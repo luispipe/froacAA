@@ -37,8 +37,8 @@
                                     <td><?php echo $key["use_level"]?></td>
                                     <td><?php if ($key["use_estado"] == "t")echo "Activo"; else echo "Inactivo" ?></td>
                                     <td>
-                                        <a href="<?php echo base_url().'admin/editar_usr/'.$key["use_username"]?>" class="btn btn-warning btn-xs"><i class="icon-pencil"></i></a>
-                                        <a data-toggle="modal" href="#delete_confirm" id="<?php echo $key["use_username"]?>" class="delete btn btn-danger btn-xs"><i class="icon-trash "></i></a>
+                                        <a href="<?php echo base_url().'admin/editar_usr/'.$key["use_username"]?>" alt="Editar"class="btn btn-warning btn-xs"><i class="icon-pencil"></i></a>
+                                        <a data-toggle="modal" href="#delete_confirm" id="<?php echo $key["use_username"]?>" alt="Eliminar" class="delete btn btn-danger btn-xs"><i class="icon-trash "></i></a>
                                     </td>
                                 </tr>
                                 <?php }?>

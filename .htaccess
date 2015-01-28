@@ -4,11 +4,11 @@
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-l
-	RewriteRule ^(.*) /froacN/index.php/$l [L]
+	RewriteRule ^(.*) /froacN1/index.php/$l [L]
 RewriteRule ^uploadify/.*$ - [PT]
 		RewriteRule ^uploads/.*$ - [PT]
 </IfModule>
 
 <IfModule !mod_rewrite.so>
-	ErrorDocument 404 /froacN/index.php
+	ErrorDocument 404 /froacN1/index.php
 </IfModule>
