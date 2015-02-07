@@ -206,5 +206,14 @@ class Usuario extends CI_Controller {
 
     }
 
+      public function guardar() {
+        $this->usuario_model->guardar_estudiante();
+        foreach ($_POST['pref'] as $key => $value) {
+            $this->usuario_model->insert_pref($value, $this->input->post('username'));
+        }
+        $name = $this->input->post('nombre') . ' ' . $this->input->post('apellido');
+        $this->exito($this->input->post('username'), $name);
+    }
+
 
 }
