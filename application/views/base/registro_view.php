@@ -86,12 +86,13 @@
 
 
         $('#proc').click(function() {
+          
             var form_data = $('#form_usr').serializeArray();
             $.post("<?php echo base_url() ?>index.php/usuario/test_result", form_data, function(respuesta) {
                 // $("#result").text(respuesta);
                 $('#result_test').val(respuesta);
                 $('#form').show();
-                $('#teformst').hide();
+                $('#test').hide();
                 $('#submitg').show();
 
                 switch ($('#result_test').val()) {
@@ -258,22 +259,23 @@
                                     <input type="checkbox" name="pref[]" value="<?php echo $key->use_pre_id ?>" /><?php echo $key->use_pre_preferencia ?><br />
                                     <?php } ?>
                         </div>
-                        <button id="sub" type="submit" class="btn btn-info">Guardar Información</button>
-                      </div>
-                    </section>
-                  </div>
-                  </table><h3 class="art-postheader">Estilo de aprendizaje</h3>
+                        </table><h3 class="art-postheader">Estilo de aprendizaje</h3>
                   <p>Para conocer su estilo de aprendizaje puede realizar el test de estilos ahora mismo,
                 o lo puede hacer luego</p>
                 <input type="button" id="boton" class="btn btn-info" value="Realizar Test">
                 <input type="hidden" name="result_test" id="result_test" value="0">
                 <h3 class="art-postheader" id="result"></h3>
+                <input id="submitg" type="submit" class="btn btn-info" value="Guardar Información">
+                      </div>
+                    </section>
+                  </div>
+                  
             
-              </form>
+                </form>
                 <div id="test" style="display: none;">
-                <h1>Test de Estilos de Aprendizaje</h1>
-              <form action="<?php echo base_url() ?>index.php/test_estilo_aprendizaje/clasificaresp/" name="form_usr" method="POST" enctype="multipart/form-data">
-                <table class="table1" width="100%" border="0" cellspacing="1" cellpadding="0" align="center"><tr><td>
+                    <h1>Test de Estilos de Aprendizaje</h1>
+                    <form action="<?php echo base_url() ?>index.php/test_estilo_aprendizaje/clasificaresp/" name="form_usr" method="POST" enctype="multipart/form-data">
+                        <table class="table1" width="100%" border="0" cellspacing="1" cellpadding="0" align="center"><tr><td>
                             <table class="table2" width="100%" border="0" cellspacing="5" cellpadding="0" align="center">
                                 <tr> 
                                     <td class="boxtitle" align="left">¿Cómo aprendo mejor?</td>                    

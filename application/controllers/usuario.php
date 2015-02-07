@@ -215,5 +215,98 @@ class Usuario extends CI_Controller {
         $this->exito($this->input->post('username'), $name);
     }
 
+    public function test_result() {
+
+        $this->clasificaresp();
+    }
+
+    public function clasificaresp() {
+
+
+        $cant_V = 0;
+        $cant_A = 0;
+        $cant_R = 0;
+        $cant_K = 0;
+
+        $cant_G = 0;
+        $cant_S = 0;
+
+        for ($i = 1; $i <= 48; $i++) {
+            if ($this->input->post($i) == 'V')
+                $cant_V++;
+
+            if ($this->input->post($i) == 'A')
+                $cant_A++;
+
+            if ($this->input->post($i) == 'R')
+                $cant_R++;
+
+            if ($this->input->post($i) == 'K')
+                $cant_K++;
+        }
+        /*
+          echo '   Cantidad de V    ';
+          echo $cant_V;
+
+          echo '   Cantidad de A    ';
+          echo $cant_A;
+
+          echo '   Cantidad de R    ';
+          echo $cant_R;
+
+          echo '   Cantidad de K    ';
+          echo $cant_K; */
+
+        //GLOBAL _ SECUENCIAL 
+
+        for ($j = 49; $j <= 70; $j++) {
+            if ($this->input->post($j) == 'G')
+                $cant_G++;
+            if ($this->input->post($j) == 'S')
+                $cant_S++;
+        }
+
+        /* echo "   cantidad G  ";
+          echo $cant_G;
+          echo "   cantidad S  ";
+          echo $cant_S; */
+
+
+
+        // $mayor = "";
+
+        $puntaje = 0;
+        if ($cant_V >= $cant_A && $cant_V >= $cant_R && $cant_V >= $cant_K) {
+            $mayor = 7; //Visual
+            $puntaje = $cant_V;
+        } else
+        if ($cant_A >= $cant_V && $cant_A >= $cant_R && $cant_A >= $cant_K) {
+            $mayor = 1; //Auditivo
+            $puntaje = $cant_A;
+        } else
+        if ($cant_R >= $cant_V && $cant_R >= $cant_A && $cant_R >= $cant_K) {
+            $mayor = 5; //Lector
+            $puntaje = $cant_R;
+        } else
+        if ($cant_K >= $cant_R && $cant_K >= $cant_V && $cant_K >= $cant_A) {
+            $mayor = 3; //kinestesico
+            $puntaje = $cant_K;
+        }
+
+        if ($cant_G >= $cant_S) {
+            $mayor = $mayor + 0; //Global
+            $puntaje = $puntaje . '-' . $cant_G;
+        } else {
+            $mayor = $mayor + 1; //Secuencial
+            $puntaje = $puntaje . ' - ' . $cant_S;
+        }
+
+
+        //echo 'Su estilo de aprendizaje es: ' . $mayor . ' con un resultado de ' . $puntaje;
+
+        echo $mayor;
+
+        //$this->usuario_model->guardar_test();
+    }
 
 }
