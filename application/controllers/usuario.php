@@ -29,7 +29,7 @@ class Usuario extends CI_Controller {
             redirect(base_url(), 'refresh');//Definir que pasa si ya esta loggeado
         } else {
             $content = array(
-
+                "preferencias" => $this->usuario_model->get_preferencias(), 
                 "main_view" => "base/registro_view"
             );
             $this->load->view('layouts/base_template', $content);

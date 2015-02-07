@@ -99,6 +99,65 @@ class Usuario_model extends CI_Model {
 
     }
 
+
+    public function guardar_estudiante() {
+    // Cuando un usuario (estudiante) se registra, la información se guarda en la tabla
+    // de usuario: "users" y en la tabla del estudiante: "use_student"
+       
+        $today = date("Y-m-d");
+
+        $data = array(
+            'use_username' => $this->input->post('username'),
+            'use_stu_datebirth' => $this->input->post('fecha_nac'),
+            'use_stu_place' => '',
+            'use_ls_id' => $this->input->post('result_test'),
+            'use_stu_level' => $this->input->post('nevel_ed'),
+        );
+
+        $data2 = array(
+            'use_username' => $this->input->post('username'),
+            'use_nombre' => $this->input->post('nombre'),
+            'use_apellido'=>  $this->input->post('apellido'),
+            'use_clave' => md5($this->input->post('passwd')),
+            'use_email' => ($this->input->post('mail')),
+            'use_fecha_registro' => $today,
+            'use_estado' => "TRUE",
+            'use_rol_id'=> $this->input->post('tipoU'),
+            'use_datebirth'=> $this->input->post('fecha_nac'),
+            'use_edu_level'=> $this->input->post('nevel_ed'),
+        );
+
+        $this->db->insert('users', $data2);
+        $this->db->insert('use_student', $data);
+    }
+
+    public function insert_pref($pref, $id) {
+    //Guarda cada una de las preferencias del estudiante en la tabla "use_pre_stu"
+        $data = array(
+            'use_pre_id' => $pref,
+            'use_username' => $id
+        );
+        $this->db->insert('use_pre_stu', $data);
+    }
+
+    public function get_preferencias() {
+
+    // Se obtienen los registros de las preferencias que hay en la tabla "use_preference"
+        $query = $this->db->get('use_preference');
+
+        return $query->result();
+    }
+
+    public function get_preferencia_est($user) {
+        $this->db->select('*');
+        $this->db->from('use_pre_stu');
+        $this->db->where('use_username', $user);
+        $this->db->join('use_preference', 'use_pre_stu.use_pre_id = use_preference.use_pre_id');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
     public function update_user($username){
         $data = array(
             "use_nombre"          =>  $this->input->post("nombre"),
