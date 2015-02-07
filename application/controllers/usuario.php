@@ -215,6 +215,17 @@ class Usuario extends CI_Controller {
         $this->exito($this->input->post('username'), $name);
     }
 
+    public function exito($id, $name) {
+
+        $content = array(
+            "title" => "Registro éxitoso",
+            "main" => "usr/exito_view",
+            "username" => $id,
+            "name" => $name
+        );
+        $this->load->view('include/u_templateEx', $content);
+    }
+
     public function test_result() {
 
         $this->clasificaresp();
@@ -271,18 +282,17 @@ class Usuario extends CI_Controller {
           echo "   cantidad S  ";
           echo $cant_S; */
 
-
-
-        // $mayor = "";
+        $mayor = 0;
 
         $puntaje = 0;
+        if (($cant_A >= $cant_V) && ($cant_A >= $cant_R) && ($cant_A >= $cant_K)) {
+            $mayor = 1; //Auditivo
+            $puntaje = $cant_A;
+        } else
         if ($cant_V >= $cant_A && $cant_V >= $cant_R && $cant_V >= $cant_K) {
             $mayor = 7; //Visual
             $puntaje = $cant_V;
-        } else
-        if ($cant_A >= $cant_V && $cant_A >= $cant_R && $cant_A >= $cant_K) {
-            $mayor = 1; //Auditivo
-            $puntaje = $cant_A;
+        
         } else
         if ($cant_R >= $cant_V && $cant_R >= $cant_A && $cant_R >= $cant_K) {
             $mayor = 5; //Lector

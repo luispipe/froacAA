@@ -99,6 +99,8 @@ class Usuario_model extends CI_Model {
 
     }
 
+    
+
 
     public function guardar_estudiante() {
     // Cuando un usuario (estudiante) se registra, la información se guarda en la tabla
