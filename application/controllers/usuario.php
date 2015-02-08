@@ -30,6 +30,7 @@ class Usuario extends CI_Controller {
         } else {
             $content = array(
                 "preferencias" => $this->usuario_model->get_preferencias(), 
+                "nivel_educativo" => $this->usuario_model->get_nivel_educativo(),
                 "main_view" => "base/registro_view"
             );
             $this->load->view('layouts/base_template', $content);
@@ -240,7 +241,7 @@ class Usuario extends CI_Controller {
         $cant_G = 0;
         $cant_S = 0;
 
-        for ($i = 1; $i <= 48; $i++) {
+        for ($i = 1; $i <= 13; $i++) {
             if ($this->input->post($i) == 'V')
                 $cant_V++;
 

@@ -108,7 +108,6 @@ class Usuario_model extends CI_Model {
         $data = array(
             'use_username' => $this->input->post('username'),
             'use_stu_datebirth' => $this->input->post('fecha_nac'),
-            'use_stu_place' => '',
             'use_ls_id' => $this->input->post('result_test'),
             'use_stu_level' => $this->input->post('nevel_ed'),
         );
@@ -120,10 +119,7 @@ class Usuario_model extends CI_Model {
             'use_clave' => md5($this->input->post('passwd')),
             'use_email' => ($this->input->post('mail')),
             'use_fecha_registro' => $today,
-            'use_estado' => "TRUE",
             'use_rol_id'=> $this->input->post('tipoU'),
-            'use_datebirth'=> $this->input->post('fecha_nac'),
-            'use_edu_level'=> $this->input->post('nevel_ed'),
         );
 
         $this->db->insert('users', $data2);
@@ -146,6 +142,15 @@ class Usuario_model extends CI_Model {
 
         return $query->result();
     }
+
+    public function get_nivel_educativo() {
+
+    // Se obtienen los registros de las preferencias que hay en la tabla "use_preference"
+        $query = $this->db->get('use_level');
+
+        return $query->result();
+    }
+    
 
     public function get_preferencia_est($user) {
         $this->db->select('*');
