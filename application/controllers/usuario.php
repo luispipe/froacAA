@@ -226,14 +226,12 @@ class Usuario extends CI_Controller {
         $this->load->view('include/u_templateEx', $content);
     }
 
-    public function test_result() {
+    /*public function test_result() {
 
         $this->clasificaresp();
-    }
+    }*/
 
-    public function clasificaresp() {
-
-
+    public function test_result() {
         $cant_V = 0;
         $cant_A = 0;
         $cant_R = 0;
@@ -282,17 +280,18 @@ class Usuario extends CI_Controller {
           echo "   cantidad S  ";
           echo $cant_S; */
 
-        $mayor = 0;
+
+
+        // $mayor = "";
 
         $puntaje = 0;
-        if (($cant_A >= $cant_V) && ($cant_A >= $cant_R) && ($cant_A >= $cant_K)) {
-            $mayor = 1; //Auditivo
-            $puntaje = $cant_A;
-        } else
         if ($cant_V >= $cant_A && $cant_V >= $cant_R && $cant_V >= $cant_K) {
             $mayor = 7; //Visual
             $puntaje = $cant_V;
-        
+        } else
+        if ($cant_A >= $cant_V && $cant_A >= $cant_R && $cant_A >= $cant_K) {
+            $mayor = 1; //Auditivo
+            $puntaje = $cant_A;
         } else
         if ($cant_R >= $cant_V && $cant_R >= $cant_A && $cant_R >= $cant_K) {
             $mayor = 5; //Lector
@@ -311,12 +310,15 @@ class Usuario extends CI_Controller {
             $puntaje = $puntaje . ' - ' . $cant_S;
         }
 
-
-        //echo 'Su estilo de aprendizaje es: ' . $mayor . ' con un resultado de ' . $puntaje;
-
         echo $mayor;
+        //echo 'Su estilo de aprendizaje es: ' . $mayor . ' con un resultado de ' . $puntaje;
+       // $data = $this->input->post('1');
+        // $data = json_decode(stripslashes($_POST['1']),true);
+        //echo $data;
 
         //$this->usuario_model->guardar_test();
     }
 
+
+    
 }

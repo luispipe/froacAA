@@ -84,16 +84,17 @@
 
         });
 
-
         $('#proc').click(function() {
           
             var form_data = $('#form_usr').serializeArray();
             $.post("<?php echo base_url() ?>index.php/usuario/test_result", form_data, function(respuesta) {
                 // $("#result").text(respuesta);
+                //alert("Resultado"+respuesta);
                 $('#result_test').val(respuesta);
                 $('#form').show();
                 $('#test').hide();
                 $('#submitg').show();
+
 
                 switch ($('#result_test').val()) {
                     case '1':
@@ -274,7 +275,7 @@
                 </form>
                 <div id="test" style="display: none;">
                     <h1>Test de Estilos de Aprendizaje</h1>
-                    <form action="<?php echo base_url() ?>index.php/test_estilo_aprendizaje/clasificaresp/" name="form_usr" method="POST" enctype="multipart/form-data">
+                    <form action="<?php echo base_url() ?>index.php/usuario/test_result/" name="form_usr" id="form_usr" method="POST" enctype="multipart/form-data">
                         <table class="table1" width="100%" border="0" cellspacing="1" cellpadding="0" align="center"><tr><td>
                             <table class="table2" width="100%" border="0" cellspacing="5" cellpadding="0" align="center">
                                 <tr> 
@@ -299,10 +300,10 @@
                                         haría?
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="1" VALUE="V"> Dibujo un mapa en un papel.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="2" VALUE="A"> Le digo cómo llegar.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="3" VALUE="R"> Le escribo las instrucciones (sin dibujar un mapa).</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="4" VALUE="K"> La busco y recojo en el hotel.</td></tr>                  
+                                <tr><td ><INPUT TYPE="CHECKBOX" NAME="1" ID="1" VALUE="V"/> Dibujo un mapa en un papel.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="2" VALUE="A"> Le digo cómo llegar.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="3" VALUE="R"> Le escribo las instrucciones (sin dibujar un mapa).</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="4" VALUE="K"> La busco y recojo en el hotel.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -310,10 +311,10 @@
                                         2. Usted no está seguro como se deletrea la palabra tracendente o trascendente. Que haría usted.
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="5" VALUE="R"> Busco la palabra en un diccionario.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="6" VALUE="V"> Veo la palabra en mi mente y escojo según como la veo</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="7" VALUE="A"> La repito en mi mente.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="8" VALUE="K"> Escribo ambas versiones en un papel y escojo una.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="5" VALUE="R"> Busco la palabra en un diccionario.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="6" VALUE="V"> Veo la palabra en mi mente y escojo según como la veo</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="7" VALUE="A"> La repito en mi mente.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="8" VALUE="K"> Escribo ambas versiones en un papel y escojo una.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -322,10 +323,10 @@
                                         Usted que haría?
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="9" VALUE="A"> Hablarle por teléfono inmediatamente y contarle del viaje.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="10" VALUE="R"> Enviarle una copia del itinerario impreso.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="11" VALUE="V"> Mostrarle un mapa del mundo.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="12" VALUE="K"> Compartir que planea hacer en cada lugar que visite.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="9" VALUE="A"> Hablarle por teléfono inmediatamente y contarle del viaje.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="10" VALUE="R"> Enviarle una copia del itinerario impreso.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="11" VALUE="V"> Mostrarle un mapa del mundo.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="12" VALUE="K"> Compartir que planea hacer en cada lugar que visite.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -333,9 +334,9 @@
                                         4. Usted esta por cocinar algo muy especial para su familia. Usted.
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="13" VALUE="K"> Cocina algo familiar que no necesite receta o instrucciones</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="14" VALUE="V"> Da una vista a través de un recetario por ideas de las fotos.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="15" VALUE="R"> Busca un libro de recetas especifico donde hay una buena receta.</td></tr>                                     
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="13" VALUE="K"> Cocina algo familiar que no necesite receta o instrucciones</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="14" VALUE="V"> Da una vista a través de un recetario por ideas de las fotos.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="15" VALUE="R"> Busca un libro de recetas especifico donde hay una buena receta.</td></tr>                                     
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -343,10 +344,10 @@
                                         5. Un grupo de turistas le han sido asignados para que usted les explique del Area Nacional Protegida. Usted,
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="16" VALUE="K"> Organiza un viaje por el lugar.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="17" VALUE="V"> Les muestra fotos y transparencias</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="18" VALUE="R"> Les da un folleto o libro sobre las Areas Nacionales Protegidas.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="19" VALUE="A"> Les da una platica sobre las Areas Nacionales Protegidas.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="16" VALUE="K"> Organiza un viaje por el lugar.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="17" VALUE="V"> Les muestra fotos y transparencias</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="18" VALUE="R"> Les da un folleto o libro sobre las Areas Nacionales Protegidas.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="19" VALUE="A"> Les da una platica sobre las Areas Nacionales Protegidas.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -354,10 +355,10 @@
                                         6. Usted está por comprarse un nuevo estéreo. Que otro factor, además del precio, influirá su decisión
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="20" VALUE="A"> El vendedor le dice lo que usted quiere saber.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="21" VALUE="R"> Leyendo los detalles sobre el estéreo.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="22" VALUE="K"> Jugando con los controles y escuchándolo.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="23" VALUE="V"> Luce muy bueno y a la moda (padre, cool, chido).</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="20" VALUE="A"> El vendedor le dice lo que usted quiere saber.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="21" VALUE="R"> Leyendo los detalles sobre el estéreo.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="22" VALUE="K"> Jugando con los controles y escuchándolo.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="23" VALUE="V"> Luce muy bueno y a la moda (padre, cool, chido).</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -366,10 +367,11 @@
                                         cartas. Trate de evitar escoger una destreza física, como andar en bicicleta. Cómo aprendió usted mejor?
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="24" VALUE="V"> Pistas visuales—fotos, diagramas, cuadros...</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="25" VALUE="R"> Instrucciones escritas</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="26" VALUE="A"> Escuchando a alguien que se lo explicaba.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="27" VALUE="K"> Haciéndolo o probándolo.</td></tr>                 
+                                <input type="hidden" name="prueba" value="8"/>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="24" VALUE="V"> Pistas visuales—fotos, diagramas, cuadros...</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="25" VALUE="R"> Instrucciones escritas</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="26" VALUE="A"> Escuchando a alguien que se lo explicaba.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="27" VALUE="K"> Haciéndolo o probándolo.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -377,9 +379,9 @@
                                         8. Si usted tiene un problema en un ojo, usted prefiere que el doctor
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="28" VALUE="A"> Le diga que anda mal.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="29" VALUE="V"> Le muestre un diagrama de que está mal.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="30" VALUE="K"> Use un modelo para enseñarle qué está mal.</td></tr>                                     
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="28" VALUE="A"> Le diga que anda mal.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="29" VALUE="V"> Le muestre un diagrama de que está mal.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="30" VALUE="K"> Use un modelo para enseñarle qué está mal.</td></tr>                                     
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -387,9 +389,9 @@
                                         9. Usted está apunto de aprender un nuevo programa en la computadora. Usted,
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="31" VALUE="K"> Se sienta frente al teclado y empieza a experimentar con el programa.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="32" VALUE="R"> Lee el manual que viene con el programa.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="33" VALUE="A"> Telefonea a un amigo y le hace preguntas sobre el programa.</td></tr>                                      
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="31" VALUE="K"> Se sienta frente al teclado y empieza a experimentar con el programa.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="32" VALUE="R"> Lee el manual que viene con el programa.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="33" VALUE="A"> Telefonea a un amigo y le hace preguntas sobre el programa.</td></tr>                                      
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -397,10 +399,10 @@
                                         10. Usted va en su coche, a otra ciudad, en donde tiene amigos que quiere visitar. Usted quisiera que ellos:
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="34" VALUE="V"> Le dibujen un mapa en un papel.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="35" VALUE="A"> Le den las instrucciones para llegar.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="36" VALUE="R"> Escriban las instrucciones (sin el mapa)</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="37" VALUE="K"> Lo esperen a usted en la gasolinera de la entrada a la ciudad.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="34" VALUE="V"> Le dibujen un mapa en un papel.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="35" VALUE="A"> Le den las instrucciones para llegar.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="36" VALUE="R"> Escriban las instrucciones (sin el mapa)</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="37" VALUE="K"> Lo esperen a usted en la gasolinera de la entrada a la ciudad.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -408,10 +410,10 @@
                                         11. Aparte del precio, que influirá más su decisión de compra de un libro de texto particular?
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="38" VALUE="K"> Usted ha usado una copia antes.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="39" VALUE="A"> Un amigo le ha platicado acerca del libro.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="40" VALUE="R"> Una lectura rápida de algunas partes del libro.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="41" VALUE="V"> El diseño de la pasta del libro es atractiva.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="38" VALUE="K"> Usted ha usado una copia antes.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="39" VALUE="A"> Un amigo le ha platicado acerca del libro.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="40" VALUE="R"> Una lectura rápida de algunas partes del libro.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="41" VALUE="V"> El diseño de la pasta del libro es atractiva.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -420,9 +422,9 @@
                                         no—asumiendo que tiene el dinero para los boletos---
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="42" VALUE="A"> Usted oyó en el radio acerca de la película</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="43" VALUE="R"> Usted Leyó una reseña de la película.</td></tr>                  
-                                <tr><td ><INPUT TYPE="checkbox" NAME="44" VALUE="V"> Usted vió una reseña en la televisión o en el cine.</td></tr>                                      
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="42" VALUE="A"> Usted oyó en el radio acerca de la película</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="43" VALUE="R"> Usted Leyó una reseña de la película.</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="44" VALUE="V"> Usted vió una reseña en la televisión o en el cine.</td></tr>                                      
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -430,10 +432,10 @@
                                         13. Usted prefiere que un profesor/maestro o conferencista use:
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE="checkbox" NAME="45" VALUE="R"> Un libro de texto, copias, lecturas.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="46" VALUE="V"> Un diagrama de flujo, cuadros, gráficos, dispositivas.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="47" VALUE="K"> Sesiones prácticas, laboratorio, visitas, viajes de campo.</td></tr>                 
-                                <tr><td ><INPUT TYPE="checkbox" NAME="48" VALUE="A"> Preguntas y respuestas, charlas, grupos de discusión u oradores invitados</td></tr>                  
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="45" VALUE="R"> Un libro de texto, copias, lecturas.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="46" VALUE="V"> Un diagrama de flujo, cuadros, gráficos, dispositivas.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="47" VALUE="K"> Sesiones prácticas, laboratorio, visitas, viajes de campo.</td></tr>                 
+                                <tr><td ><INPUT TYPE=CHECKBOX NAME="48" VALUE="A"> Preguntas y respuestas, charlas, grupos de discusión u oradores invitados</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -543,7 +545,7 @@
                                     <td class="cuadroOscuro" colspan="2" align="center">
                                         <input type="hidden" name="op" value="guardar_vark">
                                         <input type="hidden" name="mod" value="mod_vark">
-                                        <input type="button" value="Enviar" name="guardar" id="proc" class="btn btn-info">                                                   
+                                        <input type="button" value="Enviar" name="proc" id="proc" class="btn btn-info">                                                   
                                     </td>
                                 </tr> 
                             </table>
