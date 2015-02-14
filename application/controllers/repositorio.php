@@ -44,6 +44,27 @@ class Repositorio extends CI_Controller{
         }
     }
 
+
+
+     public function registrar_repo() {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $data = array(
+                'username' => $session_data['username'],
+                "title" => "Registro Repositorios",
+                "titulo" => "Administrador",
+                "user" => $session_data['username'],
+                "main" => "admin/nuevo_repo_view",
+                "page" => "Registro",
+                "usuario" => $this->repo_model->get_user_repo()
+            );
+            $this->load->view('include/adm_template1', $data);
+        } else {
+            //If no session, redirect to login page
+            redirect('init', 'refresh');
+        }
+    }
+
     public function lo_rep($rep_id){
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
@@ -78,6 +99,7 @@ class Repositorio extends CI_Controller{
                     "main_view" => "admin/nuevo_repo_view",
                     "user" => $session_data ['username'],
                     "usr_data" => $this->usuario_model->get_usr_data ( $session_data ['username'] ),
+                    "usuarios" => $this->repositorio_model->get_user_repo()
                 );
             }
             $this->load->view('layouts/admin_template', $content);
@@ -86,7 +108,6 @@ class Repositorio extends CI_Controller{
         }
     }
 
-
 /*Metodos del anterio FROAC*/
 
 
@@ -94,37 +115,19 @@ public function insert_repo() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             if ($this->input->post('tiporepositorio') == 'ROAp') {
-                $this->repo_model->insertar_repo_roap();
+                $this->repositorio_model->insertar_repo_roap();
             } else {
-                $this->repo_model->insertar_repo();
+                $this->repositorio_model->insertar_repo();
             }
 
-            $this->lista_repo();
+            $this->lista();
         } else {
             //If no session, redirect to login page
             redirect('init', 'refresh');
         }
     }
 
-    public function lista_repo() {
-        if ($this->session->userdata('logged_in')) {
-            $session_data = $this->session->userdata('logged_in');
-            $content = array(
-                'username' => $session_data['username'],
-                "title" => "Lista Repositorios",
-                "titulo" => "Administrador",
-                "user" => $session_data['username'],
-                "main" => "adm/lista_repo_view",
-                "page" => "Registro",
-                "repos" => $this->repo_model->get_repo(),
-            );
-            $this->load->view('include/adm_template1', $content);
-        } else {
-            //If no session, redirect to login page
-            redirect('init', 'refresh');
-        }
-    }
-
+  
     public function modificar_repo() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
