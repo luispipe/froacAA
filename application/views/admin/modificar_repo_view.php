@@ -1,5 +1,5 @@
 <?php if($user){$sess = 1; $usr = $user;}else{ $sess = 0; $usr=0;} ?>
-<!--main content start-->
+
 <script type="text/javascript" language="javascript">
     function verificampos() {
         if ($('#tiporepositorio').val() == 'ROAp') {
@@ -34,7 +34,6 @@
                 document.getElementById("contrasena").focus();
                 return false;
             }
-
             if (document.getElementById("puerto").value == "") {
                 alert("Por favor ingrese el puerto");
                 document.getElementById("puerto").focus();
@@ -112,14 +111,7 @@
 
 <script>
     $(function() {
-        $('#tiporepositorio').change((function() {
-            if ($('#tiporepositorio').val() == '') {
-                $('#formulario').hide();
-                
-            }
-
-
-            if ($('#tiporepositorio').val() == 'ROAp') {
+        if ($('#tiporepositorio').val() == 'ROAp') {
                 $('#formulario').show();
                 $('#lhost').text("Host");
                 $('#lmetadata').hide();
@@ -154,7 +146,6 @@
                 $('#contrasena').hide();
             }
             ;
-        }));
     });
 </script>
 
@@ -168,69 +159,71 @@
         <section class="panel">
             <header class="panel-heading">
 
-             <form autocomplete="off" action="<?php echo base_url() ?>index.php/repositorio/insert_repo/" method="post" onsubmit="return verificampos();" enctype="multipart/form-data">
-            <header><h3>Registro Repositorio</h3></header>
+             <form autocomplete="off" action="<?php echo base_url() ?>index.php/repositorio/actualizar_repo/" method="post" onsubmit="return verificampos();" enctype="multipart/form-data">
+            <header><h3>Modificar Repositorio</h3></header>
             <div class="module_content">                
                 <div class="col-lg-6">
-                  <div class="row">               
-                    <label>
-                        Tipo de Repositorio
-                    </label>
-                    <select class="form-control" name="tiporepositorio"  id="tiporepositorio">
-                        <option selected="selected" value="">Seleccione Tipo</option>
-                        <option value="ROAp">ROAp</option>
-                        <option value="OAI">OAI</option>
-                    </select>
-                    <br>
-                </div>
-                <br>
-                <br>
                 <div class="row">
-                <div class="col-lg-8" id="formulario" style="display: none;">                
-                    <label>Nombre</label><br>
-                    <input type="text" class="form-control" name="nombrerepositorio" id="nombrerepositorio" /><br>
-                    <label>Entidad</label><br>
-                    <input type="text" class="form-control" name="entidad" id="entidad" /><br>
-                    <label>Correo Electrónico</label><br>
-                    <input type="email" autocomplete="@gmail.com" class="form-control" name="email" id="email"/><br>
-                    <label>URL</label>
-                    <input type="text" class="form-control" name="url" id="url" /><br>
-                    <label id="lhost">Host</label>
-                    <input type="text" class="form-control" name="host" id="host" /><br>
-                    <label id="lmetadata">Estandar de Metadatos</label>
-                    <input type="text" class="form-control" name="metadata" id="metadata" />
-                    <label id="lpuerto">Puerto</label><br>
-                    <input type="text" class="form-control" name="puerto" id="puerto" /><br>
-                    <label id="lbasededatos">Base De Datos</label><br>
-                    <input type="text" class="form-control" name="basededatos" id="basededatos" /><br>
-                    <label id="lusuario">Usuario</label><br>
-                    <input type="text" class="form-control" name="usuario" id="usuario" /><br>
-                    <label id="lcontrasena">Contraseña</label><br>
-                    <input type="password" class="form-control" autocomplete="off" name="contrasena" id="contrasena" /><br>
-                    <label id="lperiodicidad">Periodicidad Actualizaciones (días)</label>
-                    <input type="text" class="form-control" id="periodicidad" name="periodicidad"><br>
-                    <label>Usuario repositorio</label><br>
-                    <?php 
-                        foreach ($usuarios as $user) {
-                            echo $user['use_username'];
-                            
-                        }
-                        ?>
-                    <select  class="form-control" id="usuariorepo" name="usuariorepo">
-                        <option value="0">--Seleccione un usuario--</option>
-
+                <br>
+                <br>
+                <?php foreach ($repomod as $key) { ?>
+                <div class="col-lg-8" id="formulario" style="display: none;">
+                        <label>Nombre</label><br>
+                        <input type="text" class="form-control" name="nombrerepositorio" id="nombrerepositorio" value="<?php echo $key['rep_name']; ?>" /><br>
+                        <label>Entidad</label><br>
+                        <input type="text" class="form-control" name="entidad" id="entidad" value="<?php echo $key['rep_affiliation'] ?>" /><br>
+                        <label>Correo Electrónico</label><br>
+                        <input type="email" class="form-control" value="<?php echo $key['rep_email'] ?>" name="email" id="email"/><br>
+                        <label id="ltiporepositorio">Tipo Repositorio</label>
+                        <input type="text" disabled="" id="tiporepositorio" name="tiporepositorio" value="<?php echo $key['rep_typerepository']?>">
+                        <label>URL</label>
+                        <input type="text" class="form-control" name="url" value="<?php echo $key['rep_url'] ?>" id="url" /><br>
+                        <label id="lhost">Host</label>
+                        <input type="text" class="form-control" value="<?php echo $key['rep_host'] ?>" name="host" id="host" /><br>
+                        <label id="lmetadata">Estandar de Metadatos</label>
+                        <input type="text" class="form-control" name="metadata" id="metadata" value="<?php echo $key['rep_metadata_inf'] ?>" />
+                        <label id="lpuerto">Puerto</label><br>
+                        <input type="text" class="form-control" name="puerto" id="puerto" value="<?php echo $key['rep_port'] ?>" /><br>
+                        <label id="lbasededatos">Base De Datos</label><br>
+                        <input type="text" class="form-control" name="basededatos" id="basededatos" value="<?php echo $key['rep_databasename'] ?>" /><br>
+                        <label id="lusuario">Usuario</label><br>
+                        <input type="text" class="form-control" name="usuario" id="usuario" value="<?php echo $key['rep_loggin'] ?>" /><br>
+                        <label id="lcontrasena">Contraseña</label><br>
+                        <input type="text" class="form-control" autocomplete="off" name="contrasena" id="contrasena" value="<?php echo $key['rep_password'] ?>" /><br>
+                        <label id="lperiodicidad">Perio. Actualizaciones (días)</label><br>
+                        <input type="number" class="form-control" id="periodicidad" name="periodicidad" value="<?php echo $key['rep_frequency'] ?>" /><br>
+                        <label>Usuario repositorio</label><br>
                         <?php 
-                        foreach ($usuarios as $user) { ?>
-                            <option value="<?php echo $user['use_username']; ?>"><?php echo $user['use_nombre'] . " " . $user['use_apellido']; ?></option>
-                            <?php
-                        }
-                        ?>
-                    </select>
+                            echo $key['use_username'];
+                         ?>   
+                        <select id="usuariorepo" name="usuariorepo">
+
+                            <?php 
+                            foreach ($usuario as $user) 
+                            {
+                                if($user['use_username']==$key['use_username'])
+                                {?>
+                                    <option selected value="<?php echo $user['use_username']; ?>"><?php echo $user['use_nombre'] . " " . $user['use_apellido']; ?></option>
+                        <?php  }
+                                else
+                               {?>
+
+                                    <option value="<?php echo $user['use_username']; ?>"><?php echo $user['use_nombre'] . " " . $user['use_apellido']; ?></option>
+                        <?php  }
+                                                        
+                            }
+                            ?>
+                        </select>
+                        
+                        <input type="hidden" value="<?php echo $key['rep_id'] ?>" name="rep_id" />
+                        <input type="hidden" value="<?php echo $key['rep_countoas']?>" name="countoas" />                        
+                        <input type="hidden" value="<?php echo $key['rep_registrationdate']?>" name="registrationdate">
+                        <?php
+                    }
+                    ?>
 
                 </div>
                 </div>
-                
-
             </div>
             <footer>
             <div class="row">
@@ -245,7 +238,7 @@
                 </div>
             </footer>
             <script>
-                        $("#refresh").click(function() {
+                         $("#refresh").click(function() {
                         window.location = "<?php echo base_url() ?>repositorio/lista_repo/";
                         });
             </script>

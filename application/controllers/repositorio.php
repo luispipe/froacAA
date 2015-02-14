@@ -90,6 +90,7 @@ class Repositorio extends CI_Controller{
 
     }
 
+    //Agregar Repositorio --- Lleva a la vista
     public function nuevo(){
         $session_data = $this->session->userdata('logged_in');
         if ($this->session->userdata('logged_in')) {
@@ -110,7 +111,7 @@ class Repositorio extends CI_Controller{
 
 /*Metodos del anterio FROAC*/
 
-
+//Guardar en nuevo Repositorio --- Lleva al modelo
 public function insert_repo() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
@@ -127,8 +128,8 @@ public function insert_repo() {
         }
     }
 
-  
-    public function modificar_repo() {
+    //Modificar un repositorio --- Lleva a la vista
+    public function modificar_repo($rep_id) {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $content = array(
@@ -136,24 +137,24 @@ public function insert_repo() {
                 "title" => "Modificar Repositorio",
                 "titulo" => "Administrador",
                 "user" => $session_data['username'],
-                "main" => "adm/modificar_repo_view",
+                "main_view" => "admin/modificar_repo_view",
                 "page" => "Modificación",
-                "repomod" => $this->repo_model->get_repo_mod(),
-                "usuario" => $this->repo_model->get_user_repo()
+                "repomod" => $this->repositorio_model->get_repo_mod($rep_id),
+                "usuario" => $this->repositorio_model->get_user_repo()
             );
-
-            $this->load->view('include/adm_template1', $content);
+            $this->load->view('layouts/admin_template', $content);
         } else {
             //If no session, redirect to login page
             redirect('init', 'refresh');
         }
     }
 
+    //Modificar repositori --- Lleva al modelo
     public function actualizar_repo() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $this->repo_model->modificar_repo();
-            $this->lista_repo();
+            $this->lista();
         } else {
             //If no session, redirect to login page
             redirect('init', 'refresh');
