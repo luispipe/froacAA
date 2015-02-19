@@ -220,11 +220,11 @@ class Usuario extends CI_Controller {
 
         $content = array(
             "title" => "Registro éxitoso",
-            "main" => "usr/exito_view",
+            "main_view" => "usr/exito_view",
             "username" => $id,
             "name" => $name
         );
-        $this->load->view('include/u_templateEx', $content);
+        $this->load->view('layouts/base_template', $content);
     }
 
     /*public function test_result() {
