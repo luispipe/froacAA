@@ -320,6 +320,21 @@ class Usuario extends CI_Controller {
         //$this->usuario_model->guardar_test();
     }
 
+  function check() {
+        //This method will have the credentials validation
+
+
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('passwd', 'Password', 'trim|required|xss_clean|callback_check_database');
+        $rol = $this->usuario_model->get_rol_usr($this->input->post('username'));
+        if ($this->form_validation->run() == FALSE) {
+            //Field validation failed.  User redirected to login page
+            redirect('init', 'refresh');
+        } else {
+            //Go to private area
+            $this->admin($rol);
+        }
+    }
 
     
 }
