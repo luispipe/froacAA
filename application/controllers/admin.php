@@ -20,20 +20,21 @@ class Admin extends CI_Controller {
                     "total_lo" => $this->admin_model->get_total_lo(),
                     "total_lo_score" => $this->admin_model->get_total_lo_score(),
                 );
-                $this->load->view ( 'layouts/admin_template', $content );
+                $this->load->view ( 'base/admin_template', $content );
             } else {
                 $content = array (
-                    "main_view" => "base/init_view"
+                    "main_view" => "shared_views/init_view"
                 );
-                $this->load->view ( 'layouts/base_template', $content );
+                $this->load->view ( 'base/base_template', $content );
             }
         } else {
             $content = array (
-                "main_view" => "base/init_view"
+                "main_view" => "shared_views/init_view"
             );
-            $this->load->view ( 'layouts/base_template', $content );
+            $this->load->view ( 'base/base_template', $content );
         }
     }
+
 
     public function lista_user(){
         if ($this->session->userdata ( 'logged_in' )) {
@@ -46,18 +47,18 @@ class Admin extends CI_Controller {
                     "main_view" => "admin/lista_user",
                     "users" => $this->admin_model->get_users()
                 );
-                $this->load->view ( 'layouts/admin_template', $content );
+                $this->load->view ( 'base/admin_template', $content );
             } else {
                 $content = array (
                     "main_view" => "base/init_view"
                 );
-                $this->load->view ( 'layouts/base_template', $content );
+                $this->load->view ( 'base/base_template', $content );
             }
         } else {
             $content = array (
                 "main_view" => "base/init_view"
             );
-            $this->load->view ( 'layouts/base_template', $content );
+            $this->load->view ( 'base/base_template', $content );
         }
 
     }
@@ -73,7 +74,7 @@ class Admin extends CI_Controller {
                     "usr_all_data" => $this->usuario_model->get_all_usr_data($username),
                     "main_view" => "admin/editar_view"
                 );
-                $this->load->view('layouts/admin_template', $content);
+                $this->load->view('base/admin_template', $content);
             } else {
                 redirect(base_url(), 'refresh');
             }

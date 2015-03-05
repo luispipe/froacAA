@@ -183,10 +183,9 @@
                     </select>
                     <br>
                 </div>
-                <br>
-                <br>
+
                 <div class="row">
-                <div class="col-lg-8" id="formulario" style="display: none;">                
+                <div class="col-lg-12" id="formulario" style="display: none;">
                     <label>Nombre</label><br>
                     <input type="text" class="form-control" name="nombrerepositorio" id="nombrerepositorio" /><br>
                     <label>Entidad</label><br>
@@ -210,12 +209,7 @@
                     <label id="lperiodicidad">Periodicidad Actualizaciones (días)</label>
                     <input type="text" class="form-control" id="periodicidad" name="periodicidad"><br>
                     <label>Usuario repositorio</label><br>
-                    <?php 
-                        foreach ($usuarios as $user) {
-                            echo $user['use_username'];
-                            
-                        }
-                        ?>
+
                     <select  class="form-control" id="usuariorepo" name="usuariorepo">
                         <option value="0">--Seleccione un usuario--</option>
 
@@ -229,20 +223,22 @@
 
                 </div>
                 </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="submit_link">
+
+                                <input class="btn btn-primary" type="submit" id="enviar"  value="Guardar" class="alt_btn">
+                                <input class="btn btn-danger" type="reset" id="reset" value="Reset">
+
+                            </div>
+                        </div>
+                    </div>
                 
 
             </div>
             <footer>
-            <div class="row">
-            <div class="col-lg-6">
-                <div class="submit_link">
 
-                    <input class="btn btn-primary" type="submit" id="enviar"  value="Guardar" class="alt_btn">
-                    <input class="btn btn-danger" type="reset" id="reset" value="Reset">
-                
-                </div>
-                </div>
-                </div>
             </footer>
             <script>
                         $("#refresh").click(function() {

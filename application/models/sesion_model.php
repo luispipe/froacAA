@@ -6,7 +6,7 @@ Class Sesion_model extends CI_Model {
         $this->db->select('use_username, use_clave');
         $this->db->from('users');
         $this->db->where('use_username', $username);
-        $this->db->where('use_clave', MD5($password));
+        $this->db->where('use_clave', md5($password));
         $this->db->limit(1);
 
         $query = $this->db->get();

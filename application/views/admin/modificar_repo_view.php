@@ -162,7 +162,7 @@
              <form autocomplete="off" action="<?php echo base_url() ?>index.php/repositorio/actualizar_repo/" method="post" onsubmit="return verificampos();" enctype="multipart/form-data">
             <header><h3>Modificar Repositorio</h3></header>
             <div class="module_content">                
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                 <div class="row">
                 <br>
                 <br>
@@ -175,28 +175,29 @@
                         <label>Correo Electrónico</label><br>
                         <input type="email" class="form-control" value="<?php echo $key['rep_email'] ?>" name="email" id="email"/><br>
                         <label id="ltiporepositorio">Tipo Repositorio</label>
-                        <input type="text" disabled="" id="tiporepositorio" name="tiporepositorio" value="<?php echo $key['rep_typerepository']?>">
-                        <label>URL</label>
+                        <input type="text" class="form-control" disabled="" id="tiporepositorio" name="tiporepositorio" value="<?php echo $key['rep_typerepository']?>">
+
+                    <label>URL</label>
                         <input type="text" class="form-control" name="url" value="<?php echo $key['rep_url'] ?>" id="url" /><br>
                         <label id="lhost">Host</label>
                         <input type="text" class="form-control" value="<?php echo $key['rep_host'] ?>" name="host" id="host" /><br>
                         <label id="lmetadata">Estandar de Metadatos</label>
                         <input type="text" class="form-control" name="metadata" id="metadata" value="<?php echo $key['rep_metadata_inf'] ?>" />
-                        <label id="lpuerto">Puerto</label><br>
+                        <label id="lpuerto">Puerto</label>
                         <input type="text" class="form-control" name="puerto" id="puerto" value="<?php echo $key['rep_port'] ?>" /><br>
-                        <label id="lbasededatos">Base De Datos</label><br>
-                        <input type="text" class="form-control" name="basededatos" id="basededatos" value="<?php echo $key['rep_databasename'] ?>" /><br>
-                        <label id="lusuario">Usuario</label><br>
-                        <input type="text" class="form-control" name="usuario" id="usuario" value="<?php echo $key['rep_loggin'] ?>" /><br>
-                        <label id="lcontrasena">Contraseña</label><br>
-                        <input type="text" class="form-control" autocomplete="off" name="contrasena" id="contrasena" value="<?php echo $key['rep_password'] ?>" /><br>
-                        <label id="lperiodicidad">Perio. Actualizaciones (días)</label><br>
-                        <input type="number" class="form-control" id="periodicidad" name="periodicidad" value="<?php echo $key['rep_frequency'] ?>" /><br>
-                        <label>Usuario repositorio</label><br>
+                        <label id="lbasededatos">Base De Datos</label>
+                        <input type="text" class="form-control" name="basededatos" id="basededatos" value="<?php echo $key['rep_databasename'] ?>" />
+                        <label id="lusuario">Usuario</label>
+                        <input type="text" class="form-control" name="usuario" id="usuario" value="<?php echo $key['rep_loggin'] ?>" />
+                        <label id="lcontrasena">Contraseña</label>
+                        <input type="text" class="form-control" autocomplete="off" name="contrasena" id="contrasena" value="<?php echo $key['rep_password'] ?>" />
+                        <label id="lperiodicidad">Perio. Actualizaciones (días)</label>
+                        <input type="number" class="form-control" id="periodicidad" name="periodicidad" value="<?php echo $key['rep_frequency'] ?>" />
+                        <label>Usuario repositorio</label>
                         <?php 
-                            echo $key['use_username'];
+                            //echo $key['use_username'];
                          ?>   
-                        <select id="usuariorepo" name="usuariorepo">
+                        <select id="usuariorepo" class="form-control" name="usuariorepo">
 
                             <?php 
                             foreach ($usuario as $user) 
@@ -225,17 +226,19 @@
                 </div>
                 </div>
             </div>
-            <footer>
-            <div class="row">
-            <div class="col-lg-6">
-                <div class="submit_link">
+                <div class="row"><br></div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="submit_link">
 
-                    <input class="btn btn-primary" type="submit" id="enviar"  value="Guardar" class="alt_btn">
-                    <input class="btn btn-danger" type="reset" id="reset" value="Reset">
-                
+                            <input class="btn btn-info" type="submit" id="enviar"  value="Guardar" class="alt_btn">
+                            <input class="btn btn-danger" type="reset" id="reset" value="Cancelar">
+
+                        </div>
+                    </div>
                 </div>
-                </div>
-                </div>
+            <footer>
+
             </footer>
             <script>
                          $("#refresh").click(function() {

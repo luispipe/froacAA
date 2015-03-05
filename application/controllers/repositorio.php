@@ -18,29 +18,30 @@ class Repositorio extends CI_Controller{
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             $content = array(
-                "main_view" => "base/lista_rep_view",
+                "main_view" => "shared_views/lista_rep_view",
                 "user" => $session_data ['username'],
                 "usr_data" => $this->usuario_model->get_usr_data ( $session_data ['username'] ),
                 "repos" => $this->repositorio_model->get_repos(),
                 "flag"  => "repo",
-                "encabezado" => "Resultados de el repositorio",
+                "encabezado" => "Resultados del repositorio",
                 "url" => "repositorio/lista/"
             );
             if ($session_data ['username'] == "admin"){
-                $this->load->view('layouts/admin_template', $content);
+                $this->load->view('base/admin_template', $content);
             }else{
-                $this->load->view('layouts/est_template', $content);
+
+                $this->load->view('base/est_template', $content);
             }
 
         } else {
             $content = array(
-                "main_view" => "base/lista_rep_view",
+                "main_view" => "shared_views/lista_rep_view",
                 "repos" => $this->repositorio_model->get_repos(),
                 "flag"  => "repo",
-                "encabezado" => "Resultados de el repositorio",
+                "encabezado" => "Resultados del repositorio",
                 "url" => "repositorio/lista/"
             );
-            $this->load->view('layouts/base_template', $content);
+            $this->load->view('base/base_template', $content);
         }
     }
 
@@ -72,20 +73,20 @@ class Repositorio extends CI_Controller{
                 "result" => $this->lo_model->get_rep_lo($rep_id),
                 "sess" => 1,
                 "user" => $session_data['username'],
-                "main_view" => "base/result_view_st",
+                "main_view" => "shared_views/result_view_st",
                 "url" => "repositorio/lista/",
                 "encabezado" => "Resultados de el repositorio",
             );
-            $this->load->view("layouts/base_template",$content);
+            $this->load->view("base/base_template",$content);
         } else {
             $content = array(
                 "result" => $this->lo_model->get_rep_lo($rep_id),
                 "sess" => 0,
-                "main_view" => "base/result_view_st",
+                "main_view" => "shared_views/result_view_st",
                 "url" => "repositorio/lista/",
                 "encabezado" => "Resultados de el repositorio",
             );
-            $this->load->view("layouts/base_template",$content);
+            $this->load->view("base/base_template",$content);
         }
 
     }
@@ -103,7 +104,7 @@ class Repositorio extends CI_Controller{
                     "usuarios" => $this->repositorio_model->get_user_repo()
                 );
             }
-            $this->load->view('layouts/admin_template', $content);
+            $this->load->view('base/admin_template', $content);
         }else {
             $this->lista();
         }
@@ -142,7 +143,7 @@ public function insert_repo() {
                 "repomod" => $this->repositorio_model->get_repo_mod($rep_id),
                 "usuario" => $this->repositorio_model->get_user_repo()
             );
-            $this->load->view('layouts/admin_template', $content);
+            $this->load->view('base/admin_template', $content);
         } else {
             //If no session, redirect to login page
             redirect('init', 'refresh');

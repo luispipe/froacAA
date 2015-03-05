@@ -24,7 +24,7 @@ class Sesion extends CI_Controller {
         
         if ($this->form_validation->run() == FALSE) {
             //Field validation failed.  User redirected to login page
-             $this->load->view('base/login_view');
+             $this->load->view('base/login/login_view');
         } else {
             //Go to private area
             $this->verificar_rol();
@@ -59,16 +59,13 @@ class Sesion extends CI_Controller {
     		$session_data = $this->session->userdata('logged_in');
     		$rol = $this->usuario_model->get_rol($session_data['username']);
     
-    		if ($rol[0]['use_rol_id'] <= 5 && $rol[0]['use_rol_id'] >=2) {
+    		if ($rol[0]['use_rol_id']>1) {
     			redirect('main', 'refresh');
     		}elseif($rol[0]['use_rol_id'] == 1) {
                 redirect(base_url().'admin', 'refresh'); // recordar configuración de enable_query_strings puede traer algunos problemas
     		}else{
                 $this->logout();
             }
-    	} else {
-    		//If no session, redirect to login page
-    		$this->load->view('base/login_view');
     	}
     }
     

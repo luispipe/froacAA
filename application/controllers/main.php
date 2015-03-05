@@ -40,25 +40,25 @@ class Main extends CI_Controller {
 			$content = array (
 					"user" => $session_data ['username'],
 					"usr_data" => $this->usuario_model->get_usr_data ( $session_data ['username'] ),
-					"main_view" => "base/init_view",
-                "total_user" => $this->admin_model->get_total_user(),
-                "total_rep" => $this->admin_model->get_total_rep(),
-                "total_lo" => $this->admin_model->get_total_lo(),
-                "total_lo_score" => $this->admin_model->get_total_lo_score(),
+					"main_view" => "shared_views/init_view",
+                    "total_user" => $this->admin_model->get_total_user(),
+                    "total_rep" => $this->admin_model->get_total_rep(),
+                    "total_lo" => $this->admin_model->get_total_lo(),
+                    "total_lo_score" => $this->admin_model->get_total_lo_score(),
 			)
 			;
-			$this->load->view ( 'layouts/'.$route.'_template', $content );
+			$this->load->view ( 'base/'.$route.'_template', $content );
 		}else{
 
             $content = array (
-                "main_view" => "base/init_view",
+                "main_view" => "shared_views/init_view",
                 "total_user" => $this->admin_model->get_total_user(),
                 "total_rep" => $this->admin_model->get_total_rep(),
                 "total_lo" => $this->admin_model->get_total_lo(),
                 "total_lo_score" => $this->admin_model->get_total_lo_score(),
             )
             ;
-            $this->load->view ( 'layouts/base_template', $content );
+            $this->load->view ( 'base/base_template', $content );
 
         }
 	}

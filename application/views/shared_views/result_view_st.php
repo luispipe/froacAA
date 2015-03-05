@@ -5,19 +5,20 @@ if ($sess == 1) {
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>asset/raty/jquery.raty.css">
 </script><script src="<?php echo base_url()?>asset/raty/jquery.raty.js"></script>
+<section id="main-content">
+    <section class="wrapper">
 
 <div class="col-lg-12">
     <!-- page start-->
     <section class="panel">
         <header class="panel-heading">
-            Resultados que incluyen todas las palabras <b>( <?php echo $palabras ?> )</b>
+            <a href="<?php echo base_url().$url?>"><button type="button" class="btn btn-success btn-sm"><li class="icon-reply"><b> Volver</b></li></button></a> <?php echo $encabezado?>: </b>
             <div id="prueba"></div>
         </header>
         <div class="panel-body">
             <?php
-            #echo var_dump($result);
-            if (!empty($result[0])) {
-                foreach ($result[0] as $key) {
+            if (!empty($result)) {
+                foreach ($result as $key) {
                     $url = base64_encode("http://roap.medellin.unal.edu.co/maescen/control/download.php?id=28");
                     $lo_name = base64_encode($key['lo_title']);
                     ?>
@@ -29,75 +30,29 @@ if ($sess == 1) {
                             <b>Descripción: </b><?php echo $key['lo_description'] ?><br>
                             <b>Palabras claves: </b><?php echo $key['lo_keyword'] ?><br>
 
-                            <a onclick="verMetadata('<?php echo $key['lo_id'] . '/' . $key['rep_id'] ?>')" class="btn btn-sm btn-info" data-toggle="modal" href="#dialog_medatada">
-                               <li class="icon-eye-open"></li> Ver metadatos
-                            </a>
-                            &nbsp;
-                            <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores">
-                              <li class="icon-eye-open"></li> Ver Indicadores
-                            </a>
-                        </div>
-                    </div>
-                <?php
-                }
-            } else {
-                ?>
-                No hay resultados.
-            <?php } ?>
-        </div>
-    </section>
-    <section class="panel">
-        <header class="panel-heading">
-            Resultados que incluyen una o algunas de las palabras <b>( <?php echo $palabras ?> )</b>
-        </header>
-        <div class="panel-body">
-            <?php
-            $evitDatRep=true;
-
-            if (!empty($result[1])) {
-                foreach ($result[1] as $key) {
-                    //si ya lo mostro entonces no se vuelve a mostrar
-                    foreach ($result[0] as $mostrados ) {
-                        if ($mostrados['lo_id']==$key['lo_id']) {
-                            $evitDatRep=false;
-                            break;
-                        }else{
-                            $evitDatRep=true;
-                        }
-                    }
-                    if ($evitDatRep) {
-                    
-                    ?>
-                    <div class="classic-search">
-
-                        <h4><a target="_blank" class="titulo" id="<?php echo $key['lo_id'] ?>" rep_id="<?php echo $key['rep_id'] ?>" logged="<?php echo $logged ?>" href="<?php echo base_url().'lo/load_lo/'.$url.'/'.$lo_name ?>"><?php echo $key['lo_title'] ?></a>
-                        </h4>
-                        <div>
-                            <b>Descripción: </b><?php echo $key['lo_description'] ?><br>
-                            <b>Palabras claves: </b><?php echo $key['lo_keyword'] ?><br>
-
-                            <a onclick="verMetadata('<?php echo $key['lo_id'] . '/' . $key['rep_id'] ?>')" class="btn btn-sm btn-info" data-toggle="modal" href="#dialog_medatada">
+                            <a onclick="verMetadata('<?php echo $key['lo_id'] . '/' . $key['rep_id'] ?>')" class="btn btn-sm btn-info" data-toggle="modal" href="#dialog_medatada" txt="OA1">
                                 <li class="icon-eye-open"></li> Ver metadatos
                             </a>
-                            &nbsp;
-                            <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores">
-                               <li class="icon-eye-open"></li> Ver Indicadores
+    
+                            <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores" txt="OA2">
+                                <li class="icon-eye-open"></li> Ver Indicadores
                             </a>
                         </div>
                     </div>
-                <?php
-                    }
+                    <?php
                 }
             } else {
                 ?>
                 No hay resultados.
             <?php } ?>
+
 
         </div>
     </section>
     <!-- page end-->
 </div>
-
+    </section>
+</section>
 <!-- Modal Metadata -->
 <div class="modal fade" id="dialog_medatada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -129,10 +84,8 @@ if ($sess == 1) {
             </div>
             <div class="modal-body">
 
-                <b>Ranking de busqueda: <a href="">(Que significa esto?)</a><br></b>
-                <h4><span id="rank"></span></h4>
                 <?php if ($logged == 1) { ?>
-                    <b>Usted ha calificado este objeto:</b>
+                    <b>Usted ha calificado estre objeto:</b>
                     <div class="raty"  id="" rep_id="" data-score=""  username=""></div>
                 <?php }else{ ?>
                     <b>Promedio de calificación de los usuarios:</b>
@@ -152,7 +105,6 @@ if ($sess == 1) {
 
 
 <script type="text/javascript">
-
 
     function verMetadata(id) {
         $("#dialog_metadata_result").load("<?php echo base_url(); ?>index.php/lo/load_metadata/" + id);
@@ -196,12 +148,11 @@ if ($sess == 1) {
             });
         });
 
-        <?php }?>
-
+        <?php }?>;
     }
 
 
-    $(".titulo").click(function() {//cargando datos de lo elegido en las opciones de las busquedas
+    $(".titulo").click(function() {
         $.ajax({
             type: "POST",
             url: "<?php echo base_url() ?>index.php/lo/set_visita",
@@ -215,7 +166,3 @@ if ($sess == 1) {
 
 
 </script>
-
-<!--$.fn.raty.defaults.path = '<?php #echo base_url() ?>asset/raty/images';
-
-var temp = '<?php #echo base_url() ?>asset/raty/images';

@@ -31,9 +31,9 @@ class Usuario extends CI_Controller {
             $content = array(
                 "preferencias" => $this->usuario_model->get_preferencias(), 
                 "nivel_educativo" => $this->usuario_model->get_nivel_educativo(),
-                "main_view" => "base/registro_view"
+                "main_view" => "register/registro_view"
             );
-            $this->load->view('layouts/base_template', $content);
+            $this->load->view('base/base_template', $content);
         }
     }
 
@@ -49,7 +49,7 @@ class Usuario extends CI_Controller {
                     "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
                     "main_view" => "admin/perfil_view"
                 );
-                $this->load->view('layouts/admin_template', $content);
+                $this->load->view('base/admin_template', $content);
             } else {
                 $content = array(
                     "user" => $session_data['username'],
@@ -57,7 +57,7 @@ class Usuario extends CI_Controller {
                     "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
                     "main_view" => "usr/perfil_view"
                 );
-                $this->load->view('layouts/est_template', $content);
+                $this->load->view('base/est_template', $content);
             }
 
         } else {
@@ -105,7 +105,7 @@ class Usuario extends CI_Controller {
                     "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
                     "main_view" => "admin/perfil_view"
                 );
-                $this->load->view('layouts/admin_template', $content);
+                $this->load->view('base/admin_template', $content);
             } else {
                 $content = array(
                     "user" => $session_data['username'],
@@ -113,7 +113,7 @@ class Usuario extends CI_Controller {
                     "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
                     "main_view" => "usr/editar_view"
                 );
-                $this->load->view('layouts/est_template', $content);
+                $this->load->view('base/est_template', $content);
             }
 
         } else {
@@ -185,7 +185,7 @@ class Usuario extends CI_Controller {
                     "result" => $this->lo_model->get_lo_usr($session_data['username']),
                     "sess" => 1
                 );
-                $this->load->view('layouts/est_template', $content);
+                $this->load->view('base/est_template', $content);
 
 
         } else {
@@ -220,11 +220,11 @@ class Usuario extends CI_Controller {
 
         $content = array(
             "title" => "Registro éxitoso",
-            "main_view" => "usr/exito_view",
+            "main_view" => "register/exito_view",
             "username" => $id,
             "name" => $name
         );
-        $this->load->view('layouts/base_template', $content);
+        $this->load->view('base/base_template', $content);
     }
 
     /*public function test_result() {
@@ -320,21 +320,7 @@ class Usuario extends CI_Controller {
         //$this->usuario_model->guardar_test();
     }
 
-  function check() {
-        //This method will have the credentials validation
-
-
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('passwd', 'Password', 'trim|required|xss_clean|callback_check_database');
-        $rol = $this->usuario_model->get_rol_usr($this->input->post('username'));
-        if ($this->form_validation->run() == FALSE) {
-            //Field validation failed.  User redirected to login page
-            redirect('init', 'refresh');
-        } else {
-            //Go to private area
-            $this->admin($rol);
-        }
-    }
+  
 
     
 }
