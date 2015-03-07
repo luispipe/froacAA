@@ -1,4 +1,4 @@
-    <script type="text/javascript">
+        <script type="text/javascript">
 
     $(document).ready(function() {
 
@@ -10,8 +10,8 @@
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
+            changeDay: true,
             yearRange: "1945:2035"
-            
 
         });
 
@@ -162,6 +162,8 @@
            
         });
 
+
+
     });
 
 </script>
@@ -211,6 +213,18 @@
                           <label for="mail">E-mail:</label>
                           <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electronico" required>
                         </div>
+                          <div id="in_use1" class="alert alert-block alert-danger fade in">
+                              <button data-dismiss="alert" class="close close-sm" type="button">
+                                  <i class="icon-remove"></i>
+                              </button>
+                              <strong>Lo sentimos!</strong> El correo electrónico ingresado, ya está registrado.
+                          </div>
+                          <div id="no_use1" class="alert alert-success fade in">
+                              <button data-dismiss="alert" class="close close-sm" type="button">
+                                  <i class="icon-remove"></i>
+                              </button>
+                              <strong>Éxito!</strong> este correo electronico esta disponible.
+                          </div>
                         <div class="form-group">
                           <label for="username">Nombre de usuario:</label>
                           <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario unico en FROAC" required>
@@ -260,10 +274,14 @@
 
                                 foreach ($preferencias as $key) { ?>
 
-                                    <input type="checkbox" name="pref[]" value= "<?php echo $key->use_pre_id ?>" /><?php echo $key->use_pre_preferencia ?><br />
+                                    <input type="checkbox" name="pref[]" value= " <?php echo $key->use_pre_id ?> "/><?php echo $key->use_pre_preferencia ?><br />
                                     <?php } ?>
                             </div>
-                            <header class="panel-heading">
+                        </div>
+
+
+
+
                TEST DE ESTILO DE APRENDIZAJE
               </header>
                         
@@ -557,6 +575,9 @@
                             </table>
                         </td></tr></table>
                 </form>
+
+
+
               </div>
             </div>
           </section>
@@ -596,6 +617,30 @@
   });
  });
 
+
+  $("#in_use1, #no_use1").hide();
+
+  $("#mail").change(function(){
+      $.ajax({
+          type: "POST",
+          url: "<?php echo base_url()?>index.php/usuario/verify_email",
+          data: { mail: $("#mail").val()}
+      })
+          .done(function( msg ) {
+              if(msg >= 1 ){
+
+                  $("#in_name").text($("#mail").val());
+                  $("#in_use1").show();
+                  $("#no_use1").hide();
+                  $("#sub").hide();
+                  $("#mail").val("");
+              }else{
+                  $("#no_use1").show();
+                  $("#in_use1").hide();
+                  $("#sub").show();
+              }
+          });
+  });
   $("#passwd").change(function(){
     if ($("#passwd").val().length < 6){
       alert("Su contraseña debe ser de minimo 6 caracteres!")

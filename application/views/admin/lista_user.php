@@ -19,9 +19,8 @@
                                     <th>Apellidos</th>
                                     <th>E-mail</th>
                                     <th>Fecha de registro</th>
-                                    <th>Fecha de nacimiento</th>
-                                    <th>Nivel</th>
-                                    <th>Estado</th>
+                                    <th>Rol</th>
+
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -33,9 +32,8 @@
                                     <td><?php echo $key["use_apellido"]?></td>
                                     <td><?php echo $key["use_email"]?></td>
                                     <td><?php echo $key["use_fecha_registro"]?></td>
-                                    <td><?php echo $key["use_datebirth"]?></td>
-                                    <td><?php echo $key["use_level"]?></td>
-                                    <td><?php if ($key["use_estado"] == "t")echo "Activo"; else echo "Inactivo" ?></td>
+                                    <td><?php echo $key["use_rol_id"]?></td>
+
                                     <td>
                                         <a href="<?php echo base_url().'admin/editar_usr/'.$key["use_username"]?>" alt="Editar"class="btn btn-warning btn-xs"><i class="icon-pencil"></i></a>
                                         <a data-toggle="modal" href="#delete_confirm" id="<?php echo $key["use_username"]?>" alt="Eliminar" class="delete btn btn-danger btn-xs"><i class="icon-trash "></i></a>
@@ -63,15 +61,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Indicadores</h4>
+                <h4 class="modal-title">Eliminar Usuario</h4>
             </div>
             <div class="modal-body">
 
                 Esta a punto de eliminar al usuario <span id="username_modal"></span>
 
             <div class="modal-footer">
-                <button data-dismiss="modal"  class="btn btn-success" type="button">Cancelar</button>
-                <button id="ok_del" data-dismiss="modal"  class="btn btn-danger" type="button">Aceptar</button>
+                <button id="ok_del" data-dismiss="modal"  class="btn btn-info" type="button">Aceptar</button>
+                <button data-dismiss="modal"  class="btn btn-danger" type="button">Cancelar</button>
+
             </div>
         </div>
     </div>

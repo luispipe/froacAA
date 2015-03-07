@@ -46,7 +46,7 @@ class Usuario extends CI_Controller {
                 $content = array(
                     "user" => $session_data['username'],
                     "usr_data" => $this->usuario_model->get_usr_data($session_data['username']),
-                    "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
+                    "usr_all_data" => $this->usuario_model->get_all_admin_data($session_data['username']),
                     "main_view" => "admin/perfil_view"
                 );
                 $this->load->view('base/admin_template', $content);
@@ -62,6 +62,35 @@ class Usuario extends CI_Controller {
 
         } else {
             redirect(base_url(), 'refresh');
+        }
+    }
+
+     public function verify_email(){
+        //Esta función envía el correo electronico ingresado a la función "verify_email"
+        //para verificar si ya existe en la base de datos
+        $mail = $_POST["mail"];
+        $mail = strtolower($mail);
+        $result = $this->usuario_model->verify_email($mail);
+        print_r($result);
+    }
+
+
+    public function nuevo_usuario(){
+        $session_data = $this->session->userdata('logged_in');
+        if ($this->session->userdata('logged_in')) {
+            if ($session_data ['username'] == "admin"){
+
+                $content = array(
+                    "main_view" => "admin/nuevo_user_view",
+                    "user" => $session_data ['username'],
+                    "usr_data" => $this->usuario_model->get_usr_data ( $session_data ['username'] ),
+                    //"usuarios" => $this->repositorio_model->get_user_repo()
+                    "rol" => $this->usuario_model->get_rol_data()
+                );
+            }
+            $this->load->view('base/admin_template', $content);
+        }else {
+            $this->lista();
         }
     }
 

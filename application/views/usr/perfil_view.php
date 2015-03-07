@@ -28,25 +28,25 @@
                               <h1>Acerca de mi</h1>
                               <div class="row">
                                   <div class="bio-row">
-                                     <p><span>Nombres </span>: <?php echo $usr_data['use_nombre']?></p>
+                                     <p><span>Nombres: </span> <?php echo $usr_data['use_nombre']?></p>
                                   </div>
                                   <div class="bio-row">
-                                     <p><span>Apellidos </span>: <?php echo $usr_data['use_apellido']?></p>
+                                     <p><span>Apellidos: </span> <?php echo $usr_data['use_apellido']?></p>
                                   </div>
                                   <div class="bio-row">
-                                      <p><span>Nacimiento</span>: <?php echo $usr_data['use_datebirth']?></p>
+                                      <p><span>Fecha de Nacimiento:</span> <?php echo $usr_data['use_stu_datebirth']?></p>
                                   </div>
                                   <div class="bio-row">
-                                      <p><span>Email </span>: <?php echo $usr_data['use_email']?></p>
+                                      <p><span>Email: </span> <?php echo $usr_data['use_email']?></p>
                                   </div>
                                   <div class="bio-row">
-                                      <p><span>Educación </span>: <?php echo $usr_data['use_level']?></p>
+                                      <p><span>Educación: </span> <?php echo $usr_data['use_level']?></p>
                                   </div>
                                   <div class="bio-row">
-                                      <p><span>Registro </span>: <?php echo $usr_data['use_fecha_registro']?></p>
+                                      <p><span>Registro: </span> <?php echo $usr_data['use_fecha_registro']?></p>
                                   </div>
                                   <div class="bio-row">
-                                      <p><span>Rol </span>: <?php echo $usr_data['use_rol_nombre']?></p>
+                                      <p><span>Rol: </span> <?php echo $usr_data['use_rol_nombre']?></p>
                                   </div>
                               </div>
                           </div>

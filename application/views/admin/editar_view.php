@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="fecha_nac">Fecha de nacimiento:</label>
-                                                <input value="<?php echo $usr_all_data[0]["use_datebirth"]?>" data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Password">
+                                                <input value="<?php echo $usr_all_data[0]["use_datebirth"]?>" data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Fecha de Nacimiento">
                                             </div>
                                             <div class="form-group">
                                                 <label for="mail">E-mail:</label>
@@ -51,7 +51,6 @@
                                                 <select class="form-control input-sm m-bot15" name="nevel_ed" required>
                                                     <option value="<?php echo $usr_all_data[0]["use_edu_level"]?>"><?php echo $usr_all_data[0]["use_level"]?></option>
                                                     <option value="0">Seleccione una opción</option>
-                                                    <option value="1">Básica Primaria</option>
                                                     <option value="1">Básica Primaria</option>
                                                     <option value="2">Básica Secundaria</option>
                                                     <option value="3">Educación Media</option>
@@ -139,6 +138,4 @@
 
 
  </script>
-
-
 

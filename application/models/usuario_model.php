@@ -17,13 +17,20 @@ class Usuario_model extends CI_Model {
     }
 
     function get_all_usr_data($username) {
-        $this->db->select('use_username,  use_nombre, use_apellido,'
-            . ' users.use_rol_id, use_rol_nombre, use_level, use_email, use_fecha_registro, use_datebirth, use_edu_level ');
-        $this->db->from('users');
-        $this->db->join('use_rol', 'use_rol.use_rol_id = users.use_rol_id');
-        $this->db->join('use_level', 'use_level.use_id_level = users.use_edu_level');
-        $this->db->where('use_username', $username);
-        $query = $this->db->get();
+       $query = $this->db->query("select users.use_username, users.use_nombre, users.use_email, users.use_fecha_registro,users.use_apellido, use_rol.use_rol_nombre, use_rol.use_rol_id, 
+use_student.use_stu_datebirth, use_level.use_level 
+from users  inner join use_student on use_student.use_username=users.use_username
+inner join use_level on cast(use_level.use_id_level as text)=use_student.use_stu_level
+inner join use_rol on use_rol.use_rol_id=users.use_rol_id
+where users.use_username='".$username."'");
+
+        return $query->result_array();
+    }
+
+    function get_all_admin_data($username){
+        $query = $this->db->query("select users.use_nombre, users.use_apellido, users.use_email, users.use_fecha_registro, use_rol.use_rol_nombre
+from users inner join use_rol on use_rol.use_rol_id=users.use_rol_id
+where users.use_username='".$username."'");
 
         return $query->result_array();
     }
@@ -163,19 +170,42 @@ class Usuario_model extends CI_Model {
 
 
     public function update_user($username){
-        $data = array(
+        $data1 = array(
             "use_nombre"          =>  $this->input->post("nombre"),
             "use_apellido"        =>  $this->input->post("apellido"),
             "use_email"           =>  $this->input->post("mail"),
             "use_rol_id"          =>  $this->input->post("tipoU"),
-            "use_edu_level"       =>  $this->input->post("nevel_ed"),
-            "use_datebirth"       =>  $this->input->post("fecha_nac")
+
+        );
+        $data2 = array(
+            "use_stu_level"       =>  $this->input->post("nevel_ed"),
+            "use_stu_datebirth"       =>  $this->input->post("fecha_nac")
         );
 
         $this->db->where('use_username', $username);
-        $this->db->update('users', $data);
+        $this->db->update('users', $data1);
+        $this->db->update('use_student', $data2);
     }
 
+    function verify_email($mail){
+        //Se verifica si el correo electrónico registrado existe en la base de datos
+        $this->db->select('use_email');
+        $this->db->from('users');
+        $this->db->where('use_email', $mail);
+        $this->db->limit(1);
+
+        $query = $this->db->get();
+
+        return $query->num_rows();
+    }
+
+     public function get_rol_data() {
+
+        // Se obtienen los registros de los roles que hay en la tabla "use_rol"
+        $query = $this->db->get('use_rol');
+
+        return $query->result();
+    }
     function verificar_passwd($passwd, $username){
         $this->db->select('use_clave');
         $this->db->from('users');
