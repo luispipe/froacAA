@@ -23,7 +23,12 @@ class Admin_model extends CI_Model {
         return $query;
     }
 
-   function get_users(){
+    /**
+     * Esta función muestra muestra los datos de los usuarios registrados en el módulo de gestión de usuarios
+     * en la opción listar usuarios.
+     */
+
+    function get_users(){
         $this->db->select('users.use_username, users.use_nombre, users.use_apellido, users.use_email,
         users.use_fecha_registro, use_rol.use_rol_nombre');
         $this->db->from('users');
