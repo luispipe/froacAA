@@ -10,7 +10,9 @@
             <div class="panel-body">
                 <div class="row">
                     <?php
+                    $i = 0;
                     foreach ($repos as $key) {
+                        $i+=1;
                         ?>
                         <div class="col-lg-4">
                             <!--widget start-->
@@ -33,48 +35,29 @@
                                                 if ($session_data ['username'] == "admin")
                                                 {?>
                                                     <li><a href="<?php echo base_url()?>repositorio/modificar_repo/<?php echo $key['rep_id'] ?>"> <i class="icon-file-text-alt"></i>Modificar </span></a></li>
-                                                    <li><a href="<?php echo base_url()?>repositorio/modificar_repo/<?php echo $key['rep_id'] ?>"> <i class="icon-file-text-alt"></i>Acciones </span></a></li>
-                                                    </td><div  id="actualizaroa<?php echo $i; ?>">
-                                                        <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1"/>Todo<br/>
-                                                        <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2" checked="TRUE"/>Desde <?php echo $key['ep_lastupdate'] ?> <br/>
-                                                        <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="3"/>Rango de Fechas:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        Inicio:<input class="inputext1" id="fechainicio"type="text"  value="" name="fechainicio" /><br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputext1" id="fechafin" type="text" value="" name="fechafin" />
-
-                                                    <form autocomplete="off" action="<?php echo base_url() ?>index.php/adm_repo/actualizar_oas/" method="post" enctype="multipart/form-data">
-                                                        <input type="hidden" id="idrepository" name="idrepository" value="<?php echo $key['idrepository']; ?>" />
-                                                        <input type="hidden" id="lastupdate" name="lastupdate" value="<?php echo $key['lastupdate']; ?>" />
-                                                        <input type="hidden" id="cadenaoai" name="cadenaoai" value="<?php echo $key['host']; ?>" />
-                                                        <input type="hidden" id="metadata" name="metadata" value="<?php echo $key['metadata_inf']; ?>" />  
-                                                        <?php if($key['typerepository']!='roap'){?>
-                                                    <td width="30%">
+                                                    <li><a href=""> <i class="icon-file-text-alt"></i>Acciones </span></a>
+                                                    <form autocomplete="off" action="<?php echo base_url() ?>index.php/repositorio/actualizar_oas/" method="post" enctype="multipart/form-data">
+                                                        <input type="hidden" id="idrepository" name="idrepository" value="<?php echo $key['rep_id']; ?>" />
+                                                        <input type="hidden" id="lastupdate" name="lastupdate" value="<?php echo $key['rep_lastupdate']; ?>" />
+                                                        <input type="hidden" id="cadenaoai" name="cadenaoai" value="<?php echo $key['rep_host']; ?>" />
+                                                        <input type="hidden" id="metadata" name="metadata" value="<?php echo $key['rep_metadata_inf']; ?>" />  
+                                                        <?php if($key['rep_typerepository']!='roap'){?>
+                                                        
+                                                            <div  id="actualizaroa<?php echo $i; ?>">
+                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1"/>Todo<br/>
+                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2" checked="TRUE"/>Desde <?php echo $key['rep_lastupdate'] ?> <br/>
+                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="3"/>Rango de Fechas:<br/>
+                                                            Inicio:<input class="inputext1" id="fechainicio"type="text"  value="" name="fechainicio" /><br/>
+                                                            Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputext1" id="fechafin" type="text" value="" name="fechafin" />
+                                                         
+                                                            <button id="refreshbu" width="16px"  height="16px"  type="submit"><img  src="<?php echo base_url() ?>css/adm/images/refresh.jpg"/></button>
+                                                         
+                                                            </div>
+                                                    <?php }?>
                                                 
-                                                <div  id="actualizaroa<?php echo $i; ?>">
-                                                    <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1"/>Todo<br/>
-                                                    <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2" checked="TRUE"/>Desde <?php echo $key['lastupdate'] ?> <br/>
-                                                    <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="3"/>Rango de Fechas:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    Inicio:<input class="inputext1" id="fechainicio"type="text"  value="" name="fechainicio" /><br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                    Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputext1" id="fechafin" type="text" value="" name="fechafin" />
+                                                    </form>
+                                                    </li>
 
-
-                                            </td>
-
-                                            <td width="10%"> 
-                                                <button id="refreshbu" width="16px"  height="16px"  type="submit"><img  src="<?php echo base_url() ?>css/adm/images/refresh.jpg"/></button>
-
-                                            </td> 
-
-                                            </div>
-                                                <?php }
-                                                else{
-                                                
-                                                }
-?>
-                                                
-                                        </form>
-
-
-                                                <td width="10%"> 
                                                  <?php
                                                 }
                                             }?>
