@@ -72,7 +72,8 @@ class Admin extends CI_Controller {
                     "user" => $session_data['username'],
                     "usr_data" => $this->usuario_model->get_usr_data($username),
                     "usr_all_data" => $this->usuario_model->get_all_usr_data($username),
-                    "main_view" => "admin/editar_view"
+                    "main_view" => "admin/editar_view",
+                    "rol" => $this->usuario_model->get_rol_data()
                 );
                 $this->load->view('base/admin_template', $content);
             } else {

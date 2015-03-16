@@ -32,7 +32,7 @@
                                     <td><?php echo $key["use_apellido"]?></td>
                                     <td><?php echo $key["use_email"]?></td>
                                     <td><?php echo $key["use_fecha_registro"]?></td>
-                                    <td><?php echo $key["use_rol_id"]?></td>
+                                    <td><?php echo $key["use_rol_nombre"]?></td>
 
                                     <td>
                                         <a href="<?php echo base_url().'admin/editar_usr/'.$key["use_username"]?>" alt="Editar"class="btn btn-warning btn-xs"><i class="icon-pencil"></i></a>

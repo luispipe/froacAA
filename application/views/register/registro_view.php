@@ -1,4 +1,4 @@
-        <script type="text/javascript">
+       <script type="text/javascript">
 
     $(document).ready(function() {
 
@@ -134,12 +134,17 @@
             });
         });
 
+
+
         $('#boton').click(function() {
             $('#test').show();
             $('#form').hide();
             $('#submitg').hide();
+            window.location.href = "#main-content";
         });
-        
+
+
+
         $('#cancelar').click(function() {
             $('#test').hide();
             $('#form').show();
@@ -161,142 +166,299 @@
             });
            
         });
-
-
-
     });
 
 </script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/datepicker/css/datepicker.css">
     <section id="main-content">
-      <section class="wrapper site-min-height">
+        <section class="wrapper site-min-height">
         <!-- page start-->
-        <div class="row">          
-
-          <div class="col-lg-12">
-            <section class="panel">
-              <header class="panel-heading">
-                Crear cuenta en FROAC
-              </header>
-              <div class="panel-body">
-               <div class="row">
-                <form method="POST" role="form" action="<?php echo base_url();?>index.php/usuario/guardar" enctype='multipart/form-data' id="form">
-                  <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
                     <section class="panel">
-                      <header class="panel-heading">
-                        Información personal
-                      </header>
-                      <div class="panel-body">
-                        <div class="form-group">
-                            <input type="hidden" value="2" name="tipoU">
-                          <!--<label for="exampleInputEmail1">Usted es:</label>
-                          <select class="form-control input-sm m-bot15" name="tipoU" required>
-                            <option value="2">Estudiante</option>-->
-                            <!-- Se elimina la opción de registrarse con el rol de "profesor" ya que 
-                             para este no se deben tener en cuenta las preferencias. A este lo agrega el admin-->
-                            <!--<option value="3">Profesor</option>-->
-                          </select> 
-                        </div>
-                        <div class="form-group">
-                          <label for="nombre">Nombre:</label>
-                          <input  type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="apellido">Apellido:</label>
-                          <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" required>
-                        </div>                        
-                        <div class="form-group">
-                          <label for="fecha_nac">Fecha de nacimiento:</label>
-                          <input data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Selecciona año, mes y día" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="mail">E-mail:</label>
-                          <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electronico" required>
-                        </div>
-                          <div id="in_use1" class="alert alert-block alert-danger fade in">
-                              <button data-dismiss="alert" class="close close-sm" type="button">
-                                  <i class="icon-remove"></i>
-                              </button>
-                              <strong>Lo sentimos!</strong> El correo electrónico ingresado, ya está registrado.
-                          </div>
-                          <div id="no_use1" class="alert alert-success fade in">
-                              <button data-dismiss="alert" class="close close-sm" type="button">
-                                  <i class="icon-remove"></i>
-                              </button>
-                              <strong>Éxito!</strong> este correo electronico esta disponible.
-                          </div>
-                        <div class="form-group">
-                          <label for="username">Nombre de usuario:</label>
-                          <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario unico en FROAC" required>
-                        </div> 
-                        <div id="in_use" class="alert alert-block alert-danger fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                          </button>
-                          <strong>Lo sentimos!</strong> el nombre de usuario <strong id="in_name"></strong> no esta disponible.
-                        </div>
-                        <div id="no_use" class="alert alert-success fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                          </button>
-                          <strong>Éxito!</strong> este nombre de usuario esta disponible.
-                        </div>
-                        <div class="form-group">
-                          <label for="passwd">Password:</label>
-                          <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required><br>
-                          <input type="password" class="form-control" id="passwd2" name="passwd2" placeholder="Reescribe la contraseña" required>
-                        </div>  
-                        <div id="no_match" class="alert alert-block alert-danger fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                          </button>
-                          <strong>Las contraseñas no concuerdan.</strong>
-                        </div>                        
-                        <div class="form-group">
+                        <header   class="panel-heading">
+                            Crear cuenta en FROAC
+                        </header>
 
-                            <div class="form-group">
-                            <label for="level">Nivel Educativo:</label>
-                            <select class="form-control input-sm m-bot15" name="nevel_ed" required>
-                            
-                                  <?php 
+                        <!--FORMULARIO DE REGISTRO DE USUARIO-->
 
-                                foreach ($nivel_educativo as $key) { ?>
+                        <div class="panel-body">
+                            <div class="row">
+                                <form method="POST" role="form" action="<?php echo base_url();?>index.php/usuario/guardar" enctype='multipart/form-data' id="form">
+                                    <div class="col-lg-12">
+                                        <section class="panel">
+                                            <header class="panel-heading">
+                                                Información personal
+                                            </header>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <input type="hidden" value="2" name="tipoU">
+                                                    <!--<label for="exampleInputEmail1">Usted es:</label>
+                                                    <select class="form-control input-sm m-bot15" name="tipoU" required>
+                                                    <option value="2">Estudiante</option>-->
+                                                    <!-- Se elimina la opción de registrarse con el rol de "profesor" ya que
+                                                    para este no se deben tener en cuenta las preferencias. A este lo agrega el admin-->
+                                                    <!--<option value="3">Profesor</option>
+                                                    </select>-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="nombre">Nombre:</label>
+                                                    <input  type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="apellido">Apellido:</label>
+                                                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="fecha_nac">Fecha de nacimiento:</label>
+                                                    <input data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Selecciona año, mes y día" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="mail">E-mail:</label>
+                                                    <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electronico" required>
+                                                </div>
+                                                <div id="in_use1" class="alert alert-block alert-danger fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Lo sentimos!</strong> El correo electrónico ingresado, ya está registrado.
+                                                </div>
+                                                <div id="no_use1" class="alert alert-success fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Éxito!</strong> este correo electronico esta disponible.
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="username">Nombre de usuario:</label>
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario unico en FROAC" required>
+                                                </div>
+                                                <div id="in_use" class="alert alert-block alert-danger fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Lo sentimos!</strong> el nombre de usuario <strong id="in_name"></strong> no esta disponible.
+                                                </div>
+                                                <div id="no_use" class="alert alert-success fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Éxito!</strong> este nombre de usuario esta disponible.
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="passwd">Password:</label>
+                                                    <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required><br>
+                                                    <input type="password" class="form-control" id="passwd2" name="passwd2" placeholder="Reescribe la contraseña" required>
+                                                </div>
+                                                <div id="no_match" class="alert alert-block alert-danger fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Las contraseñas no concuerdan.</strong>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="level">Nivel Educativo:</label>
+                                                    <select class="form-control input-sm m-bot15" name="nevel_ed" required>
+                                                        <?php
+                                                        foreach ($nivel_educativo as $key) { ?>
+                                                            <option name="level[]" value= "<?php echo $key->use_id_level ?>"><?php echo $key->use_level ?></option>
+                                                        <?php } ?>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pref">Preferencias:</label>
+                                                    <select class="form-control input-sm m-bot15" name="pref" required>
+                                                        <?php
+                                                        foreach ($preferencias as $key) { ?>
+                                                            <input type="checkbox" name="pref[]" value= " <?php echo $key->use_pre_id ?> "/><?php echo $key->use_pre_preferencia ?><br />
+                                                        <?php } ?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <strong>¿Presenta algún tipo de necesidad especial?</strong>
+                                                <div class="row col-md-12">
+                                                    <INPUT TYPE=RADIO id="discapasi" NAME="NO" VALUE="Si"> Si
+                                                    <INPUT TYPE=RADIO id="discapano" NAME="NO" VALUE="No"> No
+                                                </div>
+                                            </div>
 
-                                    <option name="level[]" value= "<?php echo $key->use_id_level ?>"><?php echo $key->use_level ?></option>
-                                    <?php } ?>
+                                            <input type="button" style="display:none;" value="Realizar Test" name="need" id="need" class="btn btn-info">
 
+                                    </div>
+                                    <!--FIN FORMULARIO DE REGISTRO DE USUARIO-->
+
+
+
+                                    TEST DE ESTILO DE APRENDIZAJE
+                                    </header>
+                                    <p>Para conocer su estilo de aprendizaje puede realizar el test ahora mismo o en el momento que usted lo requiera</p>
+                                    <input type="button" id="boton" class="btn btn-info" value="Realizar Test">
+                                    <input type="hidden" name="result_test" id="result_test" value="0">
+                                    <h3 class="art-postheader" id="result"></h3>
+                                    <input id="submitg" type="submit" class="btn btn-info" value="Guardar Información">
+                                </form>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="pref">Preferencias:</label>
-                              <select class="form-control input-sm m-bot15" name="pref" required>
-                                  <?php 
-
-                                foreach ($preferencias as $key) { ?>
-
-                                    <input type="checkbox" name="pref[]" value= " <?php echo $key->use_pre_id ?> "/><?php echo $key->use_pre_preferencia ?><br />
-                                    <?php } ?>
-                            </div>
-                        </div>
-
-
-
-
-               TEST DE ESTILO DE APRENDIZAJE
-              </header>
-                        
-                  <p>Para conocer su estilo de aprendizaje puede realizar el test ahora mismo o en el momento que usted
-                    lo requiera</p>
-                <input type="button" id="boton" class="btn btn-info" value="Realizar Test">
-                <input type="hidden" name="result_test" id="result_test" value="0">
-                <h3 class="art-postheader" id="result"></h3>
-                <input id="submitg" type="submit" class="btn btn-info" value="Guardar Información">
-                      </div>
                     </section>
-                  </div>
-                  
-            
-                </form>
+                </div>
+
+                <!-- TEST PARA ESTUDIANTES CON NECESIDADES ESPECIALES-->
+
+                <div id="test_need" class="col-md-12" style="display: none;">
+                    <h3  align="center">Test para Personas con Necesidades Especiales</h3>
+                    <form action="<?php echo base_url() ?>index.php/usuario/test_need/" name="form_test_need" id="form_test_need" method="POST" enctype="multipart/form-data">
+                        Para poder ofrecer mejores objetos de aprendizaje, se aconseja realizar el siguiente test.
+                        Es importante contar con la ayuda XXXXXXXX, para obtener resultados más confiables.
+
+
+                        <div id="tipoLim"class="row col-md-12">
+                            <strong>•   ¿Qué tipo de necesidad especial presenta?</strong>
+                            <div class="row col-md-12">
+                                <INPUT TYPE=RADIO id="1" NAME="1" VALUE="Visual"> Visual
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="2" NAME="2" VALUE="Auditivo"> Auditivo
+                                </div>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="3" NAME="3" VALUE="Motriz"> Motriz
+                                </div>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="4" NAME="4" VALUE="Cognitiva"> Cognitiva
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--#########################################################################################-->
+                        <!-- Limitacion Visual -->
+
+                        <div id="limitacionV" class="row col-md-12" style="display: none;">
+                            <strong>•   ¿En qué grado se presenta dicha condición?</strong>
+                            <div class="row col-md-12">
+                                <INPUT TYPE=RADIO id="5" NAME="7" VALUE="Vision Nula"> Visión Nula
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="6" NAME="7" VALUE="Baja Vision"> Baja Visión
+                                </div>
+
+                                <div id="tamaño" class="row col-md-12" style="display: none;">
+                                    <strong>•   ¿Cuál de los siguientes textos puede comprender con mayor facilidad?</strong>
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="8" NAME="8" VALUE="Tamaño 1.1"> 1.1
+                                        <div class="row col-md-12">
+                                            <INPUT TYPE=RADIO id="8" NAME="8" VALUE="Tamaño 1.3"> 1.3
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <INPUT TYPE=RADIO id="8" NAME="8" VALUE="Tamaño 1.7"> 1.7
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <INPUT TYPE=RADIO id="8" NAME="8" VALUE="Tamaño 2-0"> 2.0
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--#########################################################################################-->
+                        <!-- Limitacion Auditiva -->
+
+                        <div id="limitacionA"class="row col-md-12" style="display: none;">
+                            <strong>•   ¿En qué grado se presenta dicha condición?</strong>
+                            <div class="row col-md-12">
+                                <INPUT TYPE=RADIO id="9" NAME="9" VALUE="Audicion Nula"> Audición Nula
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="9" NAME="9" VALUE="Baja Audicion"> Audición Baja
+                                </div>
+                            </div>
+                            <div id="Señas-Simbolo"class="row col-md-12">
+                                <strong>•   ¿Utiliza lenguaje de señas o símbolos?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="10" NAME="10" VALUE="Si Lenguaje"> Si
+                                    <div id="edad"class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="10" NAME="10" VALUE="No Lenguaje"> No
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="entiende_lenguaje"class="row col-md-12">
+                                <strong>•   ¿Comprende el idioma Español?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="11" NAME="11" VALUE="Si Idioma"> Si
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="11" NAME="11" VALUE="No Idioma"> No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--######################################################-->
+                        <!-- Limitacion Motriz -->
+
+                        <div id="limitacionM"class="row col-md-12" style="display: none;">
+                            <strong>•   ¿Presenta usted alguna dificultad para manipular el mouse del computador?</strong>
+                            <div class="row col-md-12">
+                                <INPUT TYPE=RADIO id="12" NAME="12" VALUE="Si mouse"> Si
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="12" NAME="12" VALUE="No mouse"> No
+                                </div>
+                            </div>
+                            <div id="utiliza_teclado"class="row col-md-12">
+                                <strong>•   ¿Presenta usted alguna dificultad para manipular el teclado del computador?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="13" NAME="13" VALUE="Si teclado"> Si
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="13" NAME="13" VALUE="No teclado"> No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--######################################################-->
+                       <!-- Limitacion Cognitiva -->
+
+                        <div id="limitacionC"class="row col-md-12"style="display: none;">
+                            <strong>•   ¿Presenta dificultades para recordar o concentrarse?</strong>
+                            <div class="row col-md-12">
+                                <INPUT TYPE=RADIO id="14" NAME="14" VALUE="Si concentra"> Si
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="14" NAME="14" VALUE="No concentra"> No
+                                </div>
+                            </div>
+                            <div id="lee"class="row col-md-12">
+                                <strong>•   ¿Tiene dificultades para comprender un texto escrito o expresarse a través del mismo?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="15" NAME="15" VALUE="Si texto"> Si
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="15" NAME="15" VALUE="No texto"> No
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sigue_instrucciones"class="row col-md-12">
+                                <strong>•   ¿Suele tener dificultades para seguir instrucciones o actividades que se le indican?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="16" NAME="16" VALUE="Si instrucciones"> Si
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="16" NAME="16" VALUE="No instrucciones"> No
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="se_distrae"class="row col-md-12">
+                                <strong>  • ¿Se distrae fácilmente?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="17" NAME="17" VALUE="Si distrae"> Si
+                                    <div id="edad"class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="17" NAME="17" VALUE="No distrae"> No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <div class="row col-md-12">
+                        <input type="button" value="Enviar" name="respuesta_need" id="respuesta_need" class="btn btn-info">
+                    </div>
+                </div>
+
+                <!-- FIN TEST PARA ESTUDIANTES CON NECESIDADES ESPECIALES-->
+
+
+                <!--TEST DE ESTILO DE APRENDIZAJE-->
+
                 <div id="test" style="display: none;">
                     <h3>Test de Estilos de Aprendizaje</h3>
                     <form action="<?php echo base_url() ?>index.php/usuario/test_result/" name="form_usr" id="form_usr" method="POST" enctype="multipart/form-data">
@@ -576,17 +738,16 @@
                         </td></tr></table>
                 </form>
 
-
-
-              </div>
+                <!--FIN TEST DE ESTILO DE APRENDIZAJE-->
+                </div>
             </div>
-          </section>
+        </section>
         </div>
-        
-      </div>
+
+        </div>
       <!-- page end-->
     </section>
-  </section>
+    </section>
   <!--main content end-->
 
   <!--script for this page-->
@@ -657,7 +818,76 @@
     } 
   });
 
+//######################################################################################################################
+
+  //En caso de tener discapacidad se debe mostar un botón que lo lleve al formulario Test para personas con necesidades
+  // especiales
+
+  $("#discapasi").click(function () {
+          $("#need").show();
+      });
+
+  //En caso de dar click en la opción "SI" por equivocación, al dar click en la opción "No", el botón se ocultará.
+
+  $("#discapano").click(function () {
+      $("#need").hide();
+  })
+//######################################################################################################################
+
+//####################################################################################################################
+
+  //Cuando se tiene una discapacidad y se da click en el botón realizar test, este muestra el formulario para
+  // realizar el test para personas con necesidades especiales
+
+  $('#need').click(function() {
+      $('#test_need').show();
+      $('#form').hide();
+      $('#submitg').hide();
+      window.location.href = "#main-content";
+  });
+
+//#####################################################################################################################
+
+//#####################################################################################################################
+
+  //Cuando se tiene una discapacidad, se muestran las preguntas correspondientes al tipo de discapacidad seleccionada.
+
+  $("#1").click(function () {
+      $("#limitacionV").show();
+  });
+
+  $("#6").click(function () {
+      $("#tamaño").show();
+  });
+
+  $("#5").click(function () {
+      $("#tamaño").hide();
+  });
+
+  $("#2").click(function () {
+      $("#limitacionA").show();
+  });
+
+  $("#3").click(function () {
+      $("#limitacionM").show();
+  });
+
+  $("#4").click(function () {
+      $("#limitacionC").show();
+  });
 
 
+//#####################################################################################################################
+
+//#####################################################################################################################
+
+
+  $('#respuesta_need').click(function() {
+
+          $('#form').show();
+          $('#test_need').hide();
+
+  });
+//#####################################################################################################################
 
   </script>

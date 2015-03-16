@@ -95,17 +95,12 @@ where users.use_username='".$username."'");
          "use_apellido"        =>  $this->input->post("apellido"),    
          "use_clave"           =>  md5($this->input->post("passwd2")),
          "use_email"           =>  $this->input->post("mail"),
-         "use_fecha_registro"  =>  date("Y-m-d"),       
-         "use_estado"          =>  "TRUE",
-         "use_rol_id"          =>  $this->input->post("tipoU"),
-         "use_edu_level"          =>  $this->input->post("nevel_ed"),
-         "use_datebirth"          =>  $this->input->post("fecha_nac")
+         "use_fecha_registro"  =>  date("Y-m-d"),
+         "use_rol_id"          =>  $this->input->post("rol"),
          );
-
         $this->db->insert('users', $data);
-
     }
-
+    
     public function guardar_estudiante() {
     // Cuando un usuario (estudiante) se registra, la información se guarda en la tabla
     // de usuario: "users" y en la tabla del estudiante: "use_student"

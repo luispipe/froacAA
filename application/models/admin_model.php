@@ -24,11 +24,11 @@ class Admin_model extends CI_Model {
     }
 
    function get_users(){
-        $this->db->select('use_username, use_nombre, use_apellido, use_email,
-        use_fecha_registro, use_rol_id');
+        $this->db->select('users.use_username, users.use_nombre, users.use_apellido, users.use_email,
+        users.use_fecha_registro, use_rol.use_rol_nombre');
         $this->db->from('users');
-        //$this->db->join('use_level', 'use_level.use_id_level = users.use_edu_level');
-        $this->db->where('use_rol_id !=', 1);
+        $this->db->join('use_rol', 'users.use_rol_id=use_rol.use_rol_id');
+        $this->db->where('users.use_rol_id !=', 1);
         $query = $this->db->get("");
         return $query->result_array();
     }
