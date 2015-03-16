@@ -20,15 +20,19 @@
                                         <header class="panel-heading">
                                             Información personal
                                         </header>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Usted es:</label>
-                                                <select class="form-control input-sm m-bot15" name="tipoU" required>
-                                                    <option value="<?php echo $usr_all_data[0]["use_rol_id"]?>" ><?php echo $usr_all_data[0]["use_rol_nombre"]?></option>
-                                                    <option value="2">Estudiante</option>
-                                                    <option value="3">Profesor</option>
-                                                </select>
-                                            </div>
+                                        <div class="form-group">
+
+                                            <label for="exampleInputEmail1">Seleccione el Rol:</label>
+                                            <select class="form-control input-sm m-bot15" name="rol" required>
+                                                <?php
+
+                                                foreach ($rol as $key) { ?>
+
+                                                    <option name="level[]" value= "<?php echo $key->use_rol_id ?>"><?php echo $key->use_rol_nombre ?></option>
+                                                <?php } ?>
+
+                                            </select>
+                                        </div>
                                             <div class="form-group">
                                                 <label for="nombre">Nombre:</label>
                                                 <input value="<?php echo $usr_all_data[0]["use_nombre"]?>"  type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres" required>
