@@ -65,9 +65,13 @@ class Usuario extends CI_Controller {
         }
     }
 
+
+    /**
+     * Esta función envía el correo electronico ingresado a la función "verify_email" de usuario_model
+     * para verificar si ya existe en la base de datos
+     */
      public function verify_email(){
-        //Esta función envía el correo electronico ingresado a la función "verify_email"
-        //para verificar si ya existe en la base de datos
+        
         $mail = $_POST["mail"];
         $mail = strtolower($mail);
         $result = $this->usuario_model->verify_email($mail);
@@ -107,7 +111,10 @@ class Usuario extends CI_Controller {
         echo $score[0]["use_sco_score"];
     }
 
-
+    /**
+     * Esta función envía el nombre de usuario ingresado a la función "verify_username" de usuario_model
+     * para verificar si ya existe en la base de datos
+     */
     public function verify_username(){
 
         $username = $_POST["username"];
@@ -236,7 +243,10 @@ class Usuario extends CI_Controller {
 
     }
 
-      public function guardar() {
+    
+
+    public function guardar() {
+
         $this->usuario_model->guardar_estudiante();
         foreach ($_POST['pref'] as $key => $value) {
             $this->usuario_model->insert_pref($value, $this->input->post('username'));
