@@ -33,6 +33,16 @@
                                                 if ($session_data ['username'] == "admin")
                                                 {?>
                                                     <li><a href="<?php echo base_url()?>repositorio/modificar_repo/<?php echo $key['rep_id'] ?>"> <i class="icon-file-text-alt"></i>Modificar </span></a></li>
+                                                     </td><div  id="actualizaroa<?php echo $i; ?>">
+                                                        <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1"/>Todo<br/>
+                                                        <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2" checked="TRUE"/>Desde <?php echo $key['ep_lastupdate'] ?> <br/>
+                                                        <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="3"/>Rango de Fechas:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        Inicio:<input class="inputext1" id="fechainicio"type="text"  value="" name="fechainicio" /><br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputext1" id="fechafin" type="text" value="" name="fechafin" />
+
+
+
+                                                <td width="10%"> 
                                                  <?php
                                                 }
                                             }?>
