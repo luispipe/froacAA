@@ -91,4 +91,25 @@ Class Repositorio_model extends CI_Model{
         $this->db->where('rep_id', intval($this->input->post('rep_id')));
         $this->db->update('repository', $data);
     }
+     public function get_lo($rep_id, $lo_id) {
+
+        $this->db->select('lo_id, lo_lastmodified');
+        $this->db->from('lo');
+        $this->db->where('rep_id', $rep_id);
+        $this->db->where('lo_id', $lo_id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function insert_table($lo_date, $tabla) {  // qué es $tabla no encuentro correspondencia con la tabla lo, no estoy segura de si data corresponde a lo_date
+        $this->db->insert($tabla, $lo_date);
+    }
+    public function update_table($data, $tabla, $campos, $valores) { // No entiendo de donde salen estos parrámetros 
+
+        $size = sizeof($campos);
+        for ($i = 0; $i < $size; $i++) {
+            $this->db->where($campos[$i], $valores[$i]);
+        }
+        $this->db->update($tabla, $data);
+    }
+
 }

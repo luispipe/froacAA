@@ -228,21 +228,21 @@ public function insert_repo() {
                         }
 
                         //Hago select para determinar la operación a realizar -- Miro si ya existía el OA
-                        $consult = $this->repositorio_model->get_lo($idrepository, $idlom); //---- Consultar si existe en la tabla 'lo' un objeto con ese lo_id y rep_id
+                        $consult = $this->repositorio_model->get_lo($rep_id, $lo_id); //---- Consultar si existe en la tabla 'lo' un objeto con ese lo_id y rep_id
                         $vlr = sizeof($consult);
                         $last = "";
                         if ($vlr == 0) {
                             //Quiere decir que no existe un registro de ese OA, entonces lo inserto
                             if ($status != 'deleted') {
                                 $data = array(
-                                    'idrepository' => $idrepository,
-                                    'idlom' => $idlom,
-                                    'insertiondate' => date("Y-m-d"),
-                                    'deleted' => 'false',
-                                    'lastmodified' => $datestamp,
-                                    'xmlo' => $xmlo
+                                    'rep_id' => $rep_id,
+                                    'lo_id' => $lo_id,
+                                    'lo_insertiondate' => date("Y-m-d"),
+                                    'lo_deleted' => 'false',
+                                    'lo_lastmodified' => $datestamp,
+                                    'xmlo' => $xmlo// a cual variable corresponde en la tabla lo ????
                                 );
-                                $this->repo_model->insert_table($data, 'lo'); //---- Insertar en la tabla 'lo' lo correspondiente 
+                                $this->repo_model->insert_table($lo_date, 'lo'); //---- Insertar en la tabla 'lo' lo correspondiente 
 
                                /* $data2 = array(
                                     'idrepository' => $idrepository,
@@ -262,27 +262,27 @@ public function insert_repo() {
                         else 
                         {
                             foreach ($consult as $consu) {
-                                $last = $consu['lastmodified'];
+                                $last = $consu['lo_lastmodified'];
                             }
                             //Quiere decir que ya existe un registro de ese OA, entonces debo actualizarlo
-                            if ($status != 'deleted') {
-                                if ($last != $datestamp) {
+                            if ($status != 'lo_deleted') {
+                                if ($last != $lo_lastmodified) {
                                     //Datos que se van a modificar
                                     $data = array(
-                                        'lastmodified' => $datestamp,
-                                        'xmlo' => $xmlo
+                                        'lo_lastmodified' => $lo_lastmodified,
+                                        'xmlo' => $xmlo /// a que equivale???
                                     );
 
                                     //Capos para poner en el where
                                     $campos = array(
-                                        '0' => 'idrepository',
-                                        '1' => 'idlom'
+                                        '0' => 'rep_id',
+                                        '1' => 'lo_id'
                                     );
 
                                     //Valores para poner en el where
                                     $valores = array(
-                                        '0' => $idrepository,
-                                        '1' => $idlom
+                                        '0' => $rep_id,
+                                        '1' => $lo_id
                                     );
 
                                     $this->repo_model->update_table($data, 'lo', $campos, $valores); //---- Insertar en la tabla 'lo' lo correspondiente 
@@ -305,20 +305,20 @@ public function insert_repo() {
                                 }
                             } else {
                                 $data = array(
-                                    'deleted' => 'true',
-                                    'lastmodified' => $datestamp,
+                                    'lo_deleted' => 'true',
+                                    'lo_lastmodified' => $datestamp, // preguntar a que equivale datestamp
                                     'xmlo' => $xmlo
                                 );
                                 //Capos para poner en el where
                                 $campos = array(
-                                    '0' => 'idrepository',
-                                    '1' => 'idlom'
+                                    '0' => 'rep_id',
+                                    '1' => 'lo_id'
                                 );
 
                                 //Capos para poner en el where
                                 $valores = array(
-                                    '0' => $idrepository,
-                                    '1' => $idlom
+                                    '0' => $rep_id,
+                                    '1' => $lo_id
                                 );
 
                                 $this->repo_model->update_table($data, 'lo', $campos, $valores); //---- Insertar en la tabla 'lo' lo correspondiente 
