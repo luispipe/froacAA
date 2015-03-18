@@ -51,13 +51,23 @@ class Usuario extends CI_Controller {
                 );
                 $this->load->view('base/admin_template', $content);
             } else {
-                $content = array(
-                    "user" => $session_data['username'],
-                    "usr_data" => $this->usuario_model->get_usr_data($session_data['username']),
-                    "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
-                    "main_view" => "usr/perfil_view"
-                );
-                $this->load->view('base/est_template', $content);
+                if ($rol [0] ['use_rol_id'] == 5) {
+                    $content = array(
+                        "user" => $session_data['username'],
+                        "usr_data" => $this->usuario_model->get_usr_data($session_data['username']),
+                        "usr_all_data" => $this->usuario_model->get_all_admin_data($session_data['username']),
+                        "main_view" => "admin/perfil_view"
+                    );
+                    $this->load->view('base/rep_template', $content);
+                }else {
+                    $content = array(
+                        "user" => $session_data['username'],
+                        "usr_data" => $this->usuario_model->get_usr_data($session_data['username']),
+                        "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
+                        "main_view" => "usr/perfil_view"
+                    );
+                    $this->load->view('base/est_template', $content);
+                }
             }
 
         } else {
@@ -78,6 +88,7 @@ class Usuario extends CI_Controller {
         print_r($result);
     }
 
+    // Método que guarda los datos de un usuario al ser registrado desde el administrador
 
     public function nuevo_usuario(){
         $session_data = $this->session->userdata('logged_in');
@@ -244,6 +255,8 @@ class Usuario extends CI_Controller {
     }
 
     
+    //Metodo que guarda los registros cuando se crea una cuenta por parte del estudiante, 
+    // en la tabla usuario y estudiante
 
     public function guardar() {
 
@@ -254,6 +267,8 @@ class Usuario extends CI_Controller {
         $name = $this->input->post('nombre') . ' ' . $this->input->post('apellido');
         $this->exito($this->input->post('username'), $name);
     }
+
+    // Metodo que muestra un mensaje de exito cuando se crea una cuenta correctamente
 
     public function exito($id, $name) {
 
@@ -270,6 +285,8 @@ class Usuario extends CI_Controller {
 
         $this->clasificaresp();
     }*/
+
+    // Metodo que calcula el resultado del Test de Estilo de Aprendizaje
 
     public function test_result() {
         $cant_V = 0;
@@ -320,8 +337,6 @@ class Usuario extends CI_Controller {
           echo "   cantidad S  ";
           echo $cant_S; */
 
-
-
         // $mayor = "";
 
         $puntaje = 0;
@@ -360,6 +375,5 @@ class Usuario extends CI_Controller {
     }
 
   
-
     
 }

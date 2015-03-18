@@ -42,31 +42,12 @@
                                                 <label for="apellido">Apellido:</label>
                                                 <input value="<?php echo $usr_all_data[0]["use_apellido"]?>" type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="fecha_nac">Fecha de nacimiento:</label>
-                                                <input value="<?php echo $usr_all_data[0]["use_datebirth"]?>" data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Fecha de Nacimiento">
-                                            </div>
+
                                             <div class="form-group">
                                                 <label for="mail">E-mail:</label>
                                                 <input value="<?php echo $usr_all_data[0]["use_email"]?>" type="text" class="form-control" id="mail" name="mail" placeholder="Correo electronico" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="fecha_nac">Nivel de educación:</label>
-                                                <select class="form-control input-sm m-bot15" name="nevel_ed" required>
-                                                    <option value="<?php echo $usr_all_data[0]["use_edu_level"]?>"><?php echo $usr_all_data[0]["use_level"]?></option>
-                                                    <option value="0">Seleccione una opción</option>
-                                                    <option value="1">Básica Primaria</option>
-                                                    <option value="2">Básica Secundaria</option>
-                                                    <option value="3">Educación Media</option>
-                                                    <option value="4">Educación Superior</option>
-                                                    <option value="5">Carrera Técnica/Tecnológica</option>
-                                                    <option value="6">Pregrado</option>
-                                                    <option value="7">Especialización</option>
-                                                    <option value="8">Maestría</option>
-                                                    <option value="9">Doctorado</option>
-                                                    <option value="10">Posdoctorado</option>
-                                                </select>
-                                            </div>
+
                                             <button id="sub" type="submit" class="btn btn-warning">Actualizar mis datos</button>
                                         </div>
                                     </section>
@@ -142,4 +123,3 @@
 
 
  </script>
-

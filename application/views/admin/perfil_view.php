@@ -32,7 +32,7 @@
                                 <p><span>Nombres: </span> <?php echo $usr_data['use_nombre']?></p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Apellidos </span>: <?php echo $usr_data['use_apellido']?></p>
+                                <p><span>Apellidos: </span> <?php echo $usr_data['use_apellido']?></p>
                             </div>
 
                             <div class="bio-row">

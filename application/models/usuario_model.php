@@ -16,6 +16,10 @@ class Usuario_model extends CI_Model {
         return $query->result_array();
     }
 
+    // Metodo que obtiene los registros de un estudiante a partir de un nombre de usuario dado,
+    // a partir de la tabla estudiante, rol y nivel educativo
+
+
     function get_all_usr_data($username) {
        $query = $this->db->query("select users.use_username, users.use_nombre, users.use_email, users.use_fecha_registro,users.use_apellido, use_rol.use_rol_nombre, use_rol.use_rol_id, 
 use_student.use_stu_datebirth, use_level.use_level 
@@ -26,6 +30,9 @@ where users.use_username='".$username."'");
 
         return $query->result_array();
     }
+
+
+    // Metodo que obtiene los registros del administrador a partir del nombre de usuario a partir de la tabla usuario
 
     function get_all_admin_data($username){
         $query = $this->db->query("select users.use_nombre, users.use_apellido, users.use_email, users.use_fecha_registro, use_rol.use_rol_nombre
@@ -75,6 +82,9 @@ where users.use_username='".$username."'");
     	}
     }
 
+
+    // Metodo que verifica si un nombre de usuario dado existe en la base de datos 
+
     function verify_username($username) {
         //pendiente
         $this->db->select('use_username');
@@ -87,6 +97,8 @@ where users.use_username='".$username."'");
         return $query->num_rows();
     }
 
+    // Metodo que guarda los registros a partir de la creación de una cuenta por parte del administrador. 
+   
     public function guardar_usuario() {
 
         $data = array(
@@ -101,9 +113,10 @@ where users.use_username='".$username."'");
         $this->db->insert('users', $data);
     }
     
-    public function guardar_estudiante() {
     // Cuando un usuario (estudiante) se registra, la información se guarda en la tabla
     // de usuario: "users" y en la tabla del estudiante: "use_student"
+
+    public function guardar_estudiante() {
        
         $today = date("Y-m-d");
 
@@ -128,8 +141,10 @@ where users.use_username='".$username."'");
         $this->db->insert('use_student', $data);
     }
 
-    public function insert_pref($pref, $id) {
     //Guarda cada una de las preferencias del estudiante en la tabla "use_pre_stu"
+
+    public function insert_pref($pref, $id) {
+  
         $data = array(
             'use_pre_id' => $pref,
             'use_username' => $id
@@ -137,22 +152,28 @@ where users.use_username='".$username."'");
         $this->db->insert('use_pre_stu', $data);
     }
 
+    // Se obtienen los registros de las preferencias que hay en la tabla "use_preference"
+
     public function get_preferencias() {
 
-    // Se obtienen los registros de las preferencias que hay en la tabla "use_preference"
         $query = $this->db->get('use_preference');
 
         return $query->result();
     }
 
+
+    // Se obtienen los registros de las preferencias que hay en la tabla "use_level"
+
     public function get_nivel_educativo() {
 
-    // Se obtienen los registros de las preferencias que hay en la tabla "use_preference"
+    
         $query = $this->db->get('use_level');
 
         return $query->result();
     }
     
+
+    //Metodo que selecciona las preferencias de un estudiante dado  
 
     public function get_preferencia_est($user) {
         $this->db->select('*');
@@ -182,8 +203,10 @@ where users.use_username='".$username."'");
         $this->db->update('use_student', $data2);
     }
 
+    //Se verifica si el correo electrónico ingresado existe en la base de datos
+
     function verify_email($mail){
-        //Se verifica si el correo electrónico registrado existe en la base de datos
+        
         $this->db->select('use_email');
         $this->db->from('users');
         $this->db->where('use_email', $mail);
@@ -194,13 +217,15 @@ where users.use_username='".$username."'");
         return $query->num_rows();
     }
 
-     public function get_rol_data() {
+    
+    public function get_rol_data() {
 
         // Se obtienen los registros de los roles que hay en la tabla "use_rol"
         $query = $this->db->get('use_rol');
 
         return $query->result();
     }
+
     function verificar_passwd($passwd, $username){
         $this->db->select('use_clave');
         $this->db->from('users');
