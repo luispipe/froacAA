@@ -43,13 +43,14 @@
                                                         <?php if($key['rep_typerepository']!='roap'){?>
                                                         
                                                             <div  id="actualizaroa<?php echo $i; ?>">
-                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1"/>Todo<br/>
-                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2" checked="TRUE"/>Desde <?php echo $key['rep_lastupdate'] ?> <br/>
-                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="3"/>Rango de Fechas:<br/>
-                                                            Inicio:<input class="inputext1" id="fechainicio"type="text"  value="" name="fechainicio" /><br/>
-                                                            Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="inputext1" id="fechafin" type="text" value="" name="fechafin" />
-                                                         
-                                                            <button id="refreshbu" width="16px"  height="16px"  type="submit"><img  src="<?php echo base_url() ?>asset/img/refresh_1.jpg"/></button>
+                                                            <br>
+                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1"/>Todo<br/> <br/>
+                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2" checked="TRUE"/>Desde: <?php echo $key['rep_lastupdate'] ?> <br/><br/>
+                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="3"/>Rango de Fechas:<br/><br/>
+                                                            Inicio:<input class="form-control" id="fechainicio"type="text"  value="" name="fechainicio" /><br/><br/>
+                                                            Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="fechafin" type="text" value="" name="fechafin" />
+                                                            <br/>
+                                                            <button input class="btn btn-info" id="refreshbu" width="10px"  height="10px"  type="submit"></button>
                                                          
                                                             </div>
                                                     <?php }?>

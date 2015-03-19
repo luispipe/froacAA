@@ -89,7 +89,7 @@ Class Repositorio_model extends CI_Model{
             "use_username" => $this->input->post('usuariorepo')
         );
         $this->db->where('rep_id', intval($this->input->post('rep_id')));
-        $this->db->update('repository', $data);
+        $this->db->update('rep_id', $data);
     }
      public function get_lo($rep_id, $lo_id) {
 

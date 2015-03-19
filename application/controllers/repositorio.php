@@ -154,7 +154,8 @@ public function insert_repo() {
     public function actualizar_repo() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
-            $this->repo_model->modificar_repo();
+            $this->repositorio_model->modificar_repo();
+             echo hola;
             $this->lista();
         } else {
             //If no session, redirect to login page

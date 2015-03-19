@@ -216,7 +216,7 @@
                             ?>
                         </select>
                         
-                        <input type="hidden" value="<?php echo $key['rep_id'] ?>" name="rep_id" />
+                        <input type="hidden" value="<?php echo $key['rep_id'] ?>" name="repository" />
                         <input type="hidden" value="<?php echo $key['rep_countoas']?>" name="countoas" />                        
                         <input type="hidden" value="<?php echo $key['rep_registrationdate']?>" name="registrationdate">
                         <?php
@@ -242,7 +242,7 @@
             </footer>
             <script>
                          $("#refresh").click(function() {
-                        window.location = "<?php echo base_url() ?>repositorio/lista_repo/";
+                        window.location = "<?php echo base_url() ?>repositorio/lista/";
                         });
             </script>
 
