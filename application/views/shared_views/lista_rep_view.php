@@ -50,7 +50,8 @@
                                                             Inicio:<input class="form-control" id="fechainicio"type="text"  value="" name="fechainicio" /><br/><br/>
                                                             Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="fechafin" type="text" value="" name="fechafin" />
                                                             <br/>
-                                                            <button input class="btn btn-info" id="refreshbu" width="10px"  height="10px"  type="submit"></button>
+                                                            <button input class="btn btn-info pull-right r-activity" id="refreshbu" width="16px"  height="16px"  type="submit" value="Guardar" class="alt_btn"><img  src="<?php echo base_url() ?>css/adm/images/refresh.jpg"/></button>
+                                                           
                                                          
                                                             </div>
                                                     <?php }?>
