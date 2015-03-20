@@ -88,8 +88,8 @@ Class Repositorio_model extends CI_Model{
             "rep_countoas" => $this->input->post('countoas'),
             "use_username" => $this->input->post('usuariorepo')
         );
-        $this->db->where('rep_id', intval($this->input->post('rep_id')));
-        $this->db->update('rep_id', $data);
+        $this->db->where('rep_id', intval($this->input->post('repository')));
+        $this->db->update('repository', $data);
     }
      public function get_lo($rep_id, $lo_id) {
 
