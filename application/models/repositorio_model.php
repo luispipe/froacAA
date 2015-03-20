@@ -64,7 +64,7 @@ Class Repositorio_model extends CI_Model{
 
     public function get_repo_mod($rep_id) {
         //$id = $this->input->post('idrepository');
-        $query = $this->db->get_where('rep_id', array('rep_id' => $rep_id));
+        $query = $this->db->get_where('repository', array('rep_id' => $rep_id));
         return $query->result_array();
     }
 
