@@ -146,6 +146,12 @@
 
 
         $('#cancelar').click(function() {
+            $('#test_need').hide();
+            $('#form').show();
+            $('#submitg').show();
+        });
+
+        $('#cancelar1').click(function() {
             $('#test').hide();
             $('#form').show();
             $('#submitg').show();
@@ -453,6 +459,7 @@
                     </form>
                     <div class="row col-md-12">
                         <input type="button" value="Enviar" name="respuesta_need" id="respuesta_need" class="btn btn-info">
+                        <input type="button" value="Cancelar" name="cancelar" id="cancelar" class="btn btn-info">
                     </div>
                 </div>
 
@@ -733,7 +740,8 @@
                                     <td class="cuadroOscuro" colspan="2" align="center">
                                         <input type="hidden" name="op" value="guardar_vark">
                                         <input type="hidden" name="mod" value="mod_vark">
-                                        <input type="button" value="Enviar" name="proc" id="proc" class="btn btn-info">                                                   
+                                        <input type="button" value="Enviar" name="proc" id="proc" class="btn btn-info">
+                                        <input type="button" value="Cancelar" name="cancelar1" id="cancelar1" class="btn btn-info">
                                     </td>
                                 </tr> 
                             </table>

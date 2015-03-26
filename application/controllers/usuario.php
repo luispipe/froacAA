@@ -374,6 +374,112 @@ class Usuario extends CI_Controller {
         //$this->usuario_model->guardar_test();
     }
 
+
+    /**
+     * Esta Función guarda los resultados del test para personas con necesidades especiales
+     */
+   public function test_need()
+   {
+       $discapacidades = array();
+       //Resultados de limitación Visual
+       for ($i = 7; $i <= 8; $i++) {
+           if ($this->input->post($i) == 'Vision Nula') {
+               $discapacidades[] = array("Vision Nula" => "Si");
+               $resultadoVisual = "Visión Nula";
+           } else {
+               $discapacidades[] = array("Vision Nula" => "No");
+               if ($this->input->post($i + 1) == 'Tamaño 1.1') {
+                   $discapacidades[] = array("Vision Tamaño 1.1" => "Si");
+                   $resultadoVisual = "1.1";
+               } else {
+                   $discapacidades[] = array("Vision Tamaño 1.1" => "No");
+                   if ($this->input->post($i + 1) == 'Tamaño 1.3') {
+                       $discapacidades[] = array("Vision Tamaño 1.3" => "Si");
+                       $resultadoVisual = "1.3";
+                   } else {
+                       $discapacidades[] = array("Vision Tamaño 1.3" => "No");
+                       if ($this->input->post($i + 1) == 'Tamaño 1.7') {
+                           $discapacidades[] = array("Vision Tamaño 1.7" => "Si");
+                           $resultadoVisual = "1.7";
+                       } else {
+                           $discapacidades[] = array("Vision Tamaño 1.7" => "No");
+                           if($this->input->post($i + 1) == 'Tamaño 2.0'){
+                               $discapacidades[] = array("Vision Tamaño 2.0" => "Si");
+                               $resultadoVisual = "2.0";
+                           }else{
+                               $discapacidades[] = array("Vision Tamaño 2.0" => "No");
+                           }
+
+                       }
+                   }
+               }
+
+           }
+       }
+
+
+        //Resultados de Limitación Auditiva
+
+       for ($i = 9; $i <= 11; $i++) {
+           if ($this->input->post($i) == 'Audicion Nula') {
+               $discapacidades[] = array("Audicion Nula" => "Si");
+               $resultadoAuditivo = "Audición Nula";
+           } else {
+               $discapacidades[] = array("Audicion Nula" => "No");
+               if ($this->input->post($i) == 'Baja Audicion') {
+                   $discapacidades[] = array("Baja Audicion" => "Si");
+                   $resultadoAuditivo = "Baja Audicion";
+               }
+           }
+           if ($this->input->post($i) == 'Si Lenguaje') {
+               $discapacidades[] = array("Si Lenguaje" => "Si");
+               $resultadoAuditivo1 = "Lenguaje de Señas";
+           }
+           if ($this->input->post($i) == 'Si Idioma') {
+               $discapacidades[] = array("Si Idioma" => "Si");
+               $resultadoAuditivo2 = "Español";
+           }
+       }
+
+        //Resultados de Limitación Motriz
+
+       for ($i = 12; $i <= 13; $i++) {
+           if ($this->input->post($i) == 'No mouse') {
+               $discapacidades[] = array("No mouse" => "Si");
+               $resultadoMotriz = "Mouse";
+           }
+
+           if ($this->input->post($i) == 'No teclado') {
+               $discapacidades[] = array("No teclado" => "Si");
+               $resultadoMotriz1 = "Teclado";
+           }
+
+       }
+
+        //Resultados de Limitación Cognitiva
+
+       for ($i = 13; $i <= 17; $i++) {
+           if ($this->input->post($i) == 'No concentra') {
+               $discapacidades[] = array("No concentra" => "Si");
+               $resultadoCognitivo="Concentra";
+           }
+           if ($this->input->post($i) == 'No texto') {
+               $discapacidades[] = array("No texto" => "Si");
+               $resultadoCognitivo1="Texto";
+           }
+           if ($this->input->post($i) == 'No instrucciones') {
+               $discapacidades[] = array("No instrucciones" => "Si");
+               $resultadoCognitivo2 = "Instrucciones";
+           }
+
+           if ($this->input->post($i) == 'No distrae') {
+               $discapacidades[] = array("No distrae" => "Si");
+               $resultadoCognitivo3 = "No se distrae";
+           }
+
+       }
+   }
+
   
     
 }
