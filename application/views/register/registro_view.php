@@ -1,4 +1,4 @@
-<script type="text/javascript">
+    <script type="text/javascript">
 
     $(document).ready(function() {
 
@@ -88,15 +88,12 @@
 
         });
 
-//****************************************************************************************************************
-    
-        // Cuando se da click en el botónn "Enviar" en el formulario de Test de Estilo de Aprendizaje se guarda
-        // el resultado y se muestra un mensaje en pantalla con el resultado.
-
         $('#proc').click(function() {
           
             var form_data = $('#form_usr').serializeArray();
             $.post("<?php echo base_url() ?>index.php/usuario/test_result", form_data, function(respuesta) {
+                // $("#result").text(respuesta);
+                //alert("Resultado"+respuesta);
                 $('#result_test').val(respuesta);
                 $('#form').show();
                 $('#test').hide();
@@ -131,36 +128,22 @@
                     case '8':
                         $("#result").text('Su estilo de aprendizaje es: Visual-Secuencial ');
                         break
+
                 }
 
             });
         });
 
-//****************************************************************************************************************
 
-
-//****************************************************************************************************************
-
-        // Cuando se da click en el botón "Realizar Test", se muestra el formulario del Test de Estilo de 
-        // Aprendizaje, y se oculta el formulario de registro del estudiante.
 
         $('#boton').click(function() {
             $('#test').show();
             $('#form').hide();
             $('#submitg').hide();
-
-            //Esta línea lo que hace el mostrar la ventana del formulario del Test de Estilo de Aprendizaje
-            // desde la seccion marcada con ""#main-content", en este caso desde el comienzo del test. 
             window.location.href = "#main-content";
         });
 
-//****************************************************************************************************************
 
-
-//****************************************************************************************************************
-
-        // Cuando se da click en el botón "Cancelar", se oculta el formulario del Test de Estilo de Aprendizaje
-        // y se muestra el formulario de registro del estudiante.
 
         $('#cancelar').click(function() {
             $('#test').hide();
@@ -168,10 +151,6 @@
             $('#submitg').show();
         });
 
-//****************************************************************************************************************
-
-//****************************************************************************************************************
-        
         $('#username').blur(function() {
              $.get("<?php echo base_url() ?>index.php/usuario/checkusr/"+$("#username").val(), function(respuesta) {
                   $('#rta').val(respuesta);
@@ -188,9 +167,6 @@
            
         });
     });
-
-//****************************************************************************************************************
-
 
 </script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/datepicker/css/datepicker.css">
@@ -315,17 +291,17 @@
                                     TEST DE ESTILO DE APRENDIZAJE
                                     </header>
                                     <p>Para conocer su estilo de aprendizaje puede realizar el test ahora mismo o en el momento que usted lo requiera</p>
+
                                     <input type="button" id="boton" class="btn btn-info" value="Realizar Test">
                                     <input type="hidden" name="result_test" id="result_test" value="0">
                                     <h3 class="art-postheader" id="result"></h3>
+
                                     <input id="submitg" type="submit" class="btn btn-info" value="Guardar Información">
                                 </form>
                             </div>
                     </section>
                 </div>
 
-<!--************************************************************************************************************************************************************************************-->
-               
                 <!-- TEST PARA ESTUDIANTES CON NECESIDADES ESPECIALES-->
 
                 <div id="test_need" class="col-md-12" style="display: none;">
@@ -338,15 +314,15 @@
                         <div id="tipoLim"class="row col-md-12">
                             <strong>•   ¿Qué tipo de necesidad especial presenta?</strong>
                             <div class="row col-md-12">
-                                <INPUT TYPE=RADIO id="1" NAME="1" VALUE="Visual"> Visual
+                                <INPUT TYPE=RADIO id="1" NAME="1" estado="0" VALUE="Visual"> Visual
                                 <div class="row col-md-12">
-                                    <INPUT TYPE=RADIO id="2" NAME="2" VALUE="Auditivo"> Auditivo
+                                    <INPUT TYPE=RADIO id="2" NAME="2" estado="0" VALUE="Auditivo"> Auditivo
                                 </div>
                                 <div class="row col-md-12">
-                                    <INPUT TYPE=RADIO id="3" NAME="3" VALUE="Motriz"> Motriz
+                                    <INPUT TYPE=RADIO id="3" NAME="3" estado="0" VALUE="Motriz"> Motriz
                                 </div>
                                 <div class="row col-md-12">
-                                    <INPUT TYPE=RADIO id="4" NAME="4" VALUE="Cognitiva"> Cognitiva
+                                    <INPUT TYPE=RADIO id="4" NAME="4" estado="0" VALUE="Cognitiva"> Cognitiva
                                 </div>
                             </div>
                         </div>
@@ -365,15 +341,15 @@
                                 <div id="tamaño" class="row col-md-12" style="display: none;">
                                     <strong>•   ¿Cuál de los siguientes textos puede comprender con mayor facilidad?</strong>
                                     <div class="row col-md-12">
-                                        <INPUT TYPE=RADIO id="8" NAME="8" VALUE="Tamaño 1.1"> 1.1
+                                        <INPUT TYPE=RADIO id="8" NAME="8" estado="0" VALUE="Tamaño 1.1"> 1.1
                                         <div class="row col-md-12">
-                                            <INPUT TYPE=RADIO id="8" NAME="8" VALUE="Tamaño 1.3"> 1.3
+                                            <INPUT TYPE=RADIO id="8" NAME="8" estado="0" VALUE="Tamaño 1.3"> 1.3
                                         </div>
                                         <div class="row col-md-12">
-                                            <INPUT TYPE=RADIO id="8" NAME="8" VALUE="Tamaño 1.7"> 1.7
+                                            <INPUT TYPE=RADIO id="8" NAME="8" estado="0" VALUE="Tamaño 1.7"> 1.7
                                         </div>
                                         <div class="row col-md-12">
-                                            <INPUT TYPE=RADIO id="8" NAME="8" VALUE="Tamaño 2-0"> 2.0
+                                            <INPUT TYPE=RADIO id="8" NAME="8" estado="0" VALUE="Tamaño 2-0"> 2.0
                                         </div>
                                     </div>
                                 </div>
@@ -482,7 +458,6 @@
 
                 <!-- FIN TEST PARA ESTUDIANTES CON NECESIDADES ESPECIALES-->
 
-<!--************************************************************************************************************************************************************************************-->
 
                 <!--TEST DE ESTILO DE APRENDIZAJE-->
 
@@ -766,8 +741,6 @@
                 </form>
 
                 <!--FIN TEST DE ESTILO DE APRENDIZAJE-->
-
-<!--************************************************************************************************************************************************************************************-->
                 </div>
             </div>
         </section>
@@ -785,13 +758,8 @@
   $("#in_use, #no_use, #no_match").hide();
 
   $('#fecha_nac').datepicker();
-
-//****************************************************************************************************************
-
-    // Cuando se ingresa el nombre de usuario, se valida que no exista en la base de datos
-
   $("#username").change(function(){
-    $.ajax({
+   $.ajax({
     type: "POST",
     url: "<?php echo base_url()?>index.php/usuario/verify_username",
     data: { username: $("#username").val()}
@@ -800,15 +768,11 @@
      if(msg >= 1 ){
 
       $("#in_name").text($("#username").val());
-
-      // Si el usuario si existe se muestra un mensaje indicando la existencia
-
       $("#in_use").show();
       $("#no_use").hide();
       $("#sub").hide();
       $("#username").val("");
     }else{
-      // Si no existe se muestra un mensaje indicando que el nombre de usuario ingresado esta disponible
       $("#no_use").show();
       $("#in_use").hide();
       $("#sub").show();
@@ -816,11 +780,7 @@
   });
  });
 
-//*****************************************************************************************************************
 
-//*****************************************************************************************************************
-
-  // Cuando se ingresa el nombre de e-mail, se valida que no exista en la base de datos
   $("#in_use1, #no_use1").hide();
 
   $("#mail").change(function(){
@@ -833,56 +793,34 @@
               if(msg >= 1 ){
 
                   $("#in_name").text($("#mail").val());
-                  // Si el e-mail si existe se muestra un mensaje indicando la existencia
-
                   $("#in_use1").show();
                   $("#no_use1").hide();
                   $("#sub").hide();
                   $("#mail").val("");
               }else{
-
-                  // Si no existe se muestra un mensaje indicando que el e-mail ingresado esta disponible
                   $("#no_use1").show();
                   $("#in_use1").hide();
                   $("#sub").show();
               }
           });
   });
-
-//*****************************************************************************************************************
-
-//*****************************************************************************************************************
-
-    //Cuando la contraseña tiene menos de 6 caracteres se muestra un mensaje indicando el error
-
   $("#passwd").change(function(){
     if ($("#passwd").val().length < 6){
       alert("Su contraseña debe ser de minimo 6 caracteres!")
       $("#passwd").val("");
     }
   });
-
-    // Cuando la segunda contraseña ingresada no coincide con la primera se muestra un mensaje indicando el error
-
-    if($("#passwd").val() != $("#passwd2").val()){
-      $("#no_match").show();
-      $("#passwd2").val("")
-    } 
-
-    // Cuando se corrige el error, el mensaje se oculta
-
   $("#passwd2").change(function(){
     if($("#passwd").val() == $("#passwd2").val()){
         $("#no_match").hide();
     }
-
-    
+    if($("#passwd").val() != $("#passwd2").val()){
+      $("#no_match").show();
+      $("#passwd2").val("")
+    } 
   });
 
-//*****************************************************************************************************************
-
-
-//*****************************************************************************************************************
+//######################################################################################################################
 
   //En caso de tener discapacidad se debe mostar un botón que lo lleve al formulario Test para personas con necesidades
   // especiales
@@ -896,10 +834,9 @@
   $("#discapano").click(function () {
       $("#need").hide();
   })
+//######################################################################################################################
 
-//*****************************************************************************************************************
-
-//*****************************************************************************************************************
+//####################################################################################################################
 
   //Cuando se tiene una discapacidad y se da click en el botón realizar test, este muestra el formulario para
   // realizar el test para personas con necesidades especiales
@@ -911,18 +848,38 @@
       window.location.href = "#main-content";
   });
 
-//*****************************************************************************************************************
+//#####################################################################################################################
 
-//*****************************************************************************************************************
+//#####################################################################################################################
 
   //Cuando se tiene una discapacidad, se muestran las preguntas correspondientes al tipo de discapacidad seleccionada.
 
   $("#1").click(function () {
-      $("#limitacionV").show();
+      if($("#1").attr("estado")==0){
+          $("#limitacionV").show();
+          $("#1").attr("estado", 1);
+
+      }else{
+          $("#1").prop("checked", false);
+          $("#limitacionV").hide();
+          $("#1").attr("estado", 0);
+
+      }
+
   });
 
   $("#6").click(function () {
-      $("#tamaño").show();
+      if($("#6").attr("estado")==0){
+          $("#tamaño").show();
+          $("#6").attr("estado", 1);
+
+      }else{
+          $("#6").prop("checked", false);
+          $("#tamaño").hide();
+          $("#6").attr("estado", 0);
+
+      }
+
   });
 
   $("#5").click(function () {
@@ -930,30 +887,70 @@
   });
 
   $("#2").click(function () {
-      $("#limitacionA").show();
+          if($("#2").attr("estado")==0){
+              $("#limitacionA").show();
+              $("#2").attr("estado", 1);
+
+          }else{
+              $("#2").prop("checked", false);
+              $("#limitacionA").hide();
+              $("#2").attr("estado", 0);
+
+          }
   });
 
+  $("#8").click(function () {
+        if($("#8").attr("estado")==0){
+            $("#8").attr("estado", 1);
+        }else{
+            $("#8").prop("checked", false);
+            $("#8").attr("estado", 0);
+        }
+  });
+
+
   $("#3").click(function () {
-      $("#limitacionM").show();
+      if($("#3").attr("estado")==0){
+          $("#limitacionM").show();
+          $("#3").attr("estado", 1);
+
+      }else{
+          $("#3").prop("checked", false);
+          $("#limitacionM").hide();
+          $("#3").attr("estado", 0);
+
+      }
+
   });
 
   $("#4").click(function () {
-      $("#limitacionC").show();
+      if($("#4").attr("estado")==0){
+          $("#limitacionC").show();
+          $("#4").attr("estado", 1);
+
+      }else{
+          $("#4").prop("checked", false);
+          $("#limitacionC").hide();
+          $("#4").attr("estado", 0);
+
+      }
+
   });
 
 
-//*****************************************************************************************************************
+//#####################################################################################################################
 
-//*****************************************************************************************************************
+//#####################################################################################################################
 
 
   $('#respuesta_need').click(function() {
 
           $('#form').show();
           $('#test_need').hide();
+      $('#submitg').show();
+
 
   });
-  
-//*****************************************************************************************************************
+//#####################################################################################################################
 
   </script>
