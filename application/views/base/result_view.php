@@ -28,13 +28,12 @@ if ($sess == 1) {
                         <div>
                             <b>Descripción: </b><?php echo $key['lo_description'] ?><br>
                             <b>Palabras claves: </b><?php echo $key['lo_keyword'] ?><br>
-
                             <a onclick="verMetadata('<?php echo $key['lo_id'] . '/' . $key['rep_id'] ?>')" class="btn btn-sm btn-info" data-toggle="modal" href="#dialog_medatada">
-                               <li class="icon-eye-open"></li> Ver metadatos
+                                <li class="icon-eye-open"></li> Ver metadatos
                             </a>
                             &nbsp;
                             <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores">
-                              <li class="icon-eye-open"></li> Ver Indicadores
+                                <li class="icon-eye-open"></li> Ver Indicadores
                             </a>
                         </div>
                     </div>
@@ -66,26 +65,26 @@ if ($sess == 1) {
                         }
                     }
                     if ($evitDatRep) {
-                    
-                    ?>
-                    <div class="classic-search">
 
-                        <h4><a target="_blank" class="titulo" id="<?php echo $key['lo_id'] ?>" rep_id="<?php echo $key['rep_id'] ?>" logged="<?php echo $logged ?>" href="<?php echo base_url().'lo/load_lo/'.$url.'/'.$lo_name ?>"><?php echo $key['lo_title'] ?></a>
-                        </h4>
-                        <div>
-                            <b>Descripción: </b><?php echo $key['lo_description'] ?><br>
-                            <b>Palabras claves: </b><?php echo $key['lo_keyword'] ?><br>
+                        ?>
+                        <div class="classic-search">
 
-                            <a onclick="verMetadata('<?php echo $key['lo_id'] . '/' . $key['rep_id'] ?>')" class="btn btn-sm btn-info" data-toggle="modal" href="#dialog_medatada">
-                                <li class="icon-eye-open"></li> Ver metadatos
-                            </a>
-                            &nbsp;
-                            <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores">
-                               <li class="icon-eye-open"></li> Ver Indicadores
-                            </a>
+                            <h4><a target="_blank" class="titulo" id="<?php echo $key['lo_id'] ?>" rep_id="<?php echo $key['rep_id'] ?>" logged="<?php echo $logged ?>" href="<?php echo base_url().'lo/load_lo/'.$url.'/'.$lo_name ?>"><?php echo $key['lo_title'] ?></a>
+                            </h4>
+                            <div>
+                                <b>Descripción: </b><?php echo $key['lo_description'] ?><br>
+                                <b>Palabras claves: </b><?php echo $key['lo_keyword'] ?><br>
+
+                                <a onclick="verMetadata('<?php echo $key['lo_id'] . '/' . $key['rep_id'] ?>')" class="btn btn-sm btn-info" data-toggle="modal" href="#dialog_medatada">
+                                    <li class="icon-eye-open"></li> Ver metadatos
+                                </a>
+                                &nbsp;
+                                <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores">
+                                    <li class="icon-eye-open"></li> Ver Indicadores
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                <?php
+                    <?php
                     }
                 }
             } else {
@@ -99,7 +98,7 @@ if ($sess == 1) {
 </div>
 
 <!-- Modal Metadata -->
-<div class="modal fade" id="dialog_medatada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="dialog_medatada"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -107,8 +106,10 @@ if ($sess == 1) {
                 <h4 class="modal-title">Metadatos estandar LOM</h4>
             </div>
 
-            <div class="modal-body" id="dialog_metadata_result">
+            <div class="modal-body" style="height: 450px; width: 700px;" id="dialog_metadata_result">
+                <iframe src="" style="height: 450px; width: 500px;" class="insideiframe col-md-12" style="display: none">
 
+                </iframe>
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal"  class="btn btn-success" type="button">Aceptar</button>
@@ -155,7 +156,8 @@ if ($sess == 1) {
 
 
     function verMetadata(id) {
-        $("#dialog_metadata_result").load("<?php echo base_url(); ?>index.php/lo/load_metadata/" + id);
+        $(".insideiframe").attr("src", "<?php echo base_url(); ?>index.php/lo/load_metadata/"+id);
+        $(".insideiframe").show();
 
     }
 

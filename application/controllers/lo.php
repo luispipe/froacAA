@@ -6,6 +6,7 @@ Class Lo extends CI_Controller {
         parent::__construct();
         $this->load->model("lo_model");
         $this->load->model("usuario_model");
+
     }
 
     public function index() {
@@ -24,9 +25,9 @@ Class Lo extends CI_Controller {
         $arrayParams = explode("_", $params);
 
         foreach ($arrayParams as $key => $value){
-      
+
             if (substr($value, -3) == "ion" ){
-                    $arrayParams[$key] = substr($value,0, -3)."ión";  
+                $arrayParams[$key] = substr($value,0, -3)."ión";
             }
         }
 
@@ -39,7 +40,7 @@ Class Lo extends CI_Controller {
                 }
             }
         }
-        
+
         $palabras = implode(", ", $arrayParams);
         $params = implode("_", $arrayParams);
         $andParams = "('" . preg_replace('/_/', ' & ', $params) . "')";
@@ -49,7 +50,7 @@ Class Lo extends CI_Controller {
             "palabras" => $palabras,
             "sess" => $sess,
             "user" => $user
-        ); 
+        );
         $this->load->view("base/result_view",$content);
     }
 
@@ -59,31 +60,34 @@ Class Lo extends CI_Controller {
         $texto = str_replace($no_permitidas, $permitidas, $cadena);
         return $texto;
     }
-    
+
 
     public function load_metadata($id_lo, $id_rep){
-       
+        $cosa = $this->lo_model->get_metadata($id_lo, $id_rep);
+
         $content = array(
-            "xml" => $this->lo_model->get_metadata($id_lo, $id_rep)
+            "xml" => $cosa
         );
-        
-         $this->load->view("base/metadata_view",$content);
-       
+
+        $this->load->view("base/metadata_view",$content);
+
     }
-      
-   public function load_indicadores($id_lo, $id_rep, $username){
-       
+
+
+
+public function load_indicadores($id_lo, $id_rep, $username){
+
     echo $id_lo, $id_rep, $username;
-       
-   }
-    
-    
-   public function set_visita(){
-       $this->lo_model->set_visita_lo();
-   }
+
+}
 
 
-    //Hacer que el usuario admin pueda ver los objetos
+public function set_visita(){
+    $this->lo_model->set_visita_lo();
+}
+
+
+//Hacer que el usuario admin pueda ver los objetos
 public function load_lo($url, $lo_name){
     if ($this->session->userdata('logged_in')) {
         $session_data = $this->session->userdata('logged_in');
@@ -96,7 +100,7 @@ public function load_lo($url, $lo_name){
             "sess" => 1,
             "url" => $url,
             "lo_name" => $lo_name
-         ];
+        ];
 
         if ($session_data ['username'] == "admin"){
             $this->load->view('layouts/admin_template', $content);
@@ -116,11 +120,11 @@ public function load_lo($url, $lo_name){
     }
 }
 
-    public function get_score_avg(){
-        $result = $this->lo_model->get_avg_score();
-        $avg = round($result[0]['avg']);
-        echo $avg;
-    }
-    
+public function get_score_avg(){
+    $result = $this->lo_model->get_avg_score();
+    $avg = round($result[0]['avg']);
+    echo $avg;
+}
+
 
 }
