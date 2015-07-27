@@ -46,22 +46,66 @@ class Usuario extends CI_Controller {
                 $content = array(
                     "user" => $session_data['username'],
                     "usr_data" => $this->usuario_model->get_usr_data($session_data['username']),
-                    "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
+                    "usr_all_data" => $this->usuario_model->get_all_admin_data($session_data['username']),
                     "main_view" => "admin/perfil_view"
                 );
                 $this->load->view('base/admin_template', $content);
             } else {
-                $content = array(
-                    "user" => $session_data['username'],
-                    "usr_data" => $this->usuario_model->get_usr_data($session_data['username']),
-                    "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
-                    "main_view" => "usr/perfil_view"
-                );
-                $this->load->view('base/est_template', $content);
+                if ($rol [0] ['use_rol_id'] == 5) {
+                    $content = array(
+                        "user" => $session_data['username'],
+                        "usr_data" => $this->usuario_model->get_usr_data($session_data['username']),
+                        "usr_all_data" => $this->usuario_model->get_all_admin_data($session_data['username']),
+                        "main_view" => "admin/perfil_view"
+                    );
+                    $this->load->view('base/rep_template', $content);
+                }else {
+                    $content = array(
+                        "user" => $session_data['username'],
+                        "usr_data" => $this->usuario_model->get_usr_data($session_data['username']),
+                        "usr_all_data" => $this->usuario_model->get_all_usr_data($session_data['username']),
+                        "main_view" => "usr/perfil_view"
+                    );
+                    $this->load->view('base/est_template', $content);
+                }
             }
 
         } else {
             redirect(base_url(), 'refresh');
+        }
+    }
+
+
+    /**
+     * Esta función envía el correo electronico ingresado a la función "verify_email" de usuario_model
+     * para verificar si ya existe en la base de datos
+     */
+     public function verify_email(){
+        
+        $mail = $_POST["mail"];
+        $mail = strtolower($mail);
+        $result = $this->usuario_model->verify_email($mail);
+        print_r($result);
+    }
+
+    // Método que guarda los datos de un usuario al ser registrado desde el administrador
+
+    public function nuevo_usuario(){
+        $session_data = $this->session->userdata('logged_in');
+        if ($this->session->userdata('logged_in')) {
+            if ($session_data ['username'] == "admin"){
+
+                $content = array(
+                    "main_view" => "admin/nuevo_user_view",
+                    "user" => $session_data ['username'],
+                    "usr_data" => $this->usuario_model->get_usr_data ( $session_data ['username'] ),
+                    //"usuarios" => $this->repositorio_model->get_user_repo()
+                    "rol" => $this->usuario_model->get_rol_data()
+                );
+            }
+            $this->load->view('base/admin_template', $content);
+        }else {
+            $this->lista();
         }
     }
 
@@ -78,7 +122,10 @@ class Usuario extends CI_Controller {
         echo $score[0]["use_sco_score"];
     }
 
-
+    /**
+     * Esta función envía el nombre de usuario ingresado a la función "verify_username" de usuario_model
+     * para verificar si ya existe en la base de datos
+     */
     public function verify_username(){
 
         $username = $_POST["username"];
@@ -207,14 +254,186 @@ class Usuario extends CI_Controller {
 
     }
 
-      public function guardar() {
+    
+    //Metodo que guarda los registros cuando se crea una cuenta por parte del estudiante, 
+    // en la tabla usuario y estudiante
+
+    public function guardar() {
+
         $this->usuario_model->guardar_estudiante();
         foreach ($_POST['pref'] as $key => $value) {
             $this->usuario_model->insert_pref($value, $this->input->post('username'));
         }
+        if($_POST["necesidadespecial"]!=""){
+            $this->usuario_model->has_need($this->input->post('username'));
+            $need_vision = null;
+            $need_visiondescri = null;
+            $need_audicion = "no";
+            $need_audiciondescri = null;
+            $need_motriz = "no";
+            $need_motrizdescri = null;
+            $need_coginitiva = "no";
+            $need_cognitivatexto = "no";
+            $need_cognitivainstru = "no";
+            $need_cognitivaconcentra = "no";
+
+            $need = $_POST["necesidadespecial"];
+
+            $need1 = explode(",", $need);
+            //print_r($need1);
+            if(count($need1)>0){
+                for($i = 0; $i<count($need1); $i++){
+                    if(strpos($need1[$i], "Vision")!==false){
+                        if($need1[$i]=="Vision-Nula"){
+                            $need_vision = "si";
+                        }else{
+                            if(strpos($need1[$i],"Vision-Parcial")!==false){
+                                $need_vision = "si";
+                                $need_visiondescri = substr($need1[$i],-3);
+                            }
+                        }
+
+                    }
+
+                    if(strpos($need1[$i], "Audicion")!==false){
+                        $need_audicion = "si";
+                        if(strpos($need1[$i], "Señas-Texto")!==false){
+                            $need_audiciondescri = "señas-texto";
+                        }else{
+                            if(strpos($need1[$i], "Señas")!==false){
+                                $need_audiciondescri = "señas";
+                            }else{
+                                if(strpos($need1[$i], "Texto")!==false){
+                                    $need_audiciondescri = "texto";
+                                }
+                            }
+                        }
+
+
+
+                    }
+
+                    if(strpos($need1[$i], "Motriz")!==false){
+                        $need_motriz = "si";
+                        if(strpos($need1[$i], "Mouse-Teclado")!==false){
+                            $need_motrizdescri = "mouse-teclado";
+                        }else{
+                            if(strpos($need1[$i], "Mouse")!==false){
+                                $need_motrizdescri = "mouse";
+                            }
+                            else{
+
+                                if(strpos($need1[$i], "Teclado")!==false){
+                                    $need_motrizdescri = "teclado";
+                                }
+                            }
+                        }
+
+
+
+                    }
+
+                    if(strpos($need1[$i], "Cognitivo")!==false){
+                        $need_coginitiva = "si";
+                        if(strpos($need1[$i], "ConcentraSi")!==false){
+                            $need_cognitivatexto = "si";
+
+                        }else{
+                            if(strpos($need1[$i], "TextoSi")!==false){
+                                $need_cognitivainstru = "si";
+
+                            }  else{
+                                if(strpos($need1[$i], "InstruccionesSi")!==false){
+                                    $need_cognitivaconcentra = "si";
+                                }
+                            }
+                        }
+
+
+
+                    }
+                }
+
+                $this->usuario_model->update_has_need($this->input->post('username'),$need_vision,
+                    $need_visiondescri, $need_audicion, $need_audiciondescri,
+                    $need_motriz, $need_motrizdescri, $need_coginitiva, $need_cognitivatexto,
+                    $need_cognitivainstru, $need_cognitivaconcentra);
+            }else{
+                if(strpos($need1[0], "Vision")!==false){
+                    if($need1[0]=="Vision-Nula"){
+                        $need_vision = "si";
+                    }else{
+                        if(strpos($need1[0],"Vision-Parcial")!==false){
+                            $need_visiondescri = substr($need1[0],-3);
+                        }
+                    }
+
+                }
+
+                if(strpos($need1[0], "Audicion")!==false){
+                    $need_audicion = "si";
+                    if(strpos($need1[0], "Señas-Texto")!==false){
+                        $need_audiciondescri = "señas-texto";
+                    }else{
+                        if(strpos($need1[0], "Señas")!==false){
+                            $need_audiciondescri = "señas";
+                        } else{
+                            if(strpos($need1[$i], "Texto")!==false){
+                                $need_audiciondescri = "texto";
+                            }
+                        }
+                    }
+
+
+                }
+
+                if(strpos($need1[0], "Motriz")!==false){
+                    $need_motriz = "si";
+                    if(strpos($need1[0], "Mouse-Teclado")!==false){
+                        $need_motrizdescri = "mouse-teclado";
+                    }else{
+                        if(strpos($need1[0], "Mouse")!==false){
+                            $need_motrizdescri = "mouse";
+                        }else{
+                            if(strpos($need1[0], "Teclado")!==false){
+                                $need_motrizdescri = "teclado";
+                            }
+                        }
+                    }
+
+
+                }
+
+                if(strpos($need1[0], "Cognitivo")!==false){
+                    $need_coginitiva = "si";
+                    if(strpos($need1[0], "ConcentraSi")!==false){
+                        $need_cognitivatexto = "si";
+
+                    }else{
+                        if(strpos($need1[0], "TextoSi")!==false){
+                            $need_cognitivainstru = "si";
+
+                        }else{
+                            if(strpos($need1[0], "InstruccionesSi")!==false){
+                                $need_cognitivaconcentra = "si";
+                            }
+
+                        }
+                    }
+
+
+                }
+                $this->usuario_model->update_has_need($this->input->post('username'),$need_vision,
+                    $need_visiondescri, $need_audicion, $need_audiciondescri,
+                    $need_motriz, $need_motrizdescri, $need_coginitiva, $need_cognitivatexto,
+                    $need_cognitivainstru, $need_cognitivaconcentra);
+            }
+        }
         $name = $this->input->post('nombre') . ' ' . $this->input->post('apellido');
         $this->exito($this->input->post('username'), $name);
     }
+
+    // Metodo que muestra un mensaje de exito cuando se crea una cuenta correctamente
 
     public function exito($id, $name) {
 
@@ -231,6 +450,8 @@ class Usuario extends CI_Controller {
 
         $this->clasificaresp();
     }*/
+
+    // Metodo que calcula el resultado del Test de Estilo de Aprendizaje
 
     public function test_result() {
         $cant_V = 0;
@@ -281,8 +502,6 @@ class Usuario extends CI_Controller {
           echo "   cantidad S  ";
           echo $cant_S; */
 
-
-
         // $mayor = "";
 
         $puntaje = 0;
@@ -320,7 +539,112 @@ class Usuario extends CI_Controller {
         //$this->usuario_model->guardar_test();
     }
 
-  
 
+    /**
+     * Esta Función guarda los resultados del test para personas con necesidades especiales
+     */
+   public function test_need()
+   {
+       $discapacidades = array();
+       //Resultados de limitación Visual
+       for ($i = 7; $i <= 8; $i++) {
+           if ($this->input->post($i) == 'Vision Nula') {
+               $discapacidades[] = array("Vision Nula" => "Si");
+               $resultadoVisual = "Visión Nula";
+           } else {
+               $discapacidades[] = array("Vision Nula" => "No");
+               if ($this->input->post($i + 1) == 'Tamaño 1.1') {
+                   $discapacidades[] = array("Vision Tamaño 1.1" => "Si");
+                   $resultadoVisual = "1.1";
+               } else {
+                   $discapacidades[] = array("Vision Tamaño 1.1" => "No");
+                   if ($this->input->post($i + 1) == 'Tamaño 1.3') {
+                       $discapacidades[] = array("Vision Tamaño 1.3" => "Si");
+                       $resultadoVisual = "1.3";
+                   } else {
+                       $discapacidades[] = array("Vision Tamaño 1.3" => "No");
+                       if ($this->input->post($i + 1) == 'Tamaño 1.7') {
+                           $discapacidades[] = array("Vision Tamaño 1.7" => "Si");
+                           $resultadoVisual = "1.7";
+                       } else {
+                           $discapacidades[] = array("Vision Tamaño 1.7" => "No");
+                           if($this->input->post($i + 1) == 'Tamaño 2.0'){
+                               $discapacidades[] = array("Vision Tamaño 2.0" => "Si");
+                               $resultadoVisual = "2.0";
+                           }else{
+                               $discapacidades[] = array("Vision Tamaño 2.0" => "No");
+                           }
+
+                       }
+                   }
+               }
+
+           }
+       }
+
+
+        //Resultados de Limitación Auditiva
+
+       for ($i = 9; $i <= 11; $i++) {
+           if ($this->input->post($i) == 'Audicion Nula') {
+               $discapacidades[] = array("Audicion Nula" => "Si");
+               $resultadoAuditivo = "Audición Nula";
+           } else {
+               $discapacidades[] = array("Audicion Nula" => "No");
+               if ($this->input->post($i) == 'Baja Audicion') {
+                   $discapacidades[] = array("Baja Audicion" => "Si");
+                   $resultadoAuditivo = "Baja Audicion";
+               }
+           }
+           if ($this->input->post($i) == 'Si Lenguaje') {
+               $discapacidades[] = array("Si Lenguaje" => "Si");
+               $resultadoAuditivo1 = "Lenguaje de Señas";
+           }
+           if ($this->input->post($i) == 'Si Idioma') {
+               $discapacidades[] = array("Si Idioma" => "Si");
+               $resultadoAuditivo2 = "Español";
+           }
+       }
+
+        //Resultados de Limitación Motriz
+
+       for ($i = 12; $i <= 13; $i++) {
+           if ($this->input->post($i) == 'No mouse') {
+               $discapacidades[] = array("No mouse" => "Si");
+               $resultadoMotriz = "Mouse";
+           }
+
+           if ($this->input->post($i) == 'No teclado') {
+               $discapacidades[] = array("No teclado" => "Si");
+               $resultadoMotriz1 = "Teclado";
+           }
+
+       }
+
+        //Resultados de Limitación Cognitiva
+
+       for ($i = 13; $i <= 17; $i++) {
+           if ($this->input->post($i) == 'No concentra') {
+               $discapacidades[] = array("No concentra" => "Si");
+               $resultadoCognitivo="Concentra";
+           }
+           if ($this->input->post($i) == 'No texto') {
+               $discapacidades[] = array("No texto" => "Si");
+               $resultadoCognitivo1="Texto";
+           }
+           if ($this->input->post($i) == 'No instrucciones') {
+               $discapacidades[] = array("No instrucciones" => "Si");
+               $resultadoCognitivo2 = "Instrucciones";
+           }
+
+           if ($this->input->post($i) == 'No distrae') {
+               $discapacidades[] = array("No distrae" => "Si");
+               $resultadoCognitivo3 = "No se distrae";
+           }
+
+       }
+   }
+
+  
     
 }

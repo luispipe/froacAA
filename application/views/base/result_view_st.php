@@ -107,8 +107,8 @@ if ($sess == 1) {
 <script type="text/javascript">
 
     function verMetadata(id) {
-       // $("#dialog_metadata_result").load("<?php echo base_url(); ?>index.php/lo/load_metadata/" + id);
-<?php echo "id"; ?>
+        $("#dialog_metadata_result").load("<?php echo base_url(); ?>index.php/lo/load_metadata/" + id);
+
     }
 
     function verIndicadores(id,rank) {

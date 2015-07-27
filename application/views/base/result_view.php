@@ -5,8 +5,12 @@ if ($sess == 1) {
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>asset/raty/jquery.raty.css">
 </script><script src="<?php echo base_url()?>asset/raty/jquery.raty.js"></script>
-
+<div id="prueba"></div>
 <div class="col-lg-12">
+
+</div>
+
+<div class="col-lg-9">
     <!-- page start-->
     <section class="panel">
         <header class="panel-heading">
@@ -96,6 +100,21 @@ if ($sess == 1) {
     </section>
     <!-- page end-->
 </div>
+<div class="col-lg-3" id="recomendacion">
+    <script>
+        //Script para mostrar recomendación
+        $(document).ready(function(){
+            $("#prueba").hide();
+            $("#prueba").text("<?php echo urlencode($oasadaptados) ?>");
+            $("#recomendacion").load("<?php echo base_url(); ?>index.php/lo/llenar_recomendacion/" + $("#prueba").text() + "");
+
+        });
+
+
+
+    </script>
+
+</div>
 
 <!-- Modal Metadata -->
 <div class="modal fade" id="dialog_medatada"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -156,9 +175,9 @@ if ($sess == 1) {
 
 
     function verMetadata(id) {
-      //$(".insideiframe").attr("src", "<?php echo base_url(); ?>index.php/lo/load_metadata/"+id);
-      //$(".insideiframe").show();
-     <?php echo "id"; ?>
+        $(".insideiframe").attr("src", "<?php echo base_url(); ?>index.php/lo/load_metadata/"+id);
+        $(".insideiframe").show();
+
     }
 
     function verIndicadores(id,rank) {
@@ -217,6 +236,8 @@ if ($sess == 1) {
 
 
 </script>
+
+
 
 <!--$.fn.raty.defaults.path = '<?php #echo base_url() ?>asset/raty/images';
 

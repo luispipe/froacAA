@@ -175,7 +175,7 @@
                         <label>Correo Electrónico</label><br>
                         <input type="email" class="form-control" value="<?php echo $key['rep_email'] ?>" name="email" id="email"/><br>
                         <label id="ltiporepositorio">Tipo Repositorio</label>
-                        <input type="text" class="form-control" disabled="" id="tiporepositorio" name="tiporepositorio" value="<?php echo $key['rep_typerepository']?>">
+                        <input type="text" class="form-control" value="<?php echo $key['rep_typerepository']?>" name="tiporepositorio" id="tiporepositorio" readonly>
 
                     <label>URL</label>
                         <input type="text" class="form-control" name="url" value="<?php echo $key['rep_url'] ?>" id="url" /><br>
@@ -216,7 +216,7 @@
                             ?>
                         </select>
                         
-                        <input type="hidden" value="<?php echo $key['rep_id'] ?>" name="rep_id" />
+                        <input type="hidden" value="<?php echo $key['rep_id'] ?>" name="repository" />
                         <input type="hidden" value="<?php echo $key['rep_countoas']?>" name="countoas" />                        
                         <input type="hidden" value="<?php echo $key['rep_registrationdate']?>" name="registrationdate">
                         <?php
@@ -242,7 +242,7 @@
             </footer>
             <script>
                          $("#refresh").click(function() {
-                        window.location = "<?php echo base_url() ?>repositorio/lista_repo/";
+                        window.location = "<?php echo base_url() ?>repositorio/lista/";
                         });
             </script>
 

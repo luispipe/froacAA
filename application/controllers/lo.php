@@ -45,14 +45,45 @@ Class Lo extends CI_Controller {
         $params = implode("_", $arrayParams);
         $andParams = "('" . preg_replace('/_/', ' & ', $params) . "')";
         $orParams = "('" . preg_replace('/_/', ' | ', $params) . "')";
-        $content = array(
-            "result" => $this->lo_model->get_oas_b($orParams,$andParams),
-            "palabras" => $palabras,
-            "sess" => $sess,
-            "user" => $user
-        );
+        print_r($andParams);
+        print_r($orParams);
+        $oasencontrados = $this->lo_model->get_oas_b($orParams,$andParams);
+
+
+        if ($this->session->userdata ( 'logged_in' )) {
+            $d = 0;
+            //print_r($oasencontrados);
+            //echo ($oasencontrados[0][0]);
+            foreach($oasencontrados[0] as $key){
+                $x[$d]['idOA'] = $key["lo_id"];
+                $x[$d]['idRepository'] = $key["rep_id"];
+                $d++;
+            }
+            $session_data = $this->session->userdata('logged_in');
+            $user = $session_data["username"];
+            //print_r($session_data);
+            //print_r($x);
+            $content = array(
+                "result" => $oasencontrados,
+                "palabras" => $palabras,
+                "sess" => $sess,
+                "user" => $user,
+                "oasadaptados" => $this->recomendacion($x, $user)
+            );
+        }else{
+
+            $content = array(
+                "result" => $oasencontrados,
+                "palabras" => $palabras,
+                "sess" => $sess,
+                "user" => $user
+            );
+        }
+        //print_r($oasencontrados);
+
         $this->load->view("base/result_view",$content);
     }
+
 
     public function limpiar($cadena) {
         $no_permitidas = array("á", "é", "í", "ó", "ú", "Á", "É", "Í", "Ó", "Ú", "ñ", "À", "Ã", "Ì", "Ò", "Ù", "Ã™", "Ã ", "Ã¨", "Ã¬", "Ã²", "Ã¹", "ç", "Ç", "Ã¢", "ê", "Ã®", "Ã´", "Ã»", "Ã‚", "ÃŠ", "ÃŽ", "Ã”", "Ã›", "ü", "Ã¶", "Ã–", "Ã¯", "Ã¤", "«", "Ò", "Ã", "Ã„", "Ã‹");
@@ -71,6 +102,63 @@ Class Lo extends CI_Controller {
 
         $this->load->view("base/metadata_view",$content);
 
+    }
+
+    //Recomendación Paula
+    protected function recomendacion($oas, $user){
+        $parametros = array(
+            'idUsuarioActivo' => $user,
+            'OAs' => $oas
+        );
+
+        $wsdl_url = 'http://localhost:6020/ServicioWeb?wsdl';
+        //$wsdl_url = 'http://froac.manizales.unal.edu.co:6020/ServicioWeb';
+        $client = new SOAPClient($wsdl_url);
+        $result = $client->adaptarOAs($parametros);
+        $cadena = "";
+        $otro = "";
+
+        foreach ($result as $paulis) {
+            foreach ($paulis as $no) {
+                //echo $no->idOA . "-" . $no->idRepository . "$";
+
+                $cadena = $cadena . $no->idOA . "-" . $no->idRepository . "$";
+            }
+        }
+        //$this->llenar_recomendacion($p,$supone);
+//        $this->llenar_recomendacion($result);
+        return $cadena;
+    }
+
+    public function llenar_recomendacion($return1) {
+
+        $return = urldecode($return1);
+
+        $ob = explode("$", $return);
+        $ob1 = array_pop($ob);
+        $todos = array();
+        foreach ($ob as $key) {
+            $temp = explode("-", $key);
+            $comp = array(
+                'idOA' => $temp[0],
+                'idRepository' => $temp[1]
+            );
+            array_push($todos, $comp);
+        }
+        //print_r($todos);
+
+
+        //Con los id de los OAs recomendados, busco el titulo y la localización
+        for ($i = 0; $i < count($todos); $i++) {
+            $rec[$i] = $this->lo_model->titulos_recomendacion($todos[$i]['idOA'],$todos[$i]['idRepository']);
+        }
+
+        $data = array(
+            "rec" => $rec
+        );
+
+
+        $this->load->view('base/llenar_recomendacion_view', $data);
     }
 
 

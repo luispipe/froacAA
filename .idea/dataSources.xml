@@ -6,10 +6,7 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/froac_bd_test_1</jdbc-url>
-      <user-name>postgres</user-name>
-      <user-password>dfd9dfc3dfdfdfc6dfc3dfd2dfdfdfd9</user-password>
       <libraries />
     </data-source>
   </component>
 </project>
-

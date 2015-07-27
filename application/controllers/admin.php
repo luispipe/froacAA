@@ -1,4 +1,7 @@
 <?php
+
+
+
 class Admin extends CI_Controller {
     public function __construct() {
         parent::__construct ();
@@ -63,6 +66,9 @@ class Admin extends CI_Controller {
 
     }
 
+    /**
+     * @param string $username Se recibe como nombre de usuario para tata
+     */
     public function editar_usr($username){
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
@@ -72,7 +78,8 @@ class Admin extends CI_Controller {
                     "user" => $session_data['username'],
                     "usr_data" => $this->usuario_model->get_usr_data($username),
                     "usr_all_data" => $this->usuario_model->get_all_usr_data($username),
-                    "main_view" => "admin/editar_view"
+                    "main_view" => "admin/editar_view",
+                    "rol" => $this->usuario_model->get_rol_data()
                 );
                 $this->load->view('base/admin_template', $content);
             } else {
@@ -106,6 +113,7 @@ class Admin extends CI_Controller {
 
             $this->usuario_model->update_user($this->input->post("username"));
             $this->lista_user();
+
         } else {
             redirect(base_url(), 'refresh');
         }
@@ -137,5 +145,3 @@ class Admin extends CI_Controller {
 
     }
 }
-
-

@@ -154,7 +154,7 @@ public function insert_repo() {
     public function actualizar_repo() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
-            $this->repo_model->modificar_repo();
+            $this->repositorio_model->modificar_repo();
             $this->lista();
         } else {
             //If no session, redirect to login page
@@ -162,6 +162,7 @@ public function insert_repo() {
         }
     }
 
+    //Esta función es utilizada para el proceso de cosechado. Lo que hace es ir hasta el Servlet que realiza las peticiones OAI
     public function cosechado($actualizar, $idrepository, $lastupdate, $cadenaoai, $metadata, $fechainicio, $fechafin) {
         //echo "Sale por este lado"+$actualizar;
 
@@ -178,247 +179,171 @@ public function insert_repo() {
           if ($actualizar == "3") //Rango de Fechas
           $url = "http://froac.manizales.unal.edu.co:8080/harvesterFROAC/HarvesterOAI?cadenaOAI=" . $cadenaoai . "&idROA=" . $idrepository . "&metadata=" . $metadata . "&fechainicio=" . $fechainicio . "&fechafin=" . $fechafin . "";
          */
-$tags = get_meta_tags($url);
-return $tags;
-}
+        $tags = get_meta_tags($url);
+        return $tags;
+    }
 
-public function actualizar_oas() {
-    //  Prueba para El Cron
-//        echo $idrepository;
-//        echo $lastupdate;
-//        echo $cadenaoai;
-//        echo $metadata;
-//        $nuevoarhivo = fopen("pruebacron.txt", 'w+');
-//        fwrite($nuevoarhivo, "Esto deberia de estar funcionando");
-//        fclose($nuevoarhivo);
-    global $idrepository;
-    $idrepository = $this->input->post("idrepository");
-    $lastupdate = $this->input->post("lastupdate");
-    $cadenaoai = $this->input->post("cadenaoai");
-    $metadata = $this->input->post("metadata");
-    $actualizar = $this->input->post("actualizar");
-    $fechainicio = $this->input->post("fechainicio");
-    $fechafin = $this->input->post("fechafin");
+    public function actualizar_oas() 
+    {
+        global $idrepository;
+        $idrepository = $this->input->post("idrepository");
+        $lastupdate = $this->input->post("lastupdate");
+        $cadenaoai = $this->input->post("cadenaoai");
+        $metadata = $this->input->post("metadata");
+        $actualizar = $this->input->post("actualizar");
+        $fechainicio = $this->input->post("fechainicio");
+        $fechafin = $this->input->post("fechafin");
+        $resp = $this->cosechado($actualizar, $idrepository, $lastupdate, $cadenaoai, $metadata, $fechainicio, $fechafin);
+        //Verifica que sí se generaran XML... lo que retorna la función "cosechado"
+        if (count($resp) > 0) {
 
+            //Se recorre el vector que tiene las url de los xml
+            foreach ($resp as $res) {
+                //Ubicación de los archivos xml
+                //$url= base_url()."harvester/".$idrepository."_".($i+1).".xml";
+                //Ejemplo --- $url = "http://froac.manizales.unal.edu.co/harvester/FROAC-11.xml";
+                $url = $res;
 
-    $resp = $this->cosechado($actualizar, $idrepository, $lastupdate, $cadenaoai, $metadata, $fechainicio, $fechafin);
-    if (count($resp) > 0) {
-        //Este for se hace en caso de que se tengan varios xml asociados a la actualización
-        //for ($v = 0; $v < count($resp); $v++) {
-        foreach ($resp as $res) {
-            //Ubicación de los archivos xml
-            //$url= base_url()."harvester/".$idrepository."_".($i+1).".xml";
-            //$url = base_url() . "harvester/FROAC3.xml";
-            //$url = base_url() . $resp[$v];
-            //$url = "http://froac.manizales.unal.edu.co/harvester/FROAC-11.xml";
-            $url = $res;
-
-            //Se carga el contenido del archivo xml en $oas
-            $doc = new DOMDocument();
-            $doc->load($url);
-            //Verifico el estándar de metadatos a analizar
-            if ($metadata == "lom") {
-                //Se recorre el xml record por record
-                $oas = $doc->getElementsByTagName('record');
-                //Tenemos cada record
-                $rssUpdate = 0;
-                $rssInsert = 0;
-                $rssLOUp = array();
-                $rssLOIn = array();
-                foreach ($oas as $oa) {
-
-                    $header = $oa->getElementsByTagName('header');
-                    global $idlom;
-                    $idlom = $header->item(0)->getElementsByTagName('identifier')->item(0)->nodeValue;
-                    $status = $header->item(0)->getAttribute('status');
-                    $datestamp = $header->item(0)->getElementsByTagName('datestamp')->item(0)->nodeValue;
-                    $xmlo = '';
-                    if ($status != 'deleted') {
-                        $xmlo0 = $oa->getElementsByTagName('lom');
-                        $xmlo1 = $xmlo0->item(0);
-                        $xml = $xmlo1->ownerDocument->saveXML($xmlo1);
-                        $xmlo = $xml;
-                    }
-                    //Hago select para determinar la operación a realizar -- Miro si ya existía el OA
-                    $consult = $this->repo_model->get_lo($idrepository, $idlom);
-                    $vlr = sizeof($consult);
-                    $last = "";
-                    if ($vlr == 0) {
-                        //Quiere decir que no existe un registro de ese OA, entonces lo inserto
+                //Se carga el contenido del archivo xml en $doc
+                $doc = new DOMDocument();
+                $doc->load($url);
+                //Verifico el estándar de metadatos a analizar
+                if ($metadata == "lom") {
+                    //Se recorre el xml record por record
+                    $oas = $doc->getElementsByTagName('record');
+                    //Tenemos un vector de 'record' en la variable $oas y se recorre
+                    foreach ($oas as $oa) {
+                        $header = $oa->getElementsByTagName('header');
+                        global $idlom;
+                        $idlom = $header->item(0)->getElementsByTagName('identifier')->item(0)->nodeValue;
+                        $status = $header->item(0)->getAttribute('status');
+                        $datestamp = $header->item(0)->getElementsByTagName('datestamp')->item(0)->nodeValue;
+                        $xmlo = '';
+                        //Si el estado del record es 'deleted' se 
                         if ($status != 'deleted') {
-                            $data = array(
-                                'idrepository' => $idrepository,
-                                'idlom' => $idlom,
-                                'insertiondate' => date("Y-m-d"),
-                                'deleted' => 'false',
-                                'lastmodified' => $datestamp,
-                                'xmlo' => $xmlo
-                            );
-                            $this->repo_model->insert_table($data, 'lo');
-
-                            $data2 = array(
-                                'idrepository' => $idrepository,
-                                'idlom' => $idlom
-                            );
-                            $this->repo_model->insert_table($data2, 'lom');
-
-                            /* $data2 = array(
-                              'idrepository' => $idrepository,
-                              'idlom' => $idlom,
-                              'noticedate' => $datestamp,
-                              'notice_title' => "insert"
-                              );
-                              $this->repo_model->insert_table($data2, 'rss'); */
-                            $rssLOIn[$rssInsert] = $idlom;
-                            $rssInsert++;
+                            $xmlo0 = $oa->getElementsByTagName('lom');
+                            $xmlo1 = $xmlo0->item(0);
+                            $xml = $xmlo1->ownerDocument->saveXML($xmlo1);
+                            $xmlo = $xml;
                         }
-                    } else {
-                        foreach ($consult as $consu) {
-                            $last = $consu['lastmodified'];
-                        }
-                        //Quiere decir que ya existe un registro de ese OA, entonces debo actualizarlo
-                        if ($status != 'deleted') {
-                            if ($last != $datestamp) {
-                                //Datos que se van a modificar
+
+                        //Hago select para determinar la operación a realizar -- Miro si ya existía el OA
+                        $consult = $this->repositorio_model->get_lo($rep_id, $lo_id); //---- Consultar si existe en la tabla 'lo' un objeto con ese lo_id y rep_id
+                        $vlr = sizeof($consult);
+                        $last = "";
+                        if ($vlr == 0) {
+                            //Quiere decir que no existe un registro de ese OA, entonces lo inserto
+                            if ($status != 'deleted') {
                                 $data = array(
-                                    'lastmodified' => $datestamp,
-                                    'xmlo' => $xmlo
+                                    'rep_id' => $rep_id,
+                                    'lo_id' => $lo_id,
+                                    'lo_insertiondate' => date("Y-m-d"),
+                                    'lo_deleted' => 'false',
+                                    'lo_lastmodified' => $datestamp,
+                                    'xmlo' => $xmlo// a cual variable corresponde en la tabla lo ????
                                 );
+                                $this->repo_model->insert_table($lo_date, 'lo'); //---- Insertar en la tabla 'lo' lo correspondiente 
 
-                                //Capos para poner en el where
-                                $campos = array(
-                                    '0' => 'idrepository',
-                                    '1' => 'idlom'
-                                );
-
-                                //Valores para poner en el where
-                                $valores = array(
-                                    '0' => $idrepository,
-                                    '1' => $idlom
-                                );
-
-                                $this->repo_model->update_table($data, 'lo', $campos, $valores);
-
-                                $this->repo_model->delete_table('lom', $campos, $valores);
-
-                                $data2 = array(
+                               /* $data2 = array(
                                     'idrepository' => $idrepository,
                                     'idlom' => $idlom
                                 );
-                                $this->repo_model->insert_table($data2, 'lom');
+                                $this->repo_model->insert_table($data2, 'lom'); 
 
-                                /* $data2 = array(
+                                 $data2 = array(
                                   'idrepository' => $idrepository,
                                   'idlom' => $idlom,
                                   'noticedate' => $datestamp,
-                                  'notice_title' => "update"
+                                  'notice_title' => "insert"
                                   );
                                   $this->repo_model->insert_table($data2, 'rss'); */
-                                $rssLOUp[$rssUpdate] = $idlom;
-                                $rssUpdate++;
                             }
-                        } else {
-                            $data = array(
-                                'deleted' => 'true',
-                                'lastmodified' => $datestamp,
-                                'xmlo' => $xmlo
-                            );
-                            //Capos para poner en el where
-                            $campos = array(
-                                '0' => 'idrepository',
-                                '1' => 'idlom'
-                            );
+                        } 
+                        else 
+                        {
+                            foreach ($consult as $consu) {
+                                $last = $consu['lo_lastmodified'];
+                            }
+                            //Quiere decir que ya existe un registro de ese OA, entonces debo actualizarlo
+                            if ($status != 'lo_deleted') {
+                                if ($last != $lo_lastmodified) {
+                                    //Datos que se van a modificar
+                                    $data = array(
+                                        'lo_lastmodified' => $lo_lastmodified,
+                                        'xmlo' => $xmlo /// a que equivale???
+                                    );
 
-                            //Capos para poner en el where
-                            $valores = array(
-                                '0' => $idrepository,
-                                '1' => $idlom
-                            );
+                                    //Capos para poner en el where
+                                    $campos = array(
+                                        '0' => 'rep_id',
+                                        '1' => 'lo_id'
+                                    );
 
-                            $this->repo_model->update_table($data, 'lo', $campos, $valores);
+                                    //Valores para poner en el where
+                                    $valores = array(
+                                        '0' => $rep_id,
+                                        '1' => $lo_id
+                                    );
 
-                            $this->repo_model->delete_table('lom', $campos, $valores);
+                                    $this->repo_model->update_table($data, 'lo', $campos, $valores); //---- Insertar en la tabla 'lo' lo correspondiente 
+
+                                    /*$this->repo_model->delete_table('lom', $campos, $valores);
+
+                                    $data2 = array(
+                                        'idrepository' => $idrepository,
+                                        'idlom' => $idlom
+                                    );
+                                    $this->repo_model->insert_table($data2, 'lom');
+
+                                    $data2 = array(
+                                      'idrepository' => $idrepository,
+                                      'idlom' => $idlom,
+                                      'noticedate' => $datestamp,
+                                      'notice_title' => "update"
+                                      );
+                                      $this->repo_model->insert_table($data2, 'rss'); */
+                                }
+                            } else {
+                                $data = array(
+                                    'lo_deleted' => 'true',
+                                    'lo_lastmodified' => $datestamp, // preguntar a que equivale datestamp
+                                    'xmlo' => $xmlo
+                                );
+                                //Capos para poner en el where
+                                $campos = array(
+                                    '0' => 'rep_id',
+                                    '1' => 'lo_id'
+                                );
+
+                                //Capos para poner en el where
+                                $valores = array(
+                                    '0' => $rep_id,
+                                    '1' => $lo_id
+                                );
+
+                                $this->repo_model->update_table($data, 'lo', $campos, $valores); //---- Insertar en la tabla 'lo' lo correspondiente 
+
+                                //$this->repo_model->delete_table('lom', $campos, $valores);
+                            }
                         }
-                    }
-                    if ($status != 'deleted') {
-                        if ($last != $datestamp) {
-                            $meta = $oa->getElementsByTagName('metadata')->item(0);
-                            $this->importGeneral($meta, $idrepository, $idlom);
-                            $this->importLifeCycle($meta, $idrepository, $idlom);
-                            $this->importMetaMetaData($meta, $idrepository, $idlom);
-                            $this->importTechnical($meta, $idrepository, $idlom);
-                            $this->importEducational($meta, $idrepository, $idlom);
-                            $this->importRights($meta, $idrepository, $idlom);
-                            $this->importRelation($meta, $idrepository, $idlom);
-                            $this->importAnnotation($meta, $idrepository, $idlom);
-                            $this->importClassification($meta, $idrepository, $idlom);
+                        if ($status != 'deleted') {
+                            if ($last != $datestamp) {
+                                /*$meta = $oa->getElementsByTagName('metadata')->item(0);
+                                $this->importGeneral($meta, $idrepository, $idlom);
+                                $this->importLifeCycle($meta, $idrepository, $idlom);
+                                $this->importMetaMetaData($meta, $idrepository, $idlom);
+                                $this->importTechnical($meta, $idrepository, $idlom);
+                                $this->importEducational($meta, $idrepository, $idlom);
+                                $this->importRights($meta, $idrepository, $idlom);
+                                $this->importRelation($meta, $idrepository, $idlom);
+                                $this->importAnnotation($meta, $idrepository, $idlom);
+                                $this->importClassification($meta, $idrepository, $idlom);*/
+                            }
                         }
-                    }
-                }//foreach
-            }//if
-        }//for
-    }//if
-    //Hago select para determinar la operación a realizar
-    $cantOAs = $this->repo_model->get_cant_oas_repo($idrepository);
-    $data = array(
-        'lastupdate' => date("Y-m-d"),
-        'countoas' => $cantOAs
-    );
-    //Capos para poner en el where
-    $campos = array(
-        '0' => 'idrepository'
-    );
-
-    //Capos para poner en el where
-    $valores = array(
-        '0' => $idrepository
-    );
-    $this->repo_model->update_table($data, 'repository', $campos, $valores);
-
-    $fecha = date("Y-m-d");
-
-    //PROBLEMAS CON RSS
-//        if ($rssInsert != 0) {
-//            //Noticia de Insertar
-//            $data2 = array(
-//                'idrepository' => $idrepository,
-//                'noticedate' => $fecha,
-//                'notice_title' => "Se insertaron " . ($rssInsert - 1) . " objetos en ",
-//                'noticetype' => "insert"
-//            );
-//            $this->repo_model->insert_table($data2, 'rss');
-//            $idnotices = $this->repo_model->get_rss_idnotice($idrepository, $fecha, "insert");
-//
-//            foreach ($rssLOIn as $key => $lo) {
-//                //Noticia de Insertar
-//                $data3 = array(
-//                    'idnotice' => $idnotices,
-//                    'idlom' => $lo
-//                );
-//                $this->repo_model->insert_table($data3, 'rss_lom');
-//            }
-//        }
-//
-//        if ($rssUpdate != 0) {
-//            //Noticia de Actualizar
-//            $data4 = array(
-//                'idrepository' => $idrepository,
-//                'noticedate' => date("Y-m-d"),
-//                'notice_title' => "Se actualizaron " . ($rssUpdate - 1) . " objetos en ",
-//                'noticetype' => "update"
-//            );
-//            $this->repo_model->insert_table($data4, 'rss');
-//
-//            $idnotice = $this->repo_model->get_rss_idnotice($idrepository, $fecha, "update");
-//            foreach ($rssLOUp as $key => $lo) {
-//                //Noticia de Insertar
-//                $data5 = array(
-//                    'idnotice' => $idnotice,
-//                    'idlom' => $lo
-//                );
-//                $this->repo_model->insert_table($data5, 'rss_lom');
-//            }
-//        }
-    $this->lista_repo();
-}
+                    }//foreach     
+                }//if    
+            }//for
+        }//if
+        $this->lista_repo();
+    }
 }

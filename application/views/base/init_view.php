@@ -55,7 +55,7 @@
         <br><br>
 
 
-        <!--<div class="row state-overview" id="info">
+        <div class="row state-overview" id="info">
             <div class="col-lg-3 col-sm-6">
                 <section class="panel">
                     <div class="symbol terques">
@@ -112,7 +112,7 @@
                     </div>
                 </section>
             </div>
-        </div>-->
+        </div>
 
         <div class="row"  id="result">
 

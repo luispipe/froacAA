@@ -4,34 +4,35 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
                   <li>
-                      <a  href="<?php echo base_url()?>">
-                          <i class="icon-search"></i>
-                          <span>Buscador</span>
+                      <a  href="<?php echo base_url()?>admin">
+                          <i class="icon-dashboard"></i>
+                          <span>Resume general</span>
                       </a>
                   </li>
 
                   <li>
-                      <a href="<?php echo base_url()?>repositorio/lista" >
-                          <i class="icon-sitemap"></i>
-                          <span>Repositorios</span>
+                      <a href="<?php echo base_url()?>" >
+                          <i class="icon-search"></i>
+                          <span>Buscador</span>
                       </a>
                   </li>
+                  <li class="sub-menu dcjq-parent-li">
+                      <a href="javascript:;" class="dcjq-parent">
+                          <i class="icon-sitemap"></i>
+                          <span>Gestión de repositorios </span>
+                          </a>
+                      <ul class="sub" style="display: none;">
+                          <li><a href="<?php echo base_url()?>repositorio/lista">Lista de Repositorios</a></li>
+                          <li><a href="<?php echo base_url()?>repositorio/nuevo">Agregar Repositorios</a></li>
 
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="icon-cogs"></i>
-                          <span>Aplicaciones</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="general.html">General</a></li>
-                          <li><a  href="buttons.html">Buttons</a></li>
-                          <li><a  href="widget.html">Widget</a></li>
-                          <li><a  href="slider.html">Slider</a></li>
-                          <li><a  href="nestable.html">Nestable</a></li>
-                          <li><a  href="font_awesome.html">Font Awesome</a></li>
                       </ul>
                   </li>
-
+                  <li>
+                      <a href="javascript:;" >
+                          <i class="icon-cogs"></i>
+                          <span>Configuración</span>
+                      </a>
+                  </li>
                   <li>
                       <a href="javascript:;" >
                           <i class="icon-comment"></i>
@@ -48,12 +49,6 @@
                       <a href="javascript:;" >
                           <i class="icon-info"></i>
                           <span>Acerca de</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="<?php echo base_url()?>usuario/registro" >
-                          <i class="icon-user"></i>
-                          <span>Crear una cuenta</span>
                       </a>
                   </li>
 

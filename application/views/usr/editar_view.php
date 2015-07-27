@@ -24,7 +24,7 @@
                                             Información personal
                                         </header>
                                         <div class="panel-body">
-                                            <div class="form-group">
+                                            <!--   <div class="form-group">
                                                 <label for="exampleInputEmail1">Usted es:</label>
                                                 <select class="form-control input-sm m-bot15" name="tipoU" required>
                                                     <option value="<?php echo $usr_all_data[0]["use_rol_id"]?>" ><?php echo $usr_all_data[0]["use_rol_nombre"]?></option>
@@ -32,6 +32,7 @@
                                                     <option value="3">Profesor</option>
                                                 </select>
                                             </div>
+                                            -->
                                             <div class="form-group">
                                                 <label for="nombre">Nombre:</label>
                                                 <input value="<?php echo $usr_all_data[0]["use_nombre"]?>"  type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres" required>
@@ -42,7 +43,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="fecha_nac">Fecha de nacimiento:</label>
-                                                <input value="<?php echo $usr_all_data[0]["use_datebirth"]?>" data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Password">
+                                                <input value="<?php echo $usr_all_data[0]["use_datebirth"]?>" data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Fecha de Nacimiento">
                                             </div>
                                             <div class="form-group">
                                                 <label for="mail">E-mail:</label>
@@ -53,7 +54,6 @@
                                                 <select class="form-control input-sm m-bot15" name="nevel_ed" required>
                                                     <option value="<?php echo $usr_all_data[0]["use_edu_level"]?>"><?php echo $usr_all_data[0]["use_level"]?></option>
                                                     <option value="0">Seleccione una opción</option>
-                                                    <option value="1">Básica Primaria</option>
                                                     <option value="1">Básica Primaria</option>
                                                     <option value="2">Básica Secundaria</option>
                                                     <option value="3">Educación Media</option>
@@ -66,7 +66,7 @@
                                                     <option value="10">Posdoctorado</option>
                                                 </select>
                                             </div>
-                                            <button id="sub" type="submit" class="btn btn-warning">Actualizar mis datos</button>
+                                            <button id="sub" type="submit" class="btn btn-info">Actualizar mis datos</button>
                                         </div>
                                     </section>
                                 </div>
@@ -141,6 +141,3 @@
 
 
  </script>
-
-
-

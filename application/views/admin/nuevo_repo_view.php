@@ -228,8 +228,8 @@
                         <div class="col-lg-6">
                             <div class="submit_link">
 
-                                <input class="btn btn-primary" type="submit" id="enviar"  value="Guardar" class="alt_btn">
-                                <input class="btn btn-danger" type="reset" id="reset" value="Reset">
+                                <input class="btn btn-info"  type="submit" id="enviar"  value="Guardar" class="alt_btn">
+                                <input class="btn btn-danger" type="reset" id="reset" value="Cancelar">
 
                             </div>
                         </div>

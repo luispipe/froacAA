@@ -95,6 +95,19 @@ Class Lo_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function titulos_recomendacion($idlom, $idrepository) {
+        //recuperar los titulos y las localizaciones de los OAs resultado de la recomendación
+        $this->db->select('lo_title, lo_location');
+        $this->db->from('lo');
+        $this->db->where('rep_id', $idrepository);
+        $this->db->where('lo_id', $idlom);
+        //$this->db->join('technical_location', 'lom.idlom = technical_location.idlom   and lom.idlom = technical_location.idlom and lom.idrepository = technical_location.idrepository', 'left');
+        $query = $this->db->get();
+
+        return $query->result_array();
+
+    }
+
 //    function get_metadata($lo_id, $rep_id) {
 //
 //        

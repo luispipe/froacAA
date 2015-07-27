@@ -10,8 +10,8 @@
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
+            changeDay: true,
             yearRange: "1945:2035"
-            
 
         });
 
@@ -134,13 +134,24 @@
             });
         });
 
+
+
         $('#boton').click(function() {
             $('#test').show();
             $('#form').hide();
             $('#submitg').hide();
+            window.location.href = "#main-content";
         });
-        
+
+
+
         $('#cancelar').click(function() {
+            $('#test_need').hide();
+            $('#form').show();
+            $('#submitg').show();
+        });
+
+        $('#cancelar1').click(function() {
             $('#test').hide();
             $('#form').show();
             $('#submitg').show();
@@ -161,124 +172,315 @@
             });
            
         });
-
     });
 
 </script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/datepicker/css/datepicker.css">
     <section id="main-content">
-      <section class="wrapper site-min-height">
+        <section class="wrapper site-min-height">
         <!-- page start-->
-        <div class="row">          
-
-          <div class="col-lg-12">
-            <section class="panel">
-              <header class="panel-heading">
-                Crear cuenta en FROAC
-              </header>
-              <div class="panel-body">
-               <div class="row">
-                <form method="POST" role="form" action="<?php echo base_url();?>index.php/usuario/guardar" enctype='multipart/form-data' id="form">
-                  <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
                     <section class="panel">
-                      <header class="panel-heading">
-                        Información personal
-                      </header>
-                      <div class="panel-body">
-                        <div class="form-group">
-                            <input type="hidden" value="2" name="tipoU">
-                          <!--<label for="exampleInputEmail1">Usted es:</label>
-                          <select class="form-control input-sm m-bot15" name="tipoU" required>
-                            <option value="2">Estudiante</option>-->
-                            <!-- Se elimina la opción de registrarse con el rol de "profesor" ya que 
-                             para este no se deben tener en cuenta las preferencias. A este lo agrega el admin-->
-                            <!--<option value="3">Profesor</option>-->
-                          </select> 
-                        </div>
-                        <div class="form-group">
-                          <label for="nombre">Nombre:</label>
-                          <input  type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="apellido">Apellido:</label>
-                          <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" required>
-                        </div>                        
-                        <div class="form-group">
-                          <label for="fecha_nac">Fecha de nacimiento:</label>
-                          <input data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Selecciona año, mes y día" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="mail">E-mail:</label>
-                          <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electronico" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="username">Nombre de usuario:</label>
-                          <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario unico en FROAC" required>
-                        </div> 
-                        <div id="in_use" class="alert alert-block alert-danger fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                          </button>
-                          <strong>Lo sentimos!</strong> el nombre de usuario <strong id="in_name"></strong> no esta disponible.
-                        </div>
-                        <div id="no_use" class="alert alert-success fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                          </button>
-                          <strong>Éxito!</strong> este nombre de usuario esta disponible.
-                        </div>
-                        <div class="form-group">
-                          <label for="passwd">Password:</label>
-                          <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required><br>
-                          <input type="password" class="form-control" id="passwd2" name="passwd2" placeholder="Reescribe la contraseña" required>
-                        </div>  
-                        <div id="no_match" class="alert alert-block alert-danger fade in">
-                          <button data-dismiss="alert" class="close close-sm" type="button">
-                            <i class="icon-remove"></i>
-                          </button>
-                          <strong>Las contraseñas no concuerdan.</strong>
-                        </div>                        
-                        <div class="form-group">
+                        <header   class="panel-heading">
+                            Crear cuenta en FROAC
+                        </header>
 
-                            <div class="form-group">
-                            <label for="level">Nivel Educativo:</label>
-                            <select class="form-control input-sm m-bot15" name="nevel_ed" required>
-                            
-                                  <?php 
+                        <!--FORMULARIO DE REGISTRO DE USUARIO-->
 
-                                foreach ($nivel_educativo as $key) { ?>
+                        <div class="panel-body">
+                            <div class="row">
+                                <form method="POST" role="form" action="<?php echo base_url();?>index.php/usuario/guardar" enctype='multipart/form-data' id="form">
+                                    <div class="col-lg-12">
+                                        <section class="panel">
+                                            <header class="panel-heading">
+                                                Información personal
+                                            </header>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <input type="hidden" value="2" name="tipoU">
+                                                    <!--<label for="exampleInputEmail1">Usted es:</label>
+                                                    <select class="form-control input-sm m-bot15" name="tipoU" required>
+                                                    <option value="2">Estudiante</option>-->
+                                                    <!-- Se elimina la opción de registrarse con el rol de "profesor" ya que
+                                                    para este no se deben tener en cuenta las preferencias. A este lo agrega el admin-->
+                                                    <!--<option value="3">Profesor</option>
+                                                    </select>-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="nombre">Nombre:</label>
+                                                    <input  type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombres" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="apellido">Apellido:</label>
+                                                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellidos" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="fecha_nac">Fecha de nacimiento:</label>
+                                                    <input data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Selecciona año, mes y día" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="mail">E-mail:</label>
+                                                    <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electronico" required>
+                                                </div>
+                                                <div id="in_use1" class="alert alert-block alert-danger fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Lo sentimos!</strong> El correo electrónico ingresado, ya está registrado.
+                                                </div>
+                                                <div id="no_use1" class="alert alert-success fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Éxito!</strong> este correo electronico esta disponible.
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="username">Nombre de usuario:</label>
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario unico en FROAC" required>
+                                                </div>
+                                                <div id="in_use" class="alert alert-block alert-danger fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Lo sentimos!</strong> el nombre de usuario <strong id="in_name"></strong> no esta disponible.
+                                                </div>
+                                                <div id="no_use" class="alert alert-success fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Éxito!</strong> este nombre de usuario esta disponible.
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="passwd">Password:</label>
+                                                    <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Contraseña" required><br>
+                                                    <input type="password" class="form-control" id="passwd2" name="passwd2" placeholder="Reescribe la contraseña" required>
+                                                </div>
+                                                <div id="no_match" class="alert alert-block alert-danger fade in">
+                                                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                    <strong>Las contraseñas no concuerdan.</strong>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="level">Nivel Educativo:</label>
+                                                    <select class="form-control input-sm m-bot15" name="nevel_ed" required>
+                                                        <?php
+                                                        foreach ($nivel_educativo as $key) { ?>
+                                                            <option name="level[]" value= "<?php echo $key->use_id_level ?>"><?php echo $key->use_level ?></option>
+                                                        <?php } ?>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="pref">Preferencias:</label>
+                                                    <select class="form-control input-sm m-bot15" name="pref" required>
+                                                        <?php
+                                                        foreach ($preferencias as $key) { ?>
+                                                            <input type="checkbox" name="pref[]" value= " <?php echo $key->use_pre_id ?> "/><?php echo $key->use_pre_preferencia ?><br />
+                                                        <?php } ?>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <strong>¿Presenta algún tipo de necesidad especial?</strong>
+                                                <div class="row col-md-12">
+                                                    <INPUT TYPE=RADIO id="discapasi" NAME="NO" value="Si"> Si
+                                                    <INPUT TYPE=RADIO id="discapano" NAME="NO" value="No"> No
+                                                </div>
+                                            </div>
 
-                                    <option name="level[]" value= "<?php echo $key->use_id_level ?>"><?php echo $key->use_level ?></option>
-                                    <?php } ?>
+                                            <input type="button" style="display:none;" value="Realizar Test NEED" name="need" id="need" class="btn btn-info">
 
+                                    </div>
+                                    <!--FIN FORMULARIO DE REGISTRO DE USUARIO-->
+                                    <input type="text" style="display: none;" id="necesidadespecial" name="necesidadespecial">
+
+
+                                    TEST DE ESTILO DE APRENDIZAJE
+                                    </header>
+                                    <p>Para conocer su estilo de aprendizaje puede realizar el test ahora mismo o en el momento que usted lo requiera</p>
+
+                                    <input type="button" id="boton" class="btn btn-info" value="Realizar Test">
+                                    <input type="hidden" name="result_test" id="result_test" value="0">
+                                    <h3 class="art-postheader" id="result"></h3>
+
+                                    <input id="submitg" type="submit" class="btn btn-info" value="Guardar Información">
+                                </form>
                             </div>
-                            
-                            <div class="form-group">
-                                <label for="pref">Preferencias:</label>
-                              <select class="form-control input-sm m-bot15" name="pref" required>
-                                  <?php 
-
-                                foreach ($preferencias as $key) { ?>
-
-                                    <input type="checkbox" name="pref[]" value= "<?php echo $key->use_pre_id ?>" /><?php echo $key->use_pre_preferencia ?><br />
-                                    <?php } ?>
-                            </div>
-                            <header class="panel-heading">
-               TEST DE ESTILO DE APRENDIZAJE
-              </header>
-                        
-                  <p>Para conocer su estilo de aprendizaje puede realizar el test ahora mismo o en el momento que usted
-                    lo requiera</p>
-                <input type="button" id="boton" class="btn btn-info" value="Realizar Test">
-                <input type="hidden" name="result_test" id="result_test" value="0">
-                <h3 class="art-postheader" id="result"></h3>
-                <input id="submitg" type="submit" class="btn btn-info" value="Guardar Información">
-                      </div>
                     </section>
-                  </div>
-                  
-            
-                </form>
+                </div>
+
+                <!-- TEST PARA ESTUDIANTES CON NECESIDADES ESPECIALES-->
+
+                <div id="test_need" class="col-md-12" style="display: none;">
+                    <h3  align="center">Test para Personas con Necesidades Especiales</h3>
+                    <form action="<?php echo base_url() ?>index.php/usuario/test_need/" name="form_test_need" id="form_test_need" method="POST" enctype="multipart/form-data">
+                        Con el fin de ofrecer Objetos de Aprendizaje más acorde a sus necesidades, se aconseja realizar el siguiente test. Se recomienda contar con el apoyo de un acompañante
+
+
+                        <div id="tipoLim"class="row col-md-12">
+                            <strong>•   ¿Qué tipo de necesidad especial presenta?</strong>
+                            <div class="row col-md-12">
+                                <INPUT TYPE=checkbox id="1" NAME="1" estado="0" value="Visual"> Visual
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=checkbox id="2" NAME="2" estado="0" value="Auditivo"> Auditivo
+                                </div>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=checkbox id="3" NAME="3" estado="0" value="Motriz"> Motriz
+                                </div>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=checkbox id="4" NAME="4" estado="0" value="Cognitiva"> Cognitiva
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--#########################################################################################-->
+                        <!-- Limitacion Visual -->
+
+                        <div id="limitacionV" class="row col-md-12" style="display: none;">
+                            <hr>
+                            <strong>•   ¿En qué grado se presenta dicha condición?</strong>
+                            <div class="row col-md-12">
+                                <INPUT TYPE=radio id="5" NAME="7" value="Vision Nula"> Visión Nula
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=radio id="6" NAME="7" value="Baja Vision"> Baja Visión
+                                </div>
+
+                                <div id="tamaño" class="row col-md-12" style="display: none;">
+                                    <hr>
+                                    <strong>•   ¿Cuál de los siguientes textos puede comprender con mayor facilidad?</strong>
+
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=radio id="81" NAME="8" estado="0" value="1.1"><span style="font-size: 1.1em">Federación de Repositorios de Objetos de Aprendizaje Colombia – FROAC</span>
+                                        <div class="row col-md-12">
+                                            <INPUT TYPE=radio id="82" NAME="8" estado="0" value="1.3"><span style="font-size: 1.3em">Federación de Repositorios de Objetos de Aprendizaje Colombia – FROAC</span>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <INPUT TYPE=radio id="83" NAME="8" estado="0" value="1.7"> <span style="font-size: 1.7em">Federación de Repositorios de Objetos de Aprendizaje Colombia – FROAC</span>
+                                        </div>
+                                        <div class="row col-md-12">
+                                            <INPUT TYPE=radio id="84" NAME="8" estado="0" value="2.0"> <span style="font-size: 2.0em">Federación de Repositorios de Objetos de Aprendizaje Colombia – FROAC</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--#########################################################################################-->
+                        <!-- Limitacion Auditiva -->
+
+                        <div id="limitacionA"class="row col-md-12" style="display: none;">
+                            <hr>
+                            <strong>•   ¿En qué grado se presenta dicha condición?</strong>
+
+                            <div class="row col-md-12">
+                                <INPUT TYPE=RADIO id="91" NAME="91" value="Audicion Nula"> Audición Nula
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="92" NAME="92" value="Baja Audicion"> Audición Baja
+                                </div>
+                            </div>
+                            <div id="Señas-Simbolo"class="row col-md-12">
+                                <hr>
+                                <strong>•   ¿Comprende lenguaje de señas?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="101" NAME="10" value="Si Lenguaje"> Si
+                                    <div id="edad"class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="102" NAME="10" value="No Lenguaje"> No
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="entiende_lenguaje"class="row col-md-12">
+                                <hr>
+                                <strong>•   ¿Comprende textos?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="111" NAME="11" value="Si Idioma"> Si
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="112" NAME="11" value="No Idioma"> No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--######################################################-->
+                        <!-- Limitacion Motriz -->
+
+                        <div id="limitacionM"class="row col-md-12" style="display: none;">
+                            <hr>
+                            <strong>•   ¿Presenta usted alguna dificultad para manipular el mouse?</strong>
+
+                            <div class="row col-md-12">
+                                <INPUT TYPE=RADIO id="12" NAME="12" value="Si mouse"> Si
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="12" NAME="12" value="No mouse"> No
+                                </div>
+                            </div>
+                            <div id="utiliza_teclado"class="row col-md-12">
+                                <hr>
+                                <strong>•   ¿Presenta usted alguna dificultad para manipular el teclado?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="13" NAME="13" value="Si teclado"> Si
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="13" NAME="13" value="No teclado"> No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--######################################################-->
+                        <!-- Limitacion Cognitiva -->
+
+                        <div id="limitacionC"class="row col-md-12"style="display: none;">
+                            <hr>
+                            <strong>•   ¿Presenta dificultades para recordar o concentrarse?</strong>
+
+                            <div class="row col-md-12">
+                                <INPUT TYPE=RADIO id="141" NAME="14" value="Si concentra"> Si
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="142" NAME="14" value="No concentra"> No
+                                </div>
+                            </div>
+                            <div id="lee"class="row col-md-12">
+                                <hr>
+                                <strong>•   ¿Tiene dificultades para comprender un texto escrito o expresarse a través del mismo?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="151" NAME="15" value="Si texto"> Si
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="152" NAME="15" value="No texto"> No
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="sigue_instrucciones"class="row col-md-12">
+                                <strong>•   ¿Suele tener dificultades para seguir instrucciones o actividades que se le indican?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="161" NAME="16" value="Si instrucciones"> Si
+                                    <div class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="162" NAME="16" value="No instrucciones"> No
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="se_distrae"class="row col-md-12">
+                                <hr>
+                                <strong>  • ¿Se distrae fácilmente?</strong>
+                                <div class="row col-md-12">
+                                    <INPUT TYPE=RADIO id="171" NAME="17" value="Si distrae"> Si
+                                    <div id="edad"class="row col-md-12">
+                                        <INPUT TYPE=RADIO id="172" NAME="17" value="No distrae"> No
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                    <div class="row col-md-12">
+                        <input type="button" value="Enviar" name="respuesta_need" id="respuesta_need" class="btn btn-info">
+                        <input type="button" value="Cancelar" name="cancelar" id="cancelar" class="btn btn-info">
+                    </div>
+                </div>
+
+                <!-- FIN TEST PARA ESTUDIANTES CON NECESIDADES ESPECIALES-->
+
+
+                <!--TEST DE ESTILO DE APRENDIZAJE-->
+
                 <div id="test" style="display: none;">
                     <h3>Test de Estilos de Aprendizaje</h3>
                     <form action="<?php echo base_url() ?>index.php/usuario/test_result/" name="form_usr" id="form_usr" method="POST" enctype="multipart/form-data">
@@ -307,10 +509,10 @@
                                         haría?</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="1" ID="1" VALUE="V"/> Dibujo un mapa en un papel.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="1" VALUE="A"> Le digo cómo llegar.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="1" VALUE="R"> Le escribo las instrucciones (sin dibujar un mapa).</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="1" VALUE="K"> La busco y recojo en el hotel.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="1" ID="1" value="V"/> Dibujo un mapa en un papel.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="1" value="A"> Le digo cómo llegar.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="1" value="R"> Le escribo las instrucciones (sin dibujar un mapa).</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="1" value="K"> La busco y recojo en el hotel.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -318,10 +520,10 @@
                                         <strong>2. Usted no está seguro como se deletrea la palabra tracendente o trascendente. Que haría usted.</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="2" VALUE="R"> Busco la palabra en un diccionario.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="2" VALUE="V"> Veo la palabra en mi mente y escojo según como la veo</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="2" VALUE="A"> La repito en mi mente.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="2" VALUE="K"> Escribo ambas versiones en un papel y escojo una.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="2" value="R"> Busco la palabra en un diccionario.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="2" value="V"> Veo la palabra en mi mente y escojo según como la veo</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="2" value="A"> La repito en mi mente.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="2" value="K"> Escribo ambas versiones en un papel y escojo una.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -330,10 +532,10 @@
                                         Usted que haría?</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="3" VALUE="A"> Hablarle por teléfono inmediatamente y contarle del viaje.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="3" VALUE="R"> Enviarle una copia del itinerario impreso.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="3" VALUE="V"> Mostrarle un mapa del mundo.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="3" VALUE="K"> Compartir que planea hacer en cada lugar que visite.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="3" value="A"> Hablarle por teléfono inmediatamente y contarle del viaje.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="3" value="R"> Enviarle una copia del itinerario impreso.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="3" value="V"> Mostrarle un mapa del mundo.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="3" value="K"> Compartir que planea hacer en cada lugar que visite.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -341,9 +543,9 @@
                                         <strong>4. Usted esta por cocinar algo muy especial para su familia. Usted.</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="4" VALUE="K"> Cocina algo familiar que no necesite receta o instrucciones</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="4" VALUE="V"> Da una vista a través de un recetario por ideas de las fotos.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="4" VALUE="R"> Busca un libro de recetas especifico donde hay una buena receta.</td></tr>                                     
+                                <tr><td ><INPUT TYPE=RADIO NAME="4" value="K"> Cocina algo familiar que no necesite receta o instrucciones</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="4" value="V"> Da una vista a través de un recetario por ideas de las fotos.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="4" value="R"> Busca un libro de recetas especifico donde hay una buena receta.</td></tr>                                     
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -351,10 +553,10 @@
                                         <strong>5. Un grupo de turistas le han sido asignados para que usted les explique del Area Nacional Protegida. Usted,</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="5" VALUE="K"> Organiza un viaje por el lugar.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="5" VALUE="V"> Les muestra fotos y transparencias</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="5" VALUE="R"> Les da un folleto o libro sobre las Areas Nacionales Protegidas.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="5" VALUE="A"> Les da una platica sobre las Areas Nacionales Protegidas.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="5" value="K"> Organiza un viaje por el lugar.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="5" value="V"> Les muestra fotos y transparencias</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="5" value="R"> Les da un folleto o libro sobre las Areas Nacionales Protegidas.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="5" value="A"> Les da una platica sobre las Areas Nacionales Protegidas.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -362,10 +564,10 @@
                                         <strong>6. Usted está por comprarse un nuevo estéreo. Que otro factor, además del precio, influirá su decisión</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="6" VALUE="A"> El vendedor le dice lo que usted quiere saber.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="6" VALUE="R"> Leyendo los detalles sobre el estéreo.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="6" VALUE="K"> Jugando con los controles y escuchándolo.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="6" VALUE="V"> Luce muy bueno y a la moda (padre, cool, chido).</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="6" value="A"> El vendedor le dice lo que usted quiere saber.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="6" value="R"> Leyendo los detalles sobre el estéreo.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="6" value="K"> Jugando con los controles y escuchándolo.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="6" value="V"> Luce muy bueno y a la moda (padre, cool, chido).</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -374,10 +576,10 @@
                                         cartas. Trate de evitar escoger una destreza física, como andar en bicicleta. Cómo aprendió usted mejor?</strong>
                                     </td>
                                 </tr>                    
-                                <tr><td ><INPUT TYPE=RADIO NAME="7" VALUE="V"> Pistas visuales—fotos, diagramas, cuadros...</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="7" VALUE="R"> Instrucciones escritas</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="7" VALUE="A"> Escuchando a alguien que se lo explicaba.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="7" VALUE="K"> Haciéndolo o probándolo.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="7" value="V"> Pistas visuales—fotos, diagramas, cuadros...</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="7" value="R"> Instrucciones escritas</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="7" value="A"> Escuchando a alguien que se lo explicaba.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="7" value="K"> Haciéndolo o probándolo.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -385,9 +587,9 @@
                                         <strong>8. Si usted tiene un problema en un ojo, usted prefiere que el doctor</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="8" VALUE="A"> Le diga que anda mal.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="8" VALUE="V"> Le muestre un diagrama de que está mal.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="8" VALUE="K"> Use un modelo para enseñarle qué está mal.</td></tr>                                     
+                                <tr><td ><INPUT TYPE=RADIO NAME="8" value="A"> Le diga que anda mal.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="8" value="V"> Le muestre un diagrama de que está mal.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="8" value="K"> Use un modelo para enseñarle qué está mal.</td></tr>                                     
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -395,9 +597,9 @@
                                         <strong>9. Usted está apunto de aprender un nuevo programa en la computadora. Usted,</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="9" VALUE="K"> Se sienta frente al teclado y empieza a experimentar con el programa.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="9" VALUE="R"> Lee el manual que viene con el programa.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="9" VALUE="A"> Telefonea a un amigo y le hace preguntas sobre el programa.</td></tr>                                      
+                                <tr><td ><INPUT TYPE=RADIO NAME="9" value="K"> Se sienta frente al teclado y empieza a experimentar con el programa.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="9" value="R"> Lee el manual que viene con el programa.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="9" value="A"> Telefonea a un amigo y le hace preguntas sobre el programa.</td></tr>                                      
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -405,10 +607,10 @@
                                         <strong>10. Usted va en su coche, a otra ciudad, en donde tiene amigos que quiere visitar. Usted quisiera que ellos:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="10" VALUE="V"> Le dibujen un mapa en un papel.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="10" VALUE="A"> Le den las instrucciones para llegar.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="10" VALUE="R"> Escriban las instrucciones (sin el mapa)</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="10" VALUE="K"> Lo esperen a usted en la gasolinera de la entrada a la ciudad.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="10" value="V"> Le dibujen un mapa en un papel.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="10" value="A"> Le den las instrucciones para llegar.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="10" value="R"> Escriban las instrucciones (sin el mapa)</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="10" value="K"> Lo esperen a usted en la gasolinera de la entrada a la ciudad.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -416,10 +618,10 @@
                                         <strong>11. Aparte del precio, que influirá más su decisión de compra de un libro de texto particular?</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="11" VALUE="K"> Usted ha usado una copia antes.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="11" VALUE="A"> Un amigo le ha platicado acerca del libro.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="11" VALUE="R"> Una lectura rápida de algunas partes del libro.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="11" VALUE="V"> El diseño de la pasta del libro es atractiva.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="11" value="K"> Usted ha usado una copia antes.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="11" value="A"> Un amigo le ha platicado acerca del libro.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="11" value="R"> Una lectura rápida de algunas partes del libro.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="11" value="V"> El diseño de la pasta del libro es atractiva.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -428,9 +630,9 @@
                                         no—asumiendo que tiene el dinero para los boletos---</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="12" VALUE="A"> Usted oyó en el radio acerca de la película</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="12" VALUE="R"> Usted Leyó una reseña de la película.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="12" VALUE="V"> Usted vió una reseña en la televisión o en el cine.</td></tr>                                      
+                                <tr><td ><INPUT TYPE=RADIO NAME="12" value="A"> Usted oyó en el radio acerca de la película</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="12" value="R"> Usted Leyó una reseña de la película.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="12" value="V"> Usted vió una reseña en la televisión o en el cine.</td></tr>                                      
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -438,10 +640,10 @@
                                         <strong>13. Usted prefiere que un profesor/maestro o conferencista use:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="13" VALUE="R"> Un libro de texto, copias, lecturas.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="13" VALUE="V"> Un diagrama de flujo, cuadros, gráficos, dispositivas.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="13" VALUE="K"> Sesiones prácticas, laboratorio, visitas, viajes de campo.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="13" VALUE="A"> Preguntas y respuestas, charlas, grupos de discusión u oradores invitados</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="13" value="R"> Un libro de texto, copias, lecturas.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="13" value="V"> Un diagrama de flujo, cuadros, gráficos, dispositivas.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="13" value="K"> Sesiones prácticas, laboratorio, visitas, viajes de campo.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="13" value="A"> Preguntas y respuestas, charlas, grupos de discusión u oradores invitados</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -449,8 +651,8 @@
                                         <strong>14. Tengo tendencia a:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="49" VALUE="S"> Entender los detalles de un tema pero no ver claramente su estructura completa.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="49" VALUE="G"> Entender la estructura completa pero no ver claramente los detalles.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="49" value="S"> Entender los detalles de un tema pero no ver claramente su estructura completa.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="49" value="G"> Entender la estructura completa pero no ver claramente los detalles.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -458,8 +660,8 @@
                                         <strong>15. Una vez que entiendo:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="50" VALUE="G"> Todas las partes, entiendo el total.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="50" VALUE="S"> El total de algo, entiendo como encajan sus partes.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="50" value="G"> Todas las partes, entiendo el total.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="50" value="S"> El total de algo, entiendo como encajan sus partes.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -467,8 +669,8 @@
                                         <strong>16. Cuando resuelvo problemas de matemáticas:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="51" VALUE="S"> Generalmente trabajo sobre las soluciones con un paso a la vez.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="51" VALUE="G"> Frecuentemente sé cuales son las soluciones, pero luego tengo dificultad  para imaginarme los pasos para llegar a ellas.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="51" value="S"> Generalmente trabajo sobre las soluciones con un paso a la vez.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="51" value="G"> Frecuentemente sé cuales son las soluciones, pero luego tengo dificultad  para imaginarme los pasos para llegar a ellas.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -476,8 +678,8 @@
                                         <strong>17. Cuando estoy analizando un cuento o una novela:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="52" VALUE="G"> Pienso en los incidentes y trato de acomodarlos para configurar los temas.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="52" VALUE="S"> Me doy cuenta de cuales son los temas cuando termino de leer y luego tengo que regresar y encontrar los incidentes que los demuestran.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="52" value="G"> Pienso en los incidentes y trato de acomodarlos para configurar los temas.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="52" value="S"> Me doy cuenta de cuales son los temas cuando termino de leer y luego tengo que regresar y encontrar los incidentes que los demuestran.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -485,8 +687,8 @@
                                         <strong>18. Es más importante para mí que un profesor:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="53" VALUE="S"> Exponga el material en pasos secuenciales claros.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="53" VALUE="G"> Me dé un panorama general y relacione el material con otros temas.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="53" value="S"> Exponga el material en pasos secuenciales claros.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="53" value="G"> Me dé un panorama general y relacione el material con otros temas.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -494,8 +696,8 @@
                                         <strong>19. Aprendo:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="54" VALUE="S"> A un paso constante. Si estudio con ahínco consigo lo que deseo.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="54" VALUE="G"> En inicios y pausas. Me llego a confundir y súbitamente lo entiendo.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="54" value="S"> A un paso constante. Si estudio con ahínco consigo lo que deseo.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="54" value="G"> En inicios y pausas. Me llego a confundir y súbitamente lo entiendo.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -503,8 +705,8 @@
                                         <strong>20. Cuando me enfrento a un cuerpo de información:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="55" VALUE="S"> Me concentro en los detalles y pierdo de vista el total de la misma.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="55" VALUE="G"> Trato de entender el todo antes de ir a los detalles.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="55" value="S"> Me concentro en los detalles y pierdo de vista el total de la misma.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="55" value="G"> Trato de entender el todo antes de ir a los detalles.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -512,8 +714,8 @@
                                         <strong>21. Cuando escribo un trabajo, es más probable que:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="56" VALUE="G">  Lo haga (piense o escriba) desde el principio y avance.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="56" VALUE="S">  Lo haga (piense o escriba) en diferentes partes y luego las ordene.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="56" value="G">  Lo haga (piense o escriba) desde el principio y avance.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="56" value="S">  Lo haga (piense o escriba) en diferentes partes y luego las ordene.</td></tr>                  
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -521,8 +723,8 @@
                                         <strong>22. Cuando estoy aprendiendo un tema, prefiero:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="57" VALUE="S"> Mantenerme concentrado en ese tema, aprendiendo lo más que pueda de él.</td></tr>                 
-                                <tr><td ><INPUT TYPE=RADIO NAME="57" VALUE="G"> Hacer conexiones entre ese tema y temas relacionados.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="57" value="S"> Mantenerme concentrado en ese tema, aprendiendo lo más que pueda de él.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="57" value="G"> Hacer conexiones entre ese tema y temas relacionados.</td></tr>                 
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
                                 <tr> 
@@ -530,8 +732,8 @@
                                         <strong>23. Algunos profesores inician sus clases haciendo un bosquejo de lo que enseñarán. Esos bosquejos son:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="58" VALUE="S"> Algo útiles para mí.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="58" VALUE="G"> Muy útiles para mí.</td></tr>                 
+                                <tr><td ><INPUT TYPE=RADIO NAME="58" value="S"> Algo útiles para mí.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="58" value="G"> Muy útiles para mí.</td></tr>                 
                                 <tr>
                                 <tr>
                                 <tr><td>&nbsp;</td></tr>                  
@@ -540,8 +742,8 @@
                                         <strong>24. Cuando resuelvo problemas en grupo, es más probable que yo:</strong>
                                     </td>
                                 </tr>        
-                                <tr><td ><INPUT TYPE=RADIO NAME="59" VALUE="S"> Piense en los pasos para la solución de los problemas.</td></tr>                  
-                                <tr><td ><INPUT TYPE=RADIO NAME="59" VALUE="G"> Piense en las posibles consecuencias o aplicaciones de la solución en un amplio rango de campos.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="59" value="S"> Piense en los pasos para la solución de los problemas.</td></tr>                  
+                                <tr><td ><INPUT TYPE=RADIO NAME="59" value="G"> Piense en las posibles consecuencias o aplicaciones de la solución en un amplio rango de campos.</td></tr>                  
                                 <tr>
 
                                 <tr><td>&nbsp;</td></tr>                                                                        
@@ -551,21 +753,24 @@
                                     <td class="cuadroOscuro" colspan="2" align="center">
                                         <input type="hidden" name="op" value="guardar_vark">
                                         <input type="hidden" name="mod" value="mod_vark">
-                                        <input type="button" value="Enviar" name="proc" id="proc" class="btn btn-info">                                                   
+                                        <input type="button" value="Enviar" name="proc" id="proc" class="btn btn-info">
+                                        <input type="button" value="Cancelar" name="cancelar1" id="cancelar1" class="btn btn-info">
                                     </td>
                                 </tr> 
                             </table>
                         </td></tr></table>
                 </form>
-              </div>
+
+                <!--FIN TEST DE ESTILO DE APRENDIZAJE-->
+                </div>
             </div>
-          </section>
+        </section>
         </div>
-        
-      </div>
+
+        </div>
       <!-- page end-->
     </section>
-  </section>
+    </section>
   <!--main content end-->
 
   <!--script for this page-->
@@ -596,6 +801,30 @@
   });
  });
 
+
+  $("#in_use1, #no_use1").hide();
+
+  $("#mail").change(function(){
+      $.ajax({
+          type: "POST",
+          url: "<?php echo base_url()?>index.php/usuario/verify_email",
+          data: { mail: $("#mail").val()}
+      })
+          .done(function( msg ) {
+              if(msg >= 1 ){
+
+                  $("#in_name").text($("#mail").val());
+                  $("#in_use1").show();
+                  $("#no_use1").hide();
+                  $("#sub").hide();
+                  $("#mail").val("");
+              }else{
+                  $("#no_use1").show();
+                  $("#in_use1").hide();
+                  $("#sub").show();
+              }
+          });
+  });
   $("#passwd").change(function(){
     if ($("#passwd").val().length < 6){
       alert("Su contraseña debe ser de minimo 6 caracteres!")
@@ -612,7 +841,365 @@
     } 
   });
 
+//######################################################################################################################
+
+  //En caso de tener discapacidad se debe mostar un botón que lo lleve al formulario Test para personas con necesidades
+  // especiales
+
+  $("#discapasi").click(function () {
+          $("#need").show();
+      });
+
+  //En caso de dar click en la opción "SI" por equivocación, al dar click en la opción "No", el botón se ocultará.
+
+  $("#discapano").click(function () {
+      $("#need").hide();
+  })
+//######################################################################################################################
+
+//####################################################################################################################
+
+  //Cuando se tiene una discapacidad y se da click en el botón realizar test, este muestra el formulario para
+  // realizar el test para personas con necesidades especiales
+
+  $('#need').click(function() {
+      $('#test_need').show();
+      $('#form').hide();
+      $('#submitg').hide();
+      window.location.href = "#main-content";
+  });
+
+//#####################################################################################################################
+
+//#####################################################################################################################
+
+  //Cuando se tiene una discapacidad, se muestran las preguntas correspondientes al tipo de discapacidad seleccionada.
+
+  $("#1").click(function () {
+      if($("#1").attr("estado")==0){
+          $("#limitacionV").show();
+          $("#1").attr("estado", 1);
+
+      }else{
+          $("#1").prop("checked", false);
+          $("#limitacionV").hide();
+          $("#1").attr("estado", 0);
+
+      }
+
+  });
+
+  $("#6").click(function () {
+      if($("#6").attr("estado")==0){
+          $("#tamaño").show();
+          $("#6").attr("estado", 1);
+
+      }else{
+          $("#6").prop("checked", false);
+          $("#tamaño").hide();
+          $("#6").attr("estado", 0);
+
+      }
+
+  });
+
+  $("#5").click(function () {
+      $("#tamaño").hide();
+  });
+
+  $("#2").click(function () {
+          if($("#2").attr("estado")==0){
+              $("#limitacionA").show();
+              $("#2").attr("estado", 1);
+
+          }else{
+              $("#2").prop("checked", false);
+              $("#limitacionA").hide();
+              $("#2").attr("estado", 0);
+
+          }
+  });
+
+  $("#8").click(function () {
+        if($("#8").attr("estado")==0){
+            $("#8").attr("estado", 1);
+        }else{
+            $("#8").prop("checked", false);
+            $("#8").attr("estado", 0);
+        }
+  });
 
 
+  $("#3").click(function () {
+      if($("#3").attr("estado")==0){
+          $("#limitacionM").show();
+          $("#3").attr("estado", 1);
+
+      }else{
+          $("#3").prop("checked", false);
+          $("#limitacionM").hide();
+          $("#3").attr("estado", 0);
+
+      }
+
+  });
+
+  $("#4").click(function () {
+      if($("#4").attr("estado")==0){
+          $("#limitacionC").show();
+          $("#4").attr("estado", 1);
+
+      }else{
+          $("#4").prop("checked", false);
+          $("#limitacionC").hide();
+          $("#4").attr("estado", 0);
+
+      }
+
+  });
+
+
+//#####################################################################################################################
+
+//#####################################################################################################################
+
+
+  $('#respuesta_need').click(function() {
+      $("#necesidadespecial").val("");
+      //Limitacion Visual ******************
+      if($("#1").is(":checked")){
+        if($("#5").is(":checked")){
+            if($("#necesidadespecial").val()!=""){
+                $("#necesidadespecial").val($("#necesidadespecial").val()+",Vision-Nula");
+            }else{
+                $("#necesidadespecial").val("Vision-Nula");
+            }
+
+            $("#necesidadespecial").show();
+        }
+
+          if($("#81").is(":checked")){
+
+              if($("#necesidadespecial").val()!=""){
+                  $("#necesidadespecial").val($("#necesidadespecial").val()+",Vision-Parcial"+$("#81").attr("value"));
+              }else{
+                  $("#necesidadespecial").val("Vision-Parcial"+$("#81").attr("value"));
+              }
+          }
+
+          if($("#82").is(":checked")){
+
+              if($("#necesidadespecial").val()!=""){
+                  $("#necesidadespecial").val($("#necesidadespecial").val()+",Vision-Parcial"+$("#82").attr("value"));
+              }else{
+                  $("#necesidadespecial").val("Vision-Parcial"+$("#82").attr("value"));
+              }
+          }
+
+          if($("#83").is(":checked")){
+
+              if($("#necesidadespecial").val()!=""){
+                  $("#necesidadespecial").val($("#necesidadespecial").val()+",Vision-Parcial"+$("#83").attr("value"));
+              }else{
+                  $("#necesidadespecial").val("Vision-Parcial"+$("#83").attr("value"));
+              }
+          }
+
+          if($("#84").is(":checked")){
+
+              if($("#necesidadespecial").val()!=""){
+                  $("#necesidadespecial").val($("#necesidadespecial").val()+",Vision-Parcial"+$("#84").attr("value"));
+              }else{
+                  $("#necesidadespecial").val("Vision-Parcial"+$("#84").attr("value"));
+              }
+          }
+          $("#necesidadespecial").show();
+      }
+
+      //Limitacion Visual ******************
+
+      //Limitacion Auditiva *************************
+      if($("#2").is(":checked")){
+        if($("#91").is(":checked")){
+
+            if($("#101").is(":checked")){
+
+                if($("#111").is(":checked")){
+
+                    if($("#necesidadespecial").val()!=""){
+                        $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#91").attr("value")+"/Señas-Texto");
+                    }else{
+                        $("#necesidadespecial").val($("#91").attr("value")+"/Señas-Texto");
+                    }
+                }else {
+
+                        if($("#necesidadespecial").val()!=""){
+                            $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#91").attr("value")+"/Señas");
+                        }else {
+                            $("#necesidadespecial").val($("#91").attr("value") + "/Señas");
+                        }
+                    }
+                }else{
+                if($("#111").is(":checked")){
+
+                    if($("#101").is(":checked")){
+                        if($("#111").is(":checked")){
+                            if($("#necesidadespecial").val()!=""){
+                                $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#91").attr("value")+"/Señas-Texto");
+                            }else{
+                                $("#necesidadespecial").val($("#91").attr("value")+"/Señas-Texto");
+                            }
+                        }else {
+
+                            if($("#necesidadespecial").val()!=""){
+                                $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#91").attr("value")+"/Señas");
+                            }else{
+                                $("#necesidadespecial").val($("#91").attr("value")+"/Señas");
+                            }
+
+                        }
+
+                    }else{
+                        if($("#111").is(":checked")){
+                            if($("#necesidadespecial").val()!=""){
+                                $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#91").attr("value")+"/Texto");
+                            }else{
+                                $("#necesidadespecial").val($("#91").attr("value")+"/Texto");
+                            }
+                        }
+                    }
+
+
+                }
+            }
+
+
+        }
+
+          if($("#92").is(":checked")){
+
+              if($("#101").is(":checked")){
+
+                  if($("#111").is(":checked")){
+
+                      if($("#necesidadespecial").val()!=""){
+                          $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#92").attr("value")+"/Señas-Texto");
+                      }else{
+                          $("#necesidadespecial").val($("#92").attr("value")+"/Señas-Texto");
+                      }
+                  }else {
+
+                      if($("#necesidadespecial").val()!=""){
+                          $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#92").attr("value")+"/Señas");
+                      }else {
+                          $("#necesidadespecial").val($("#92").attr("value") + "/Señas");
+                      }
+                  }
+              }else{
+                  if($("#111").is(":checked")){
+
+                      if($("#101").is(":checked")){
+                          if($("#111").is(":checked")){
+                              if($("#necesidadespecial").val()!=""){
+                                  $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#92").attr("value")+"/Señas-Texto");
+                              }else{
+                                  $("#necesidadespecial").val($("#92").attr("value")+"/Señas-Texto");
+                              }
+                          }else {
+
+                              if($("#necesidadespecial").val()!=""){
+                                  $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#92").attr("value")+"/Señas");
+                              }else{
+                                  $("#necesidadespecial").val($("#92").attr("value")+"/Señas");
+                              }
+
+                          }
+
+                      }else{
+                          if($("#111").is(":checked")){
+                              if($("#necesidadespecial").val()!=""){
+                                  $("#necesidadespecial").val($("#necesidadespecial").val()+","+$("#92").attr("value")+"/Texto");
+                              }else{
+                                  $("#necesidadespecial").val($("#92").attr("value")+"/Texto");
+                              }
+                          }
+                      }
+
+
+                  }
+              }
+
+
+          }
+
+
+          $("#necesidadespecial").show();
+      }
+
+      if($("#3").is(":checked")){
+
+          if($("#12").is(":checked")){
+              if($("#13").is(":checked")){
+                  if($("#necesidadespecial").val()!=""){
+                      $("#necesidadespecial").val($("#necesidadespecial").val()+",Motriz"+"/Mouse-Teclado");
+                  }else{
+                      $("#necesidadespecial").val("Motriz"+"/Mouse-Teclado");
+                  }
+              }else{
+                  if($("#necesidadespecial").val()!=""){
+                      $("#necesidadespecial").val($("#necesidadespecial").val()+",Motriz"+"/Mouse");
+                  }else{
+                      $("#necesidadespecial").val("Motriz"+"/Mouse");
+                  }
+              }
+          }else{
+              if($("#13").is(":checked")){
+                  if($("#necesidadespecial").val()!=""){
+                      $("#necesidadespecial").val($("#necesidadespecial").val()+",Motriz"+"/Teclado");
+                  }else{
+                      $("#necesidadespecial").val("Motriz"+"/Teclado");
+                  }
+              }
+          }
+          $("#necesidadespecial").show();
+      }
+      if($("#4").is(":checked")){
+          if($("#necesidadespecial").val()!=""){
+              $("#necesidadespecial").val($("#necesidadespecial").val()+",Cognitivo/");
+          }else{
+              $("#necesidadespecial").val("Cognitivo/");
+          }
+          if($("#141").is(":checked")){
+              $("#necesidadespecial").val($("#necesidadespecial").val()+"-ConcentraSi");
+          }else{
+              $("#necesidadespecial").val($("#necesidadespecial").val()+"-ConcentraNo");
+          }
+          if($("#151").is(":checked")){
+              $("#necesidadespecial").val($("#necesidadespecial").val()+"-TextoSi");
+          }else{
+              $("#necesidadespecial").val($("#necesidadespecial").val()+"/TextoNo");
+          }
+          if($("#161").is(":checked")){
+              $("#necesidadespecial").val($("#necesidadespecial").val()+"-InstruccionesSi");
+          }else{
+              $("#necesidadespecial").val($("#necesidadespecial").val()+"-InstruccionesNo");
+          }
+          if($("#171").is(":checked")){
+              $("#necesidadespecial").val($("#necesidadespecial").val()+"-DistraccionSi");
+          }else{
+              $("#necesidadespecial").val($("#necesidadespecial").val()+"-DistraccionNo");
+          }
+          /*var str = $("#necesidadespecial").val();
+          $("#necesidadespecial").val(str.substring(0, (str.length)-1));*/
+          $("#necesidadespecial").show();
+      }
+      $("#necesidadespecial").show();
+        $('#form').show();
+        $('#test_need').hide();
+        $('#submitg').show();
+
+
+  });
+//#####################################################################################################################
 
   </script>

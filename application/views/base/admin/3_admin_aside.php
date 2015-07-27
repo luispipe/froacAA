@@ -1,4 +1,4 @@
-      <!--sidebar start-->
+       <!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
@@ -22,16 +22,22 @@
                           <span>Gestión de repositorios </span>
                           </a>
                       <ul class="sub" style="display: none;">
-                          <li><a href="<?php echo base_url()?>repositorio/lista">Lista de repositorios</a></li>
-                          <li><a href="<?php echo base_url()?>repositorio/nuevo">Agregar repositorios</a></li>
+                          <li><a href="<?php echo base_url()?>repositorio/lista">Lista de Repositorios</a></li>
+                          <li><a href="<?php echo base_url()?>repositorio/nuevo">Agregar Repositorios</a></li>
 
                       </ul>
                   </li>
                   <li>
-                      <a href="<?php echo base_url()?>admin/lista_user" >
-                          <i class="icon-user"></i>
-                          <span>Gestión de usuarios</span>
+                  <li class="sub-menu dcjq-parent-li">
+                      <a href="javascript:;" class="dcjq-parent">
+                          <i class="icon-sitemap"></i>
+                          <span>Gestión de Usuarios </span>
                       </a>
+                      <ul class="sub" style="display: none;">
+                        <li><a href="<?php echo base_url()?>admin/lista_user">Lista de Usuarios </a></li>
+                          <li><a href="<?php echo base_url()?>usuario/nuevo_usuario">Agregar Usuarios</a></li>
+                      </ul>
+
                   </li>
 
                   <li>
@@ -40,7 +46,7 @@
                           <span>Configuración</span>
                       </a>
                   </li>
-                 <!-- <li>
+                  <li>
                       <a href="javascript:;" >
                           <i class="icon-comment"></i>
                           <span>Blog</span>
@@ -57,7 +63,7 @@
                           <i class="icon-info"></i>
                           <span>Acerca de</span>
                       </a>
-                  </li>-->
+                  </li>
 
               </ul>
               <!-- sidebar menu end-->

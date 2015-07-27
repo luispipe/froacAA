@@ -17,7 +17,7 @@
                       </a>
                   </li>
 
-                  <!--<li class="sub-menu">
+                  <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="icon-cogs"></i>
                           <span>Aplicaciones</span>
@@ -69,7 +69,7 @@
                           <li><a  href="responsive_table.html">GloAR</a></li>
                           <li><a  href="dynamic_table.html">GAIA</a></li>
                       </ul>
-                  </li>-->
+                  </li>
 
               </ul>
               <!-- sidebar menu end-->
