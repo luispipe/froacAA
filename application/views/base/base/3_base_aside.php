@@ -17,7 +17,7 @@
                       </a>
                   </li>
 
-                  <li class="sub-menu">
+                   <!--<li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="icon-cogs"></i>
                           <span>Aplicaciones</span>
@@ -49,7 +49,7 @@
                           <i class="icon-info"></i>
                           <span>Acerca de</span>
                       </a>
-                  </li>
+                  </li>-->
                   <li>
                       <a href="<?php echo base_url()?>usuario/registro" >
                           <i class="icon-user"></i>

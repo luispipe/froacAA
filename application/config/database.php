@@ -50,9 +50,9 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'postgres';
-$db['default']['password'] = '%froac$';
+$db['default']['password'] = 'luis';
 //$db['default']['database'] = 'froacn';
-$db['default']['database'] = 'froacn1';
+$db['default']['database'] = 'froacN';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

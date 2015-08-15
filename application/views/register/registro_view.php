@@ -1,6 +1,8 @@
-    <script type="text/javascript">
+hidden<script type="text/javascript">
 
     $(document).ready(function() {
+        estiloAprendizaje= 'Para conocer su estilo de aprendizaje puede realizar el test ahora mismo o en el momento que usted lo requiera';
+        $('#estiloaprendizaje').text(estiloAprendizaje);
 
         $("#img_ok").hide();
         $("#img_not").hide();
@@ -94,42 +96,76 @@
             $.post("<?php echo base_url() ?>index.php/usuario/test_result", form_data, function(respuesta) {
                 // $("#result").text(respuesta);
                 //alert("Resultado"+respuesta);
-                $('#result_test').val(respuesta);
+                var cantidades =  JSON.parse(respuesta);
+                //$('#verResult').val(','+cantidades[0]+',');
+                var larespuesta, cantidad1, cantidad2, cantidad3, cantidad4, cantidad5, cantidad6;
+                var i=0;
+                for (var x in cantidades) {
+                    if (i==0) {
+                        larespuesta= cantidades[x];
+                    }else if (i==1) {
+                        cantidad1= cantidades[x];
+                    }else if (i==2){
+                        cantidad2= cantidades[x];
+                    }else if (i==3){
+                        cantidad3= cantidades[x];
+                    }else if (i==4){
+                        cantidad4= cantidades[x];
+                    }else if (i==5){
+                        cantidad5= cantidades[x];
+                    }else if (i==6){
+                        cantidad6= cantidades[x];
+                    }
+                    i++;
+                }
+                $('#result_test').val(larespuesta);
                 $('#form').show();
                 $('#test').hide();
                 $('#submitg').show();
 
-
+                var estiloAprendizaje;
                 switch ($('#result_test').val()) {
                     case '1':
-                        $("#result").text('Su estilo de aprendizaje es: Auditivo-Global ');
+                        estiloAprendizaje= 'Su estilo de aprendizaje es: Auditivo-Global (La instrucción que se habla o se escucha facilita el aprendizaje de este tipo de aprendizaje. Las conferencias, las grabaciones, los debates son todos mecanismos que permiten que las personas de este estilo exploren conceptos) ';
                         break;
                     case '2':
-                        $("#result").text('Su estilo de aprendizaje es: Auditivo-Secuencial ');
+                        estiloAprendizaje= 'Su estilo de aprendizaje es: Auditivo-Secuencial (Las personas Auditivas secuenciales tienden a deletrear fonéticamente (sonidos.) Estos estudiantes aprenden escuchando y recuerdan los hechos cuando éstos son presentados en forma de poemas, cantos o melodías) ';
                         break;
                     case '3':
-                        $("#result").text('Su estilo de aprendizaje es: Kinestesico-Global ');
+                        estiloAprendizaje= 'Su estilo de aprendizaje es: Kinestesico-Global (Estas personas aprender mejor haciendo actividades que les permiten experimentar o practicar el concepto que están intentando aprender. La clave para el aprendizaje efectivo es que la instrucción les ofrece oportunidades concretas para aplicar la información.)';
                         break;
                     case '4':
-                        $("#result").text('Su estilo de aprendizaje es: Kinestesico-Secuencial ');
+                        estiloAprendizaje= 'Su estilo de aprendizaje es: Kinestesico-Secuencial (Estas personas aprenden mejor moviendo, experimentando  y manipulando. Les gusta descubrir como funcionan las cosas y muchas veces son exitosos en artes prácticas como carpintería o diseño)';
                         break;
                     case '5':
-                        $("#result").text('Su estilo de aprendizaje es: Lector-Global ');
+                        estiloAprendizaje= 'Su estilo de aprendizaje es: Lector-Global (Las personas con una preferencia a la modalidad leer/escribir aprenden mejor cuando reciben y devuelven la información en palabras)';
                         break;
                     case '6':
-                        $("#result").text('Su estilo de aprendizaje es: Lector-Secuencial ');
+                        estiloAprendizaje= 'Su estilo de aprendizaje es: Lector-Secuencial (Las personas con estilo de aprendizaje Lector Secuencial tienen preferencia por información impresa en forma de palabras)';
                         break;
                     case '7':
-                        $("#result").text('Su estilo de aprendizaje es: Visual-Global ');
-                        break
+                        estiloAprendizaje= 'Su estilo de aprendizaje es: Visual-Global (Las personas Visuales Globales aprenden  mirando. Ellos van a imágenes del pasado cuando tratan de recordar. Ellos dibujan la forma de las cosas en su mente)';
+                        break;
                     case '8':
-                        $("#result").text('Su estilo de aprendizaje es: Visual-Secuencial ');
-                        break
-                    case '8':
-                        $("#result").text('Su estilo de aprendizaje es: Visual-Secuencial ');
-                        break
-
+                        estiloAprendizaje= 'Su estilo de aprendizaje es: Visual-Secuencial (Las personas visuales secuenciales gustan de reunir y procesar información usando tablas, diagramas, gráficas, mapas y otras imágenes o formas basadas en gráfico para aprender)';
+                        break;
+                    default:
+                        estiloAprendizaje= 'Para conocer su estilo de aprendizaje puede realizar el test ahora mismo o en el momento que usted lo requiera';
+                        break;
                 }
+
+
+                $('#estiloaprendizaje').text(estiloAprendizaje);
+                $('#result_test').val(larespuesta);
+                $('#cantidad1').val(cantidad1);
+                $('#cantidad2').val(cantidad2);
+                $('#cantidad3').val(cantidad3);
+                $('#cantidad4').val(cantidad4);
+                $('#cantidad5').val(cantidad5);
+                $('#cantidad6').val(cantidad6);
+
+
+
 
             });
         });
@@ -142,25 +178,19 @@
             $('#submitg').hide();
             window.location.href = "#main-content";
         });
-
-
-
         $('#cancelar').click(function() {
             $('#test_need').hide();
             $('#form').show();
             $('#submitg').show();
         });
-
         $('#cancelar1').click(function() {
             $('#test').hide();
             $('#form').show();
             $('#submitg').show();
         });
-
         $('#username').blur(function() {
              $.get("<?php echo base_url() ?>index.php/usuario/checkusr/"+$("#username").val(), function(respuesta) {
                   $('#rta').val(respuesta);
-        
             if (respuesta == 1){
                 $('#img_not').show();
                 $('#img_ok').hide();
@@ -168,9 +198,7 @@
                 $('#img_ok').show();
                 $('#img_not').hide();
             }
-        
             });
-           
         });
     });
 
@@ -192,6 +220,7 @@
                             <div class="row">
                                 <form method="POST" role="form" action="<?php echo base_url();?>index.php/usuario/guardar" enctype='multipart/form-data' id="form">
                                     <div class="col-lg-12">
+                                        <!--label>hola:</label><input type="text" id="verResult"/-->
                                         <section class="panel">
                                             <header class="panel-heading">
                                                 Información personal
@@ -288,7 +317,6 @@
                                             </div>
 
                                             <input type="button" style="display:none;" value="Realizar Test NEED" name="need" id="need" class="btn btn-info">
-
                                     </div>
                                     <!--FIN FORMULARIO DE REGISTRO DE USUARIO-->
                                     <input type="text" style="display: none;" id="necesidadespecial" name="necesidadespecial">
@@ -296,11 +324,18 @@
 
                                     TEST DE ESTILO DE APRENDIZAJE
                                     </header>
-                                    <p>Para conocer su estilo de aprendizaje puede realizar el test ahora mismo o en el momento que usted lo requiera</p>
+                                    <p><label id="estiloaprendizaje"></label></p>
 
                                     <input type="button" id="boton" class="btn btn-info" value="Realizar Test">
-                                    <input type="hidden" name="result_test" id="result_test" value="0">
-                                    <h3 class="art-postheader" id="result"></h3>
+                                    <input type="hidden" name="result_test" id="result_test" ><!--value="0"-->
+                                    <input type="hidden" name="cantidad1" id="cantidad1" ><!--value="0"--> 
+                                    <input type="hidden" name="cantidad2" id="cantidad2" ><!--value="0"-->
+                                    <input type="hidden" name="cantidad3" id="cantidad3" ><!--value="0"-->
+                                    <input type="hidden" name="cantidad4" id="cantidad4" ><!--value="0"-->
+                                    <input type="hidden" name="cantidad5" id="cantidad5" ><!--value="0"-->
+                                    <input type="hidden" name="cantidad6" id="cantidad6" ><!--value="0"-->
+                                    <h3 class="art-postheader" id="result" ></h3>
+
 
                                     <input id="submitg" type="submit" class="btn btn-info" value="Guardar Información">
                                 </form>

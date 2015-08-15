@@ -120,13 +120,26 @@ where users.use_username='".$username."'");
        
         $today = date("Y-m-d");
 
+/*
+ESTAS CANTIDADES SON LAS QUE DEBERIAN LLEGAR DESDE EL CONTROLADOR
+cantidad1
+cantidad2
+cantidad3
+cantidad4
+cantidad5
+cantidad6*/
         $data = array(
             'use_username' => $this->input->post('username'),
             'use_stu_datebirth' => $this->input->post('fecha_nac'),
             'use_ls_id' => $this->input->post('result_test'),
             'use_stu_level' => $this->input->post('nevel_ed'),
+            'use_ls_cant_V' => $this->input->post('cantidad1'),
+            'use_ls_cant_A' => $this->input->post('cantidad2'),
+            'use_ls_cant_R' => $this->input->post('cantidad3'),
+            'use_ls_cant_K' => $this->input->post('cantidad4'),
+            'use_ls_cant_G' => $this->input->post('cantidad5'),
+            'use_ls_cant_S' => $this->input->post('cantidad6'),
         );
-
         $data2 = array(
             'use_username' => $this->input->post('username'),
             'use_nombre' => $this->input->post('nombre'),

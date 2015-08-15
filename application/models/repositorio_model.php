@@ -100,8 +100,8 @@ Class Repositorio_model extends CI_Model{
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function insert_table($lo_date, $tabla) {  // qué es $tabla no encuentro correspondencia con la tabla lo, no estoy segura de si data corresponde a lo_date
-        $this->db->insert($tabla, $lo_date);
+    public function insert_table($data, $tabla) {  // qué es $tabla no encuentro correspondencia con la tabla lo, no estoy segura de si data corresponde a lo_date
+        $this->db->insert($tabla, $data);
     }
     public function update_table($data, $tabla, $campos, $valores) { // No entiendo de donde salen estos parrámetros 
 

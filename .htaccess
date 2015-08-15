@@ -2,6 +2,6 @@
  
  RewriteCond %{REQUEST_FILENAME} !-f
  RewriteCond %{REQUEST_FILENAME} !-d
- RewriteRule ^(.*)$ /froacn/index.php/$1 [L]
+ RewriteRule ^(.*)$ /froacN1/index.php/$1 [L]
  
- ErrorDocument 404 /froacn/index.php
+ ErrorDocument 404 /froacN1/index.php

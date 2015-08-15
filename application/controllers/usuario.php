@@ -497,6 +497,8 @@ class Usuario extends CI_Controller {
                 $cant_S++;
         }
 
+    /*$this->usuario_model->guardar_estudiante($cant_V,$cant_A,$cant_R,$cant_K,$cant_G,$cant_S);
+    
         /* echo "   cantidad G  ";
           echo $cant_G;
           echo "   cantidad S  ";
@@ -530,7 +532,17 @@ class Usuario extends CI_Controller {
             $puntaje = $puntaje . ' - ' . $cant_S;
         }
 
-        echo $mayor;
+        $datos = array($mayor,$cant_V,$cant_A,$cant_R,$cant_K,$cant_G,$cant_S);
+
+        echo json_encode($datos);#$mayor.",".$cant_V.",".$cant_A.",".$cant_R.",".$cant_K.",".$cant_G.",".$cant_S;
+        /*
+
+esta es una opción que dio valen usando javascrip en la cual se manda la variable mayor y las 
+6 variables cant en una cadena serada por un caracter especial para desde la vista desarmar la 
+cadena y enviar al modelo estos valores
+        echo $mayor."&".$cant_K;*/
+
+        
         //echo 'Su estilo de aprendizaje es: ' . $mayor . ' con un resultado de ' . $puntaje;
        // $data = $this->input->post('1');
         // $data = json_decode(stripslashes($_POST['1']),true);
