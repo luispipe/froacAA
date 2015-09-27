@@ -34,9 +34,9 @@ if ($sess == 1) {
                                 <li class="icon-eye-open"></li> Ver metadatos
                             </a>
     
-                            <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores" txt="OA2">
+                         <!--   <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores" txt="OA2">
                                 <li class="icon-eye-open"></li> Ver Indicadores
-                            </a>
+                            </a>-->
                         </div>
                     </div>
                     <?php
@@ -74,7 +74,7 @@ if ($sess == 1) {
 <!-- modal -->
 
 
-<!-- Modal indicadores -->
+<!-- Modal indicadores 
 <div class="modal fade" id="dialog_indicaores" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -93,7 +93,7 @@ if ($sess == 1) {
                     Si desea calificar este objeto y agregarlo a su lista de favoritos, debe crear una cuenta e iniciar sesión!
                 <?php }?>
 
-                <!--<div id="dialog_inidicadores_result"></div>-->
+                <div id="dialog_inidicadores_result"></div>
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal"  class="btn btn-success" type="button">Aceptar</button>
@@ -101,7 +101,7 @@ if ($sess == 1) {
         </div>
     </div>
 </div>
-<!-- modal -->
+ modal -->
 
 
 <script type="text/javascript">

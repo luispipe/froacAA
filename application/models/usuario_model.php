@@ -120,13 +120,26 @@ where users.use_username='".$username."'");
        
         $today = date("Y-m-d");
 
+/*
+ESTAS CANTIDADES SON LAS QUE DEBERIAN LLEGAR DESDE EL CONTROLADOR
+cantidad1
+cantidad2
+cantidad3
+cantidad4
+cantidad5
+cantidad6*/
         $data = array(
             'use_username' => $this->input->post('username'),
             'use_stu_datebirth' => $this->input->post('fecha_nac'),
             'use_ls_id' => $this->input->post('result_test'),
             'use_stu_level' => $this->input->post('nevel_ed'),
+            'use_ls_cant_V' => $this->input->post('cantidad1'),
+            'use_ls_cant_A' => $this->input->post('cantidad2'),
+            'use_ls_cant_R' => $this->input->post('cantidad3'),
+            'use_ls_cant_K' => $this->input->post('cantidad4'),
+            'use_ls_cant_G' => $this->input->post('cantidad5'),
+            'use_ls_cant_S' => $this->input->post('cantidad6'),
         );
-
         $data2 = array(
             'use_username' => $this->input->post('username'),
             'use_nombre' => $this->input->post('nombre'),
@@ -150,6 +163,34 @@ where users.use_username='".$username."'");
             'use_username' => $id
         );
         $this->db->insert('use_pre_stu', $data);
+    }
+
+    //Si el usuario tiene una NEED se actualiza
+
+    public function has_need($username){
+        $data = array("use_username" => $username);
+        $this->db->insert("use_need", $data);
+    }
+
+    public function update_has_need($username,$need_vision, $need_visiondescri, $need_audicion, $need_audiciondescri,
+                                    $need_motriz, $need_motrizdescri, $need_coginitiva, $need_cognitivatexto,
+                                    $need_cognitivainstru, $need_cognitivaconcentra)
+    {
+        $data = array(
+            "use_need_vision" => $need_vision,
+            "use_need_visiondescri"=> $need_visiondescri,
+            "use_need_audicion" => $need_audicion,
+            "use_need_audiciondescri" => $need_audiciondescri,
+            "use_need_motriz" => $need_motriz,
+            "use_need_motrizdescri" => $need_motrizdescri,
+            "use_need_cognitiva" => $need_coginitiva,
+            "use_need_cognitivatexto" => $need_cognitivatexto,
+            "use_need_cognitivainstru" => $need_cognitivainstru,
+            "use_need_cognitivaconcentr" => $need_cognitivaconcentra);
+
+        $this->db->where("use_username", $username);
+        $this->db->update('use_need', $data);
+
     }
 
     // Se obtienen los registros de las preferencias que hay en la tabla "use_preference"

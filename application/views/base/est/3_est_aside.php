@@ -17,7 +17,7 @@
                       </a>
                   </li>
 
-                  <li class="sub-menu">
+                 <!-- <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="icon-cogs"></i>
                           <span>Aplicaciones</span>
@@ -32,18 +32,15 @@
                       </ul>
                   </li>
 
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="icon-comment"></i>
-                          <span>Blog</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="grids.html">Grids</a></li>
-                          <li><a  href="calendar.html">Calendar</a></li>
-                          <li><a  href="gallery.html">Gallery</a></li>
-                          <li><a  href="todo_list.html">Todo List</a></li>
-                      </ul>
-                  </li>
+                -->
+
+                  <li>
+                      <a href="<?php echo base_url()?>usuario/glosary/">
+                          <i class="icon-user"></i>
+                        <span >Glosario</span>
+                  </a>
+                </li>
+                <!--
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="icon-rss"></i>
@@ -70,6 +67,7 @@
                           <li><a  href="dynamic_table.html">GAIA</a></li>
                       </ul>
                   </li>
+                -->
 
               </ul>
               <!-- sidebar menu end-->

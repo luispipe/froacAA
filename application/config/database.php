@@ -49,9 +49,12 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
+//$db['default']['hostname'] = 'froac.manizales.unal.edu.co';
 $db['default']['username'] = 'postgres';
-$db['default']['password'] = 'postgre';
-$db['default']['database'] = 'froacn4';
+$db['default']['password'] = 'luis';
+//$db['default']['password'] = '%froac$';
+//$db['default']['database'] = 'froacn';
+$db['default']['database'] = 'froacN';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
@@ -63,6 +66,7 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
 
 
 /* End of file database.php */

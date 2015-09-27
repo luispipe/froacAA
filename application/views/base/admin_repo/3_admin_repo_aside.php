@@ -34,11 +34,11 @@
                       </a>
                   </li>
                   <li>
-                      <a href="javascript:;" >
-                          <i class="icon-comment"></i>
-                          <span>Blog</span>
-                      </a>
-                  </li>
+                      <a href="<?php echo base_url()?>usuario/glosary/">
+                          <i class="icon-user"></i>
+                        <span >Glosario</span>
+                  </a>
+                </li>
                   <li>
                       <a href="javascript:;" >
                           <i class="icon-rss"></i>

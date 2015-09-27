@@ -22,7 +22,16 @@ class Usuario extends CI_Controller {
     public function login() {
         $this->load->view('base/login_view');
     }
+//metodo que carga el glosario
+    public function glosary() {
+        $content = array(
+           "main_view" => "shared_views/glosario_view",
+                "encabezado" => "GLOSARIO",
+                "url" => "usuario/glosary/"
+        );
+        $this->load->view('base/base_template', $content); 
 
+    }
     //Metodo para crear una nueva cuenta
     public function registro(){
         if ($this->session->userdata('logged_in')) {
@@ -264,6 +273,171 @@ class Usuario extends CI_Controller {
         foreach ($_POST['pref'] as $key => $value) {
             $this->usuario_model->insert_pref($value, $this->input->post('username'));
         }
+        if($_POST["necesidadespecial"]!=""){
+            $this->usuario_model->has_need($this->input->post('username'));
+            $need_vision = null;
+            $need_visiondescri = null;
+            $need_audicion = "no";
+            $need_audiciondescri = null;
+            $need_motriz = "no";
+            $need_motrizdescri = null;
+            $need_coginitiva = "no";
+            $need_cognitivatexto = "no";
+            $need_cognitivainstru = "no";
+            $need_cognitivaconcentra = "no";
+
+            $need = $_POST["necesidadespecial"];
+
+            $need1 = explode(",", $need);
+            //print_r($need1);
+            if(count($need1)>0){
+                for($i = 0; $i<count($need1); $i++){
+                    if(strpos($need1[$i], "Vision")!==false){
+                        if($need1[$i]=="Vision-Nula"){
+                            $need_vision = "si";
+                        }else{
+                            if(strpos($need1[$i],"Vision-Parcial")!==false){
+                                $need_vision = "si";
+                                $need_visiondescri = substr($need1[$i],-3);
+                            }
+                        }
+
+                    }
+
+                    if(strpos($need1[$i], "Audicion")!==false){
+                        $need_audicion = "si";
+                        if(strpos($need1[$i], "Señas-Texto")!==false){
+                            $need_audiciondescri = "señas-texto";
+                        }else{
+                            if(strpos($need1[$i], "Señas")!==false){
+                                $need_audiciondescri = "señas";
+                            }else{
+                                if(strpos($need1[$i], "Texto")!==false){
+                                    $need_audiciondescri = "texto";
+                                }
+                            }
+                        }
+
+
+
+                    }
+
+                    if(strpos($need1[$i], "Motriz")!==false){
+                        $need_motriz = "si";
+                        if(strpos($need1[$i], "Mouse-Teclado")!==false){
+                            $need_motrizdescri = "mouse-teclado";
+                        }else{
+                            if(strpos($need1[$i], "Mouse")!==false){
+                                $need_motrizdescri = "mouse";
+                            }
+                            else{
+
+                                if(strpos($need1[$i], "Teclado")!==false){
+                                    $need_motrizdescri = "teclado";
+                                }
+                            }
+                        }
+
+
+
+                    }
+
+                    if(strpos($need1[$i], "Cognitivo")!==false){
+                        $need_coginitiva = "si";
+                        if(strpos($need1[$i], "ConcentraSi")!==false){
+                            $need_cognitivatexto = "si";
+
+                        }else{
+                            if(strpos($need1[$i], "TextoSi")!==false){
+                                $need_cognitivainstru = "si";
+
+                            }  else{
+                                if(strpos($need1[$i], "InstruccionesSi")!==false){
+                                    $need_cognitivaconcentra = "si";
+                                }
+                            }
+                        }
+
+
+
+                    }
+                }
+
+                $this->usuario_model->update_has_need($this->input->post('username'),$need_vision,
+                    $need_visiondescri, $need_audicion, $need_audiciondescri,
+                    $need_motriz, $need_motrizdescri, $need_coginitiva, $need_cognitivatexto,
+                    $need_cognitivainstru, $need_cognitivaconcentra);
+            }else{
+                if(strpos($need1[0], "Vision")!==false){
+                    if($need1[0]=="Vision-Nula"){
+                        $need_vision = "si";
+                    }else{
+                        if(strpos($need1[0],"Vision-Parcial")!==false){
+                            $need_visiondescri = substr($need1[0],-3);
+                        }
+                    }
+
+                }
+
+                if(strpos($need1[0], "Audicion")!==false){
+                    $need_audicion = "si";
+                    if(strpos($need1[0], "Señas-Texto")!==false){
+                        $need_audiciondescri = "señas-texto";
+                    }else{
+                        if(strpos($need1[0], "Señas")!==false){
+                            $need_audiciondescri = "señas";
+                        } else{
+                            if(strpos($need1[$i], "Texto")!==false){
+                                $need_audiciondescri = "texto";
+                            }
+                        }
+                    }
+
+
+                }
+
+                if(strpos($need1[0], "Motriz")!==false){
+                    $need_motriz = "si";
+                    if(strpos($need1[0], "Mouse-Teclado")!==false){
+                        $need_motrizdescri = "mouse-teclado";
+                    }else{
+                        if(strpos($need1[0], "Mouse")!==false){
+                            $need_motrizdescri = "mouse";
+                        }else{
+                            if(strpos($need1[0], "Teclado")!==false){
+                                $need_motrizdescri = "teclado";
+                            }
+                        }
+                    }
+
+
+                }
+
+                if(strpos($need1[0], "Cognitivo")!==false){
+                    $need_coginitiva = "si";
+                    if(strpos($need1[0], "ConcentraSi")!==false){
+                        $need_cognitivatexto = "si";
+
+                    }else{
+                        if(strpos($need1[0], "TextoSi")!==false){
+                            $need_cognitivainstru = "si";
+
+                        }else{
+                            if(strpos($need1[0], "InstruccionesSi")!==false){
+                                $need_cognitivaconcentra = "si";
+                            }
+
+                        }
+                    }
+
+
+                }
+                $this->usuario_model->update_has_need($this->input->post('username'),$need_vision,
+                    $need_visiondescri, $need_audicion, $need_audiciondescri,
+                    $need_motriz, $need_motrizdescri, $need_coginitiva, $need_cognitivatexto,
+                    $need_cognitivainstru, $need_cognitivaconcentra);
+            }
+        }
         $name = $this->input->post('nombre') . ' ' . $this->input->post('apellido');
         $this->exito($this->input->post('username'), $name);
     }
@@ -332,6 +506,8 @@ class Usuario extends CI_Controller {
                 $cant_S++;
         }
 
+    /*$this->usuario_model->guardar_estudiante($cant_V,$cant_A,$cant_R,$cant_K,$cant_G,$cant_S);
+    
         /* echo "   cantidad G  ";
           echo $cant_G;
           echo "   cantidad S  ";
@@ -365,7 +541,17 @@ class Usuario extends CI_Controller {
             $puntaje = $puntaje . ' - ' . $cant_S;
         }
 
-        echo $mayor;
+        $datos = array($mayor,$cant_V,$cant_A,$cant_R,$cant_K,$cant_G,$cant_S);
+
+        echo json_encode($datos);#$mayor.",".$cant_V.",".$cant_A.",".$cant_R.",".$cant_K.",".$cant_G.",".$cant_S;
+        /*
+
+esta es una opción que dio valen usando javascrip en la cual se manda la variable mayor y las 
+6 variables cant en una cadena serada por un caracter especial para desde la vista desarmar la 
+cadena y enviar al modelo estos valores
+        echo $mayor."&".$cant_K;*/
+
+        
         //echo 'Su estilo de aprendizaje es: ' . $mayor . ' con un resultado de ' . $puntaje;
        // $data = $this->input->post('1');
         // $data = json_decode(stripslashes($_POST['1']),true);
@@ -483,3 +669,20 @@ class Usuario extends CI_Controller {
   
     
 }
+?>
+
+<?php
+
+session_start();
+$c = conector_pg::getInstance();
+extract($_POST);
+$decode = base64_decode(base64_decode(base64_decode($key)));
+$query = "UPDATE users SET password='" . sha1($password) . "' WHERE email='$decode'";
+$c->realizarOperacion($query);
+$c = conector_pg::getInstance();
+$c->close();
+echo "<script>
+         alert('Constrase\u00f1a cambiada correctamente');
+         location.href='../index.php';
+         </script>";
+?>

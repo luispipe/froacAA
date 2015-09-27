@@ -14,8 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:81/froacN1/';
-//$config['base_url']	= 'http://192.168.1.19/froac/';
+$config['base_url']	= 'http://localhost/froacn_18-08-2015/';
+//$config['base_url']	= 'http://froac.manizales.unal.edu.co/froacn/';
 /*
 |--------------------------------------------------------------------------
 | Index File
