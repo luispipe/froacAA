@@ -34,11 +34,11 @@
                       </a>
                   </li>
                   <li>
-                      <a href="<?php echo base_url()?>usuario/glosary/">
-                          <i class="icon-user"></i>
-                        <span >Glosario</span>
-                  </a>
-                </li>
+                      <a href="javascript:;" >
+                          <i class="icon-comment"></i>
+                          <span>Blog</span>
+                      </a>
+                  </li>
                   <li>
                       <a href="javascript:;" >
                           <i class="icon-rss"></i>
@@ -49,6 +49,12 @@
                       <a href="javascript:;" >
                           <i class="icon-info"></i>
                           <span>Acerca de</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url()?>usuario/glosario" >
+                          <i class="icon-user"></i>
+                          <span>Glosario</span>
                       </a>
                   </li>
 

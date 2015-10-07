@@ -110,232 +110,8 @@ class Repositorio extends CI_Controller{
         }
     }
 
-/*Metodos del anterio FROAC*/
-function importGeneral($meta, $idrepository, $idlom) {
-            /*             * *************************Title************************** */
-            $title = $general->getElementsByTagName('title')->item(0)->nodeValue;
-            /*             * *************************Language************************** */
-            $tagLanguaje = $general->getElementsByTagName('language');
-            $j = 1;
-            foreach ($tagLanguaje as $language) {
-                $lang = $language->nodeValue;
-
-                $data = array(
-                    'idrepository' => $idrepository,
-                    'idlom' => $idlom,
-                    'idgenerallanguage' => $j,
-                    'language' => $lang
-                );
-                $this->repositorio_model->insert_table($data, 'lom');
-                $j++;
-            }
-            /*             * *************************Description************************** */
-            $tagDescription = $general->getElementsByTagName('description');
-            $j = 1;
-            foreach ($tagDescription as $description) {
-                $descri = $description->nodeValue;
-
-                $data = array(
-                    'idrepository' => $idrepository,
-                    'idlom' => $idlom,
-                    'idgeneraldescription' => $j,
-                    'description' => $descri
-                );
-                $this->repositorio_model->insert_table($data, 'lom');
-                $j++;
-            }
-            /*             * *************************Keyword************************** */
-            $tagKeyword = $general->getElementsByTagName('keyword');
-            $j = 1;
-            foreach ($tagKeyword as $keyword) {
-                $key = $keyword->nodeValue;
-
-                $data = array(
-                    'idrepository' => $idrepository,
-                    'idlom' => $idlom,
-                    'idgeneralkeyword' => $j,
-                    'keyword' => $key
-                );
-                $this->repositorio_model->insert_table($data, 'lom');
-                $j++;
-            }
-            /*             * *************************Structure************************** */
-            $structure = $general->getElementsByTagName('structure')->item(0)->nodeValue;
-            /*             * *************************Aggregationlevel************************** */
-            $aggregationlevel = $general->getElementsByTagName('aggregationlevel')->item(0)->nodeValue;
-
-            //Con esta sección almaceno en la tabla lom metadatos que no son multivaluados
-            $data = array(
-                'general_title' => $title,
-                'general_structure' => $structure,
-                'general_aggregationlevel' => $aggregationlevel
-            );
-            //Capos para poner en el where
-            $campos = array(
-                '0' => 'idrepository',
-                '1' => 'idlom'
-            );
-
-            //Capos para poner en el where
-            $valores = array(
-                '0' => $idrepository,
-                '1' => $idlom
-            );
-
-            $this->repositorio_model->update_table($data, 'lom', $campos, $valores);
-        }
-
-       ///////////////////// L I F E   C Y C L E/////////////
-    function importLifeCycle($meta, $idrepository, $idlom) {
-        $tagLifecycle = $meta->getElementsByTagName('lifecycle');
-        foreach ($tagLifecycle as $lifecycle) {
-            /*             * *************************Version************************** */
-            $version = $lifecycle->getElementsByTagName('version')->item(0)->nodeValue;
-            /*             * *************************Status************************** */
-            $status = $lifecycle->getElementsByTagName('status')->item(0)->nodeValue;
-            /*             * *************************Contribute************************** */
-            $tagContribute = $lifecycle->getElementsByTagName('contribute');
-            $j = 1;
-            foreach ($tagContribute as $contribute) {
-                $role = $contribute->getElementsByTagName('role')->item(0)->nodeValue;
-                
-//Hacer condicional para verificar si el role es un author
-                $date = $contribute->getElementsByTagName('date')->item(0)->nodeValue;
-                $data = array(
-                    'idrepository' => $idrepository,
-                    'idlom' => $idlom,
-                    'idlifecyclecontribute' => $j,
-                    'role' => $role,
-                    'date' => $date
-                );
-                $this->repositorio_model->insert_table($data, 'lifecycle_contribute');
-                $x = 1;
-                $tagEntity = $contribute->getElementsByTagName('entity');
-                foreach ($tagEntity as $entity) {
-                    $enti = $entity->nodeValue;
-                    $data = array(
-                        'idrepository' => $idrepository,
-                        'idlom' => $idlom,
-                        'idlifecyclecontribute' => $j,
-                        'idlifecyclecontributeentity' => $x,
-                        'entity' => $enti
-                    );
-                    $this->repositorio_model->insert_table($data, 'lom');
-                    $x++;
-                }
-                $j++;
-            }
-
-            //Con esta sección almaceno en la tabla lom metadatos que no son multivaluados
-            $data = array(
-                'lifecycle_version' => $version,
-                'lifecycle_status' => $status
-            );
-            //Capos para poner en el where
-            $campos = array(
-                '0' => 'idrepository',
-                '1' => 'idlom'
-            );
-
-            //Capos para poner en el where
-            $valores = array(
-                '0' => $idrepository,
-                '1' => $idlom
-            );
-
-            $this->repositorio_model->update_table($data, 'lom', $campos, $valores);
-        }
-    }
-
-
-     ///////////////////// T E C H N I C A L /////////////
-    function importTechnical($meta, $idrepository, $idlom) {
-        $tagTechnical = $meta->getElementsByTagName('technical');
-        foreach ($tagTechnical as $technical) {
-            /*             * *************************Format************************** */
-            $tagFormat = $technical->getElementsByTagName('format');
-            $j = 1;
-            foreach ($tagFormat as $format) {
-                $form = $format->nodeValue;
-
-                $data = array(
-                    'idrepository' => $idrepository,
-                    'idlom' => $idlom,
-                    'idtechnicalformat' => $j,
-                    'format' => $form
-                );
-                $this->repositorio_model->insert_table($data, 'lom');
-                $j++;
-            }
-            /*             * *************************Location************************** */
-            $tagLocation = $technical->getElementsByTagName('location');
-            $j = 1;
-            foreach ($tagLocation as $location) {
-                $locat = $location->nodeValue;
-
-                $data = array(
-                    'idrepository' => $idrepository,
-                    'idlom' => $idlom,
-                    'idtechnicallocation' => $j,
-                    'location' => $locat
-                );
-                $this->repositorio_model->insert_table($data, 'lom');
-                $j++;
-            }
-        }
-    }
-             ///////////////////// E D U C A T I O N A L /////////////
-    function importEducational($meta, $idrepository, $idlom) {
-        $tagEducational = $meta->getElementsByTagName('educational');
-        foreach ($tagEducational as $educational) {
-            /*             * *************************Interactivitytype************************** */
-            $interactivitytype = $educational->getElementsByTagName('interactivitytype')->item(0)->nodeValue;
-            /*             * *************************Learningresourcetype************************** */
-            $tagLearningresourcetype = $educational->getElementsByTagName('learningresourcetype');
-            $j = 1;
-            foreach ($tagLearningresourcetype as $learningresourcetype) {
-                $resourcetype = $learningresourcetype->nodeValue;
-
-                $data = array(
-                    'idrepository' => $idrepository,
-                    'idlom' => $idlom,
-                    'ideducationallearningresourcetype' => $j,
-                    'learningresourcetype' => $resourcetype
-                );
-                $this->repositorio_model->insert_table($data, 'lom');
-                $j++;
-            }
-            /*             * *************************Interactivitylevel************************** */
-            $interactivitylevel = $educational->getElementsByTagName('interactivitylevel')->item(0)->nodeValue;
-
-            /*             * *************************Difficulty************************** */
-            $difficulty = $educational->getElementsByTagName('difficulty')->item(0)->nodeValue;
-
-            //Con esta sección almaceno en la tabla lom metadatos que no son multivaluados
-            $data = array(
-                'educational_interactivitytype' => $interactivitytype,
-                'educational_interactivitylevel' => $interactivitylevel,
-                'educational_semanticdensity' => $semanticdensity,
-                'educational_difficulty' => $difficulty,
-                'educational_typicallearningtime' => $typicallearningtime
-            );
-            //Capos para poner en el where
-            $campos = array(
-                '0' => 'idrepository',
-                '1' => 'idlom'
-            );
-
-            //Capos para poner en el where
-            $valores = array(
-                '0' => $idrepository,
-                '1' => $idlom
-            );
-
-            $this->repositorio_model->update_table($data, 'lom', $campos, $valores);
-        }
-    }
-//Guardar en nuevo Repositorio --- Lleva al modelo
-public function insert_repo() {
+    //Guardar en nuevo Repositorio --- Lleva al modelo
+    public function insert_repo() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             if ($this->input->post('tiporepositorio') == 'ROAp') {
@@ -436,12 +212,12 @@ public function insert_repo() {
                     //Tenemos un vector de 'record' en la variable $oas y se recorre
                     foreach ($oas as $oa) {
                         $header = $oa->getElementsByTagName('header');
-                        global $idlom;
-                        $idlom = $header->item(0)->getElementsByTagName('identifier')->item(0)->nodeValue;
+                        global $lo_id;
+                        $lo_id = $header->item(0)->getElementsByTagName('identifier')->item(0)->nodeValue;
                         $status = $header->item(0)->getAttribute('status');
                         $datestamp = $header->item(0)->getElementsByTagName('datestamp')->item(0)->nodeValue;
                         $xmlo = '';
-                        //Si el estado del record es 'deleted' se 
+                        //Si el estado del record no es 'deleted' obtengo el xml
                         if ($status != 'deleted') {
                             $xmlo0 = $oa->getElementsByTagName('lom');
                             $xmlo1 = $xmlo0->item(0);
@@ -450,35 +226,21 @@ public function insert_repo() {
                         }
 
                         //Hago select para determinar la operación a realizar -- Miro si ya existía el OA
-                        $consult = $this->repositorio_model->get_lo($rep_id, $lo_id); //---- Consultar si existe en la tabla 'lo' un objeto con ese lo_id y rep_id
+                        $consult = $this->repositorio_model->get_lo($idrepository, $lo_id); //---- Consultar si existe en la tabla 'lo' un objeto con ese lo_id y rep_id
                         $vlr = sizeof($consult);
                         $last = "";
                         if ($vlr == 0) {
-                            //Quiere decir que no existe un registro de ese OA, entonces lo inserto
+                            //Quiere decir que no existe un registro de ese OA, entonces lo inserto si no se ha eliminado
                             if ($status != 'deleted') {
                                 $data = array(
-                                    'rep_id' => $rep_id,
+                                    'rep_id' => $idrepository,
                                     'lo_id' => $lo_id,
                                     'lo_insertiondate' => date("Y-m-d"),
                                     'lo_deleted' => 'false',
                                     'lo_lastmodified' => $datestamp,
-                                    'xmlo' => $xmlo// a cual variable corresponde en la tabla lo ????
+                                    'lo_xml_lom' => $xmlo
                                 );
-                                $this->repo_model->insert_table($lo_date, 'lo'); //---- Insertar en la tabla 'lo' lo correspondiente 
-
-                               /* $data2 = array(
-                                    'idrepository' => $idrepository,
-                                    'idlom' => $idlom
-                                );
-                                $this->repo_model->insert_table($data2, 'lom'); 
-
-                                 $data2 = array(
-                                  'idrepository' => $idrepository,
-                                  'idlom' => $idlom,
-                                  'noticedate' => $datestamp,
-                                  'notice_title' => "insert"
-                                  );
-                                  $this->repo_model->insert_table($data2, 'rss'); */
+                                $this->repositorio_model->insert_table($data, 'lo'); //---- Insertar en la tabla 'lo' lo correspondiente 
                             }
                         } 
                         else 
@@ -487,12 +249,13 @@ public function insert_repo() {
                                 $last = $consu['lo_lastmodified'];
                             }
                             //Quiere decir que ya existe un registro de ese OA, entonces debo actualizarlo
-                            if ($status != 'lo_deleted') {
+                            if ($status != 'deleted') {
+                                //Ya existe registro y no se ha eliminado, sino modificado
                                 if ($last != $lo_lastmodified) {
                                     //Datos que se van a modificar
                                     $data = array(
                                         'lo_lastmodified' => $lo_lastmodified,
-                                        'xmlo' => $xmlo /// a que equivale???
+                                        'lo_xml_lom' => $xmlo 
                                     );
 
                                     //Capos para poner en el where
@@ -507,29 +270,16 @@ public function insert_repo() {
                                         '1' => $lo_id
                                     );
 
-                                    $this->repo_model->update_table($data, 'lo', $campos, $valores); //---- Insertar en la tabla 'lo' lo correspondiente 
+                                    $this->repositorio_model->update_table($data, 'lo', $campos, $valores); //---- Modifica en la tabla 'lo' lo correspondiente 
 
-                                    /*$this->repo_model->delete_table('lom', $campos, $valores);
-
-                                    $data2 = array(
-                                        'idrepository' => $idrepository,
-                                        'idlom' => $idlom
-                                    );
-                                    $this->repo_model->insert_table($data2, 'lom');
-
-                                    $data2 = array(
-                                      'idrepository' => $idrepository,
-                                      'idlom' => $idlom,
-                                      'noticedate' => $datestamp,
-                                      'notice_title' => "update"
-                                      );
-                                      $this->repo_model->insert_table($data2, 'rss'); */
                                 }
-                            } else {
+                            } 
+                            else 
+                            {
                                 $data = array(
                                     'lo_deleted' => 'true',
-                                    'lo_lastmodified' => $datestamp, // preguntar a que equivale datestamp
-                                    'xmlo' => $xmlo
+                                    'lo_lastmodified' => $datestamp,
+                                    'lo_xml_lom' => $xmlo
                                 );
                                 //Capos para poner en el where
                                 $campos = array(
@@ -539,34 +289,239 @@ public function insert_repo() {
 
                                 //Capos para poner en el where
                                 $valores = array(
-                                    '0' => $rep_id,
+                                    '0' => $idrepository,
                                     '1' => $lo_id
                                 );
 
-                                $this->repo_model->update_table($data, 'lo', $campos, $valores); //---- Insertar en la tabla 'lo' lo correspondiente 
-
-                                //$this->repo_model->delete_table('lom', $campos, $valores);
+                                $this->repositorio_model->update_table($data, 'lo', $campos, $valores);
                             }
                         }
                         if ($status != 'deleted') {
                             if ($last != $datestamp) {
-                                /*$meta = $oa->getElementsByTagName('metadata')->item(0);
-                                $this->importGeneral($meta, $idrepository, $idlom);
-                                $this->importLifeCycle($meta, $idrepository, $idlom);
-                                $this->importMetaMetaData($meta, $idrepository, $idlom);
-                                $this->importTechnical($meta, $idrepository, $idlom);
-                                $this->importEducational($meta, $idrepository, $idlom);
-                                $this->importRights($meta, $idrepository, $idlom);
-                                $this->importRelation($meta, $idrepository, $idlom);
-                                $this->importAnnotation($meta, $idrepository, $idlom);
-                                $this->importClassification($meta, $idrepository, $idlom);*/
+                                $meta = $oa->getElementsByTagName('metadata')->item(0);
+                                $this->importGeneral($meta, $idrepository, $lo_id);
+                                $this->importLifeCycle($meta, $idrepository, $lo_id);
+                                $this->importTechnical($meta, $idrepository, $lo_id);
+                                $this->importEducational($meta, $idrepository, $lo_id);
                             }
                         }
                     }//foreach     
                 }//if    
             }//for
         }//if
-        $this->lista_repo();
+        //$this->lista_repo();
+    }
+    
+    ///////////////////// GENERAL  /////////////
+    function importGeneral($meta, $idrepository, $idlom) {
+        $tagGeneral = $meta->getElementsByTagName('general');
+        $title="";
+        $language="";
+        $description="";
+        $keyword = "";
+        $structure = "";
+        $aggregationlevel = "";
+        foreach ($tagGeneral as $general) {
+            /***************************Title***************************/
+            $titlet = $general->getElementsByTagName('title')->item(0)->nodeValue;
+            $title = $title."/".$titlet;
+            
+            /***************************Language***********************/
+            $tagLanguaje = $general->getElementsByTagName('language');
+            foreach ($tagLanguaje as $l) {
+                $lang = $l->nodeValue;
+                $language = $language."/".$lang;
+            }
+            
+            /*************************Description**************************/
+            $tagDescription = $general->getElementsByTagName('description');
+            foreach ($tagDescription as $d) {
+                $descri = $d->nodeValue;
+                $description = $description."/".$descri;
+            }
+            
+            /*************************Keyword**************************/
+            $tagKeyword = $general->getElementsByTagName('keyword');
+            foreach ($tagKeyword as $k) {
+                $key = $k->nodeValue;
+                $keyword = $keyword."/".$key;
+            }
+            
+            /**************************Structure************************** */
+            $structuret = $general->getElementsByTagName('structure')->item(0)->nodeValue;
+            $structure = $structure."/".$structuret;
+            
+            /**************************Aggregationlevel************************** */
+            $aggregationlevelt = $general->getElementsByTagName('aggregationlevel')->item(0)->nodeValue;
+            $aggregationlevel = $aggregationlevel."/".$aggregationlevelt;
+        }
+        $title = substr($title,1);
+        $language = substr($language,1);
+        $description = substr($description,1);
+        $keyword = substr($keyword,1);
+        $structure = substr($structure,1);
+        $aggregationlevel = substr($aggregationlevel,1);
+        
+            //Con esta sección almaceno en la tabla lo
+            $data = array(
+                'lo_title' => $title,
+                'lo_language' => $language,
+                'lo_description' => $description,
+                'lo_keyword' => $keyword,
+                'lo_structure' => $structure,
+                'lo_aggregationlevel' => $aggregationlevel
+            );
+            //Capos para poner en el where
+            $campos = array(
+                '0' => 'rep_id',
+                '1' => 'lo_id'
+            );
+
+            //Capos para poner en el where
+            $valores = array(
+                '0' => $idrepository,
+                '1' => $idlom
+            );
+
+            $this->repositorio_model->update_table($data, 'lo', $campos, $valores);
+    }
+    
+    ///////////////////// L I F E   C Y C L E/////////////
+    function importLifeCycle($meta, $idrepository, $idlom) 
+    {
+        $tagLifecycle = $meta->getElementsByTagName('lifecycle');
+        $date="";
+        $entity="";
+        foreach ($tagLifecycle as $lifecycle) {
+            /***************************Contribute***************************/
+            $tagContribute = $lifecycle->getElementsByTagName('contribute');
+            foreach ($tagContribute as $contribute) {
+                $datet = $contribute->getElementsByTagName('date')->item(0)->nodeValue;
+                $date = $date."/".$datet;
+                
+                $role = $contribute->getElementsByTagName('role')->item(0)->nodeValue;
+                if($role == "author")
+                {
+                    $tagEntity = $contribute->getElementsByTagName('entity');
+                    foreach ($tagEntity as $e) {
+                        $enti = $e->nodeValue;
+                        $entity = $entity."/".$enti;
+                    }
+                }
+            }
+        }
+        $date = substr($date,1);
+        $entity = substr($entity,1);
+
+        //Con esta sección almaceno en la tabla lo
+        $data = array(
+            'lo_author' => $entity,
+            'lo_date' => $date
+        );
+        //Capos para poner en el where
+        $campos = array(
+            '0' => 'rep_id',
+            '1' => 'lo_id'
+        );
+        //Capos para poner en el where
+        $valores = array(
+            '0' => $idrepository,
+            '1' => $idlom
+        );
+        $this->repositorio_model->update_table($data, 'lo', $campos, $valores);
+    }
+    
+    ///////////////////// T E C H N I C A L /////////////
+    function importTechnical($meta, $idrepository, $idlom) {
+        $tagTechnical = $meta->getElementsByTagName('technical');
+        $format="";
+        $location="";
+        foreach ($tagTechnical as $technical) {
+            /***************************Format************************** */
+            $tagFormat = $technical->getElementsByTagName('format');
+            foreach ($tagFormat as $f) {
+                $form = $f->nodeValue;
+                $format = $format."/".$form;
+            }
+            /**************************Location************************** */
+            $tagLocation = $technical->getElementsByTagName('location');
+            foreach ($tagLocation as $l) {
+                $locat = $l->nodeValue;
+                $location = $location."/".$locat;
+            }
+        }
+        $format = substr($format,1);
+        $location = substr($location,1);
+
+        //Con esta sección almaceno en la tabla lo
+        $data = array(
+            'lo_format' => $format,
+            'lo_location' => $location
+        );
+        //Capos para poner en el where
+        $campos = array(
+            '0' => 'rep_id',
+            '1' => 'lo_id'
+        );
+        //Capos para poner en el where
+        $valores = array(
+            '0' => $idrepository,
+            '1' => $idlom
+        );
+        $this->repositorio_model->update_table($data, 'lo', $campos, $valores);
+    }
+    
+    ///////////////////// E D U C A T I O N A L /////////////
+    function importEducational($meta, $idrepository, $idlom) {
+        $tagEducational = $meta->getElementsByTagName('educational');
+        $interactivitytype = "";
+        $learningresourcetype = "";
+        $interactivitylevel = "";
+        $difficulty = "";
+        foreach ($tagEducational as $educational) {
+            /**************************Interactivitytype************************** */
+            $interactivitytypet = $educational->getElementsByTagName('interactivitytype')->item(0)->nodeValue;
+            $interactivitytype = $interactivitytype."/".$interactivitytypet;
+            
+            /**************************Learningresourcetype************************** */
+            $tagLearningresourcetype = $educational->getElementsByTagName('learningresourcetype');
+            foreach ($tagLearningresourcetype as $lrt) {
+                $resourcetype = $lrt->nodeValue;
+                $learningresourcetype = $learningresourcetype."/".$resourcetype;
+            }
+            
+            /**************************Interactivitylevel************************** */
+            $interactivitylevelt = $educational->getElementsByTagName('interactivitylevel')->item(0)->nodeValue;
+            $interactivitylevel = $interactivitylevel."/".$interactivitylevelt;
+            
+            /**************************Difficulty************************** */
+            $difficultyt = $educational->getElementsByTagName('difficulty')->item(0)->nodeValue;
+            $difficulty = $difficulty."/".$difficultyt;
+        }
+        
+        $interactivitytype = substr($interactivitytype,1);
+        $learningresourcetype = substr($learningresourcetype,1);
+        $interactivitylevel = substr($interactivitylevel,1);
+        $difficulty = substr($difficulty,1);
+        
+        //Con esta sección almaceno en la tabla lom metadatos que no son multivaluados
+        $data = array(
+            'lo_interactivitytype' => $interactivitytype,
+            'lo_learningresourcetype' => $learningresourcetype,
+            'lo_interactivitylevel' => $interactivitylevel,
+            'lo_difficulty' => $difficulty
+        );
+        //Capos para poner en el where
+        $campos = array(
+            '0' => 'rep_id',
+            '1' => 'lo_id'
+        );
+        //Capos para poner en el where
+        $valores = array(
+            '0' => $idrepository,
+            '1' => $idlom
+        );
+        $this->repositorio_model->update_table($data, 'lo', $campos, $valores);
     }
 }
 

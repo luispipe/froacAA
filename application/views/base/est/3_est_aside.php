@@ -16,8 +16,8 @@
                           <span>Repositorios</span>
                       </a>
                   </li>
-
-                 <!-- <li class="sub-menu">
+<!--
+                  <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="icon-cogs"></i>
                           <span>Aplicaciones</span>
@@ -32,15 +32,18 @@
                       </ul>
                   </li>
 
-                -->
-
-                  <li>
-                      <a href="<?php echo base_url()?>usuario/glosary/">
-                          <i class="icon-user"></i>
-                        <span >Glosario</span>
-                  </a>
-                </li>
-                <!--
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="icon-comment"></i>
+                          <span>Blog</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="grids.html">Grids</a></li>
+                          <li><a  href="calendar.html">Calendar</a></li>
+                          <li><a  href="gallery.html">Gallery</a></li>
+                          <li><a  href="todo_list.html">Todo List</a></li>
+                      </ul>
+                  </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="icon-rss"></i>
@@ -56,18 +59,31 @@
                           <li><a  href="image_cropping.html">Image Cropping</a></li>
                       </ul>
                   </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
+                 -->
+                 <li>
+                      <a href="<?php echo base_url()?>usuario/equipo" >
+                          <i class="icon-info"></i>
+                          <span>Equipo FROAC</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url()?>usuario/acerca" >
                           <i class="icon-info"></i>
                           <span>Acerca de</span>
                       </a>
-                      <ul class="sub">
-                          <li><a  href="basic_table.html">FROAC</a></li>
-                          <li><a  href="responsive_table.html">GloAR</a></li>
-                          <li><a  href="dynamic_table.html">GAIA</a></li>
-                      </ul>
                   </li>
-                -->
+                  <li>
+                      <a href="<?php echo base_url()?>usuario/glosario" >
+                          <i class="icon-info"></i>
+                          <span>Glosario</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="http://portal.manizales.unal.edu.co/gta/gaia/" >
+                          <i class="icon-info"></i>
+                          <span>GAIA</span>
+                      </a>
+                  </li>
 
               </ul>
               <!-- sidebar menu end-->

@@ -17,21 +17,41 @@ class Usuario extends CI_Controller {
     public function get_usr_data($username) {
         $this->load->view('base/login_view');
     }
+    
+//metodo que carga la vista acerca
+    public function acerca() {
+        $content = array(
+            "main_view" => "shared_views/acerca_view",
+                "encabezado" => "Acerca de",
+                "url" => "usuario/acerca/"
+        );
+        $this->load->view('base/base_template', $content);
+    }
+
+//metodo que carga el equipo de trabajo de froac
+    public function equipo() {
+         $content = array(
+                "main_view" => "shared_views/equipo_view",
+                "encabezado" => "Equipo FROAC",
+                "url" => "usuario/equipo/"
+            );
+                $this->load->view('base/base_template', $content);
+            }
+
+    public function glosario() {
+            $content = array(
+                "main_view" => "shared_views/glosario_view",
+                "encabezado" => "GLosario",
+                "url" => "usuario/glosario/"
+            );
+                $this->load->view('base/base_template', $content);
+            }
 
     //Metodo que carga la pagina de inicio de sesión
     public function login() {
         $this->load->view('base/login_view');
     }
-//metodo que carga el glosario
-    public function glosary() {
-        $content = array(
-           "main_view" => "shared_views/glosario_view",
-                "encabezado" => "GLOSARIO",
-                "url" => "usuario/glosary/"
-        );
-        $this->load->view('base/base_template', $content); 
 
-    }
     //Metodo para crear una nueva cuenta
     public function registro(){
         if ($this->session->userdata('logged_in')) {
@@ -669,20 +689,3 @@ cadena y enviar al modelo estos valores
   
     
 }
-?>
-
-<?php
-
-session_start();
-$c = conector_pg::getInstance();
-extract($_POST);
-$decode = base64_decode(base64_decode(base64_decode($key)));
-$query = "UPDATE users SET password='" . sha1($password) . "' WHERE email='$decode'";
-$c->realizarOperacion($query);
-$c = conector_pg::getInstance();
-$c->close();
-echo "<script>
-         alert('Constrase\u00f1a cambiada correctamente');
-         location.href='../index.php';
-         </script>";
-?>

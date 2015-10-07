@@ -1,4 +1,3 @@
-
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
@@ -9,7 +8,10 @@
             </header>
             <div class="panel-body">
                 <div class="row">
-                    <h5>Glosario de Términos</h5>
+
+    </div>
+    <div class="art-postcontent"><br>
+<h5>GLOSARIO DE TÉRMINOS</h5>
 
 <table width="791" border="2" align="center">
   <tr>
@@ -44,7 +46,7 @@
 <p>&nbsp;</p>
 <p>&nbsp;
         
-        <h5>Glosario de Siglas</h5>
+        <h5>GLOSARIO DE SIGLAS</h5>
          
         
      <table width="791" border="2" align="center">
@@ -189,8 +191,13 @@
     <td>   <div align="justify">Bases de Datos XM</div></td>
   </tr>
 </table>
+        
 
-                </div>
+    </div>
+    <div class="cleared"></div>
+</div>
+
+</div>
             </div>
         </section>
 
