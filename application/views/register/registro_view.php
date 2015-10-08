@@ -16,6 +16,12 @@ hidden<script type="text/javascript">
             yearRange: "1945:2035"
 
         });
+         //Cerrar el calendario (datapicker) al seleccionar el dia
+        $('#fecha_nac').on('changeDate', function (cer) {
+            if(cer.viewMode === 'days'){
+                $('fecha_nac').datepicker('hide');
+            }
+        });
 
         $(".submitg").click(function() {
             $("#form").validate({
@@ -250,7 +256,8 @@ hidden<script type="text/javascript">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="mail">E-mail:</label>
-                                                    <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electronico" required>
+                                                    <!-- Se valida la existencia de @ y . en el correo ingresado por medio del atributo pattern -->
+                                                    <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electronico" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required>
                                                 </div>
                                                 <div id="in_use1" class="alert alert-block alert-danger fade in">
                                                     <button data-dismiss="alert" class="close close-sm" type="button">
