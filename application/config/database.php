@@ -49,10 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-//$db['default']['hostname'] = 'froac.manizales.unal.edu.co';
 $db['default']['username'] = 'postgres';
 $db['default']['password'] = 'luis';
-//$db['default']['password'] = '%froac$';
 //$db['default']['database'] = 'froacn';
 $db['default']['database'] = 'froacN';
 $db['default']['dbdriver'] = 'postgre';

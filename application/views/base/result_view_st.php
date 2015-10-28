@@ -19,7 +19,7 @@ if ($sess == 1) {
             <?php
             if (!empty($result)) {
                 foreach ($result as $key) {
-                    $url = base64_encode("http://roap.medellin.unal.edu.co/maescen/control/download.php?id=28");
+                    $url = base64_encode($key['lo_location']);
                     $lo_name = base64_encode($key['lo_title']);
                     ?>
                     <div class="classic-search">

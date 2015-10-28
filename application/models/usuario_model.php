@@ -128,17 +128,61 @@ cantidad3
 cantidad4
 cantidad5
 cantidad6*/
+
+if ($this->input->post('result_test')!='') {
+    $result_test = $this->input->post('result_test');
+}else{
+    $result_test = null;
+}
+
+if ($this->input->post('cantidad1')!='') {
+    $cantidad1 = $this->input->post('cantidad1');
+}else{
+    $cantidad1 = null;
+}
+
+if ($this->input->post('cantidad2')!='') {
+    $cantidad2 = $this->input->post('cantidad2');
+}else{
+    $cantidad2 = null;
+}
+
+if ($this->input->post('cantidad3')!='') {
+    $cantidad3 = $this->input->post('cantidad3');
+}else{
+    $cantidad3 = null;
+}
+
+if ($this->input->post('cantidad4')!='') {
+    $cantidad4 = $this->input->post('cantidad4');
+}else{
+    $cantidad4 = null;
+}
+
+if ($this->input->post('cantidad5')!='') {
+    $cantidad5 = $this->input->post('cantidad5');
+}else{
+    $cantidad5 = null;
+}
+
+if ($this->input->post('cantidad6')!='') {
+    $cantidad6 = $this->input->post('cantidad6');
+}else{
+    $cantidad6 = null;
+}
+
+
         $data = array(
             'use_username' => $this->input->post('username'),
             'use_stu_datebirth' => $this->input->post('fecha_nac'),
-            'use_ls_id' => $this->input->post('result_test'),
+            'use_ls_id' => $result_text,
             'use_stu_level' => $this->input->post('nevel_ed'),
-            'use_ls_cant_V' => $this->input->post('cantidad1'),
-            'use_ls_cant_A' => $this->input->post('cantidad2'),
-            'use_ls_cant_R' => $this->input->post('cantidad3'),
-            'use_ls_cant_K' => $this->input->post('cantidad4'),
-            'use_ls_cant_G' => $this->input->post('cantidad5'),
-            'use_ls_cant_S' => $this->input->post('cantidad6'),
+            'use_ls_cant_V' => $cantidad1,
+            'use_ls_cant_A' => $cantidad2,
+            'use_ls_cant_R' => $cantidad3,
+            'use_ls_cant_K' => $cantidad4,
+            'use_ls_cant_G' => $cantidad5,
+            'use_ls_cant_S' => $cantidad6,
         );
         $data2 = array(
             'use_username' => $this->input->post('username'),

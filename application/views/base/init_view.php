@@ -27,7 +27,7 @@
                         <div class="">
                             <div class="text-center">
                                 <h1 class="froac">Federación de Repositorios de Objetos de Aprendizaje Colombia 
-                                    <img src="<?php echo base_url() ?>asset/img/logo2.png" alt="aca pondre el texto :D" width="50">
+                                    <img src="<?php echo base_url() ?>asset/img/logo2.png" alt="Logo de FROAC" width="50">
                                 </h1>
                             </div>
                         </div>

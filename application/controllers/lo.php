@@ -45,8 +45,8 @@ Class Lo extends CI_Controller {
         $params = implode("_", $arrayParams);
         $andParams = "('" . preg_replace('/_/', ' & ', $params) . "')";
         $orParams = "('" . preg_replace('/_/', ' | ', $params) . "')";
-        print_r($andParams);
-        print_r($orParams);
+       // print_r($andParams);
+       // print_r($orParams);
         $oasencontrados = $this->lo_model->get_oas_b($orParams,$andParams);
 
 
