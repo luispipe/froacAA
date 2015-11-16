@@ -36,11 +36,11 @@
             </div>
             <!--logo start-->
             <a href="index.html" class="logo tooltips" data-original-title="Federación de repositorios de objetos de aprendizaje Colombia." data-placement="right" ><span>FROAC</span></a>
-            <!--logo end-->
+            <!--logo end--><!--
             <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
+                 notification start 
                 <ul class="nav top-menu">
-                    <!-- settings start -->
+                     settings start 
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-tasks"></i>
@@ -122,8 +122,8 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- settings end -->
-                    <!-- inbox dropdown start-->
+                     settings end 
+                     inbox dropdown start
                     <li id="header_inbox_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-envelope-alt"></i>
@@ -187,8 +187,8 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- inbox dropdown end -->
-                    <!-- notification dropdown start-->
+                     inbox dropdown end 
+                     notification dropdown start
                     <li id="header_notification_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
@@ -240,10 +240,10 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- notification dropdown end -->
+                     notification dropdown end 
                 </ul>
-                <!--  notification end -->
-            </div>
+                  notification end 
+            </div>-->
             <div class="top-nav ">
                 <!--search & user info start-->
                 <ul class="nav pull-right top-menu">
@@ -257,8 +257,8 @@
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li><a href="<?php echo base_url()?>usuario/perfil"><i class=" icon-suitcase"></i> Perfil</a></li>
-                            <li><a href="#"><i class="icon-cog"></i> Ajustes</a></li>
-                            <li><a href="#"><i class="icon-bell-alt"></i> Noticias</a></li>
+                           <!-- <li><a href="#"><i class="icon-cog"></i> Ajustes</a></li>
+                            <li><a href="#"><i class="icon-bell-alt"></i> Noticias</a></li>-->
                             <li><a href="<?php echo base_url()?>sesion/logout"><i class="icon-key"></i> Salir</a></li>
                         </ul>
                     </li>

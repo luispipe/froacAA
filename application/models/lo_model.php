@@ -10,7 +10,7 @@ Class Lo_model extends CI_Model {
                     ts_rank_cd(campo_busqueda_index_col, query) AS rank
                     FROM lo, to_tsquery" . $andParams . "query
                         WHERE query @@ campo_busqueda_index_col
-                        ORDER BY rank DESC;"
+                        and lo_location is not null ORDER BY rank DESC;"
         );
 
         $orQuery = $this->db->query(
@@ -18,7 +18,7 @@ Class Lo_model extends CI_Model {
                     lo_keyword, lo_location,
                      ts_rank_cd(campo_busqueda_index_col, query) AS rank
                     FROM lo, to_tsquery" . $orParams . "query
-                        WHERE query @@ campo_busqueda_index_col
+                        WHERE query @@ campo_busqueda_index_col and lo_location is not null
                         ORDER BY rank DESC;"
         );
         $result = array();

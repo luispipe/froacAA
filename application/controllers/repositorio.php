@@ -309,8 +309,29 @@ class Repositorio extends CI_Controller{
                 }//if    
             }//for
         }//if
-        //$this->lista_repo();
+         $this->lista_repo();
     }
+
+// funcion que se encarga de actualizar la lista de repositorios 
+    public function lista_repo() {
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $content = array(
+                'username' => $session_data['username'],
+                "title" => "Lista Repositorios",
+                "titulo" => "Administrador",
+                "user" => $session_data['username'],
+                "main" => "shared_views/lista_rep_view",
+                "page" => "Registro",
+                "repos" => $this->repo_model->get_repo(),
+            );
+            $this->load->view('include/adm_template1', $content);
+        } else {
+            //If no session, redirect to login page
+            redirect('init', 'refresh');
+        }
+    }
+
     
     ///////////////////// GENERAL  /////////////
     function importGeneral($meta, $idrepository, $idlom) {

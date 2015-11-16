@@ -109,7 +109,7 @@
     });
 
 </script>
-
+<!--se borraron algunos campos que  estan implicitos en los formularoios  -->
 <script>
     $(function() {
         $('#tiporepositorio').change((function() {
@@ -121,7 +121,10 @@
 
             if ($('#tiporepositorio').val() == 'ROAp') {
                 $('#formulario').show();
+                 $('#formulario2').hide();
+                $('#formulario3').show();
                 $('#lhost').text("Host");
+               /*
                 $('#lmetadata').hide();
                 $('#metadata').hide();
                 $('#lpuerto').show();
@@ -133,13 +136,16 @@
                 $('#lcontrasena').show();
                 $('#contrasena').show();
                 $('#lperiodicidad').hide();
-                $('#periodicidad').hide();
+                $('#periodicidad').hide();*/
             }
             ;
 
             if ($('#tiporepositorio').val() == 'OAI') {
                 $('#formulario').show();
+                $('#formulario2').show();
+                $('#formulario3').hide();
                 $('#lhost').text("Enlace OAI");
+                /*
                 $('#lmetadata').show();
                 $('#metadata').show();
                 $('#lperiodicidad').show();
@@ -151,7 +157,7 @@
                 $('#lusuario').hide();
                 $('#usuario').hide();
                 $('#lcontrasena').hide();
-                $('#contrasena').hide();
+                $('#contrasena').hide();*/
             }
             ;
         }));
@@ -172,7 +178,7 @@
             <header><h3>Registro Repositorio</h3></header>
             <div class="module_content">                
                 <div class="col-lg-6">
-                  <div class="row">               
+                  <div class="row"><br><br>               
                     <label>
                         Tipo de Repositorio
                     </label>
@@ -192,12 +198,32 @@
                     <input type="text" class="form-control" name="entidad" id="entidad" /><br>
                     <label>Correo Electrónico</label><br>
                     <input type="email" autocomplete="@gmail.com" class="form-control" name="email" id="email"/><br>
-                    <label>URL</label>
+                    <label>URL</label><br<
                     <input type="text" class="form-control" name="url" id="url" /><br>
-                    <label id="lhost">Host</label>
+                    <!--SI  TIPO DE REPOSITORIO ES ROAp lhost = host, -->
+                    <!--SI  TIPO DE REPOSITORIO ES OAi lhost = Enlace OAi, -->
+                    <label id="lhost">Host</label><br>
                     <input type="text" class="form-control" name="host" id="host" /><br>
-                    <label id="lmetadata">Estandar de Metadatos</label>
-                    <input type="text" class="form-control" name="metadata" id="metadata" />
+                     <!--ESTA PARTE DE FORMULARIO SOLO APARECERA  CON OAi -->
+                    <div class="row">
+                    <div class="col-lg-12" id="formulario2" style="display: none;">
+                    <!--SELECT ENCARGADO DE LOS TIPOS DE ESTANDARES DE METADATOS -->
+                    <label id="lmetadata">Estandar de Metadatos</label><br>
+                    <select class="form-control" name="metadata"  id="metadata">
+
+                        <option selected="selected" value="">Seleccione Tipo Metadatos</option>
+                        <option value="lom">LOM</option>
+                        <option value="obaa">ABAA</option>
+                        <option value="cem">CEM</option>
+                        <option value="dc">DUBLIN CORE</option>
+                    </select><br>
+                    <label id="lperiodicidad">Periodicidad Actualizaciones (días)</label>
+                    <input type="text" class="form-control" id="periodicidad" name="periodicidad"><br>
+                    </div></div>
+
+                    <!--ESTA PARTE DE FORMULARIO SOLO APARECERA  CON ROAp -->
+                    <div class="row">
+                    <div class="col-lg-12" id="formulario3" style="display: none;">
                     <label id="lpuerto">Puerto</label><br>
                     <input type="text" class="form-control" name="puerto" id="puerto" /><br>
                     <label id="lbasededatos">Base De Datos</label><br>
@@ -206,20 +232,25 @@
                     <input type="text" class="form-control" name="usuario" id="usuario" /><br>
                     <label id="lcontrasena">Contraseña</label><br>
                     <input type="password" class="form-control" autocomplete="off" name="contrasena" id="contrasena" /><br>
-                    <label id="lperiodicidad">Periodicidad Actualizaciones (días)</label>
-                    <input type="text" class="form-control" id="periodicidad" name="periodicidad"><br>
+                    </div></div>
+
                     <label>Usuario repositorio</label><br>
+                     <select  class="form-control" id="usuariorepo" name="usuariorepo">
+                    <!--SE AGREGARON LOS CAMPOS  AL SELECT QUE DEFINEN EL TIPO DE USUARIO EN EL FORMULARIO DE NUEVO REPOSITORIO-->
+                    <!--PARA ROAp Y  OAi-->
 
-                    <select  class="form-control" id="usuariorepo" name="usuariorepo">
-                        <option value="0">--Seleccione un usuario--</option>
-
-                        <?php 
+                        <option selected="selected" value="0">--Seleccione un usuario--</option>
+                        <!--<option value="Administrador">Administrador</option>
+                        <option value="Profesor">Evaluador</option>-->
+                        
+                        <!--SE ENCARGA DE  MOSTRAR EN EL SELECT EL USERNAME DE LOS ADMINISTRADORES  Y AGEGARLO COMO OPCION -->
+                        <?php
                         foreach ($usuarios as $user) { ?>
                             <option value="<?php echo $user['use_username']; ?>"><?php echo $user['use_nombre'] . " " . $user['use_apellido']; ?></option>
                             <?php
                         }
                         ?>
-                    </select>
+                    </select><br>
 
                 </div>
                 </div>

@@ -9,13 +9,12 @@
             </header>
             <div class="panel-body">
                 <div class="row">
-<?php
-                    echo base64_decode($url);
-                   echo '<br>';
 
-?>
                     <!-- Esto es una prueba de vizualización de el objeto -->
-                    <iframe src="http://froac.manizales.unal.edu.co/roap/control/download.php?id=638" style="border: none; " width="100%" height="800px"></iframe>
+                    <center>
+                                            <iframe src="<?php echo base64_decode($url);?>" style="aling:center; border:hidden;" width="90%" height="600em"></iframe>
+
+                    </center>
 
                 </div>
             </div>

@@ -33,7 +33,7 @@
                 <div data-original-title="Oculta barra lateral" data-placement="right" class="icon-reorder tooltips"></div>
             </div>    
             <!--logo start-->
-            <a href="index.html" class="logo tooltips" data-original-title="Federación de repositorios de objetos de aprendizaje Colombia." data-placement="right" ><span>FROAC</span></a>
+            <a href="<?php echo base_url()?>" class="logo tooltips" data-original-title="Federación de repositorios de objetos de aprendizaje Colombia." data-placement="right" ><span>FROAC</span></a>
             <!--logo end-->
             <!--<div class="nav notify-row" id="top_menu">
                   notification start 

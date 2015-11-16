@@ -33,9 +33,9 @@ if ($sess == 1) {
                             <a onclick="verMetadata('<?php echo $key['lo_id'] . '/' . $key['rep_id'] ?>')" class="btn btn-sm btn-info" data-toggle="modal" href="#dialog_medatada" txt="OA1">
                                 <li class="icon-eye-open"></li> Ver metadatos
                             </a>
-    <!--
-                            <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores" txt="OA2">
-                                <li class="icon-eye-open"></li> Ver Indicadores
+    
+                          <!--  <a onclick="verIndicadores('<?php echo $key['lo_id'] . '/' . $key['rep_id'] . '/' . $user; ?>','<?php echo $key['rank']?>')" class="btn btn-warning btn-sm" data-toggle="modal" href="#dialog_indicaores" txt="OA2">
+                                <li class="icon-eye-open"></li> Ver Indicadores 
                             </a>-->
                         </div>
                     </div>

@@ -35,7 +35,8 @@
                                                 if ($session_data ['username'] == "admin")
                                                 {?>
                                                     <li><a href="<?php echo base_url()?>repositorio/modificar_repo/<?php echo $key['rep_id'] ?>"> <i class="icon-file-text-alt"></i>Modificar </span></a></li>
-                                                    <form autocomplete="off" action="<?php echo base_url() ?>index.php/repositorio/actualizar_oas/" method="post" enctype="multipart/form-data">
+                                                    <!-- el action  se le cambio la direccion para que actualizara-->
+                                                    <form autocomplete="off" action="<?php echo base_url() ?>index.php/repositorio/lista/" method="post" enctype="multipart/form-data">
                                                         <input type="hidden" id="idrepository" name="idrepository" value="<?php echo $key['rep_id']; ?>" />
                                                         <input type="hidden" id="lastupdate" name="lastupdate" value="<?php echo $key['rep_lastupdate']; ?>" />
                                                         <input type="hidden" id="cadenaoai" name="cadenaoai" value="<?php echo $key['rep_host']; ?>" />
@@ -47,10 +48,14 @@
                                                             <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1"/>Todo<br/> <br/>
                                                             <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2" checked="TRUE"/>Desde: <?php echo $key['rep_lastupdate'] ?> <br/><br/>
                                                             <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="3"/>Rango de Fechas:<br/><br/>
-                                                            Inicio:<input class="form-control" id="fechainicio"type="text"  value="" name="fechainicio" /><br/><br/>
-                                                            Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="fechafin" type="text" value="" name="fechafin" />
+                                                            <!-- SE CAMBIO EL TIPO DE TECT A DATE -->
+                                                            Inicio:<input class="form-control" id="fechainicio"type="date"  value="" name="fechainicio" /><br/><br/>
+                                                            <!-- SE CAMBIO EL TIPO DE TECT A DATE -->
+                                                            Fin:&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control" id="fechafin" type="date" value="" name="fechafin" />
                                                             <br/>
-                                                            <button input class="btn btn-info pull-right r-activity" id="refreshbu" width="16px"  height="16px"  type="submit" value="Guardar" class="alt_btn"><img  src="<?php echo base_url() ?>css/adm/images/refresh.jpg"/></button>
+                                                            <!-- SE ELIMINO LA ETIQUETA DE IMAGEN PARA EL  BOTON Y SE LE AGREGO ACTUALIZAR -->
+                                                            <button input class="btn btn-info pull-right r-activity" id="refreshbu" width="16px"  height="16px"  
+                                                            type="submit" value="Guardar" class="alt_btn">ACTUALIZAR</button>
                                                            
                                                          
                                                             </div>

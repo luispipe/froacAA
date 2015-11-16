@@ -32,7 +32,7 @@
         <div class="container">
             <form class="form-signin" action="<?php echo base_url()?>index.php/sesion" method="POST">
                 <p class="form-signin-heading">Federación de Repositorios de Objetos de Aprendizaje Colombia <br><br>
-                    <img src="<?php echo base_url() ?>asset/img/logo2.png" alt="aca pondre el texto :D" width="50"></p>
+                    <img src="<?php echo base_url() ?>asset/img/logo2.png" alt="logo FROAC" width="50"></p>
                 <div class="login-wrap">
                     <input type="text" class="form-control" placeholder="E-mail" name="username" autofocus>
                     <input type="password" class="form-control" name="password" placeholder="Password">

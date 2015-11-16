@@ -252,7 +252,8 @@ hidden<script type="text/javascript">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="fecha_nac">Fecha de nacimiento:</label>
-                                                    <input data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Selecciona año, mes y día" required>
+                                                    <!--<input data-date-viewmode="years" data-date-format="dd-mm-yyyy" type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Selecciona año, mes y día" required>-->
+                                                    <input  type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Selecciona año, mes y día" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="mail">E-mail:</label>

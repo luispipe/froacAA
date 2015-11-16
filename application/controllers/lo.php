@@ -20,7 +20,6 @@ Class Lo extends CI_Controller {
             $params = substr($params, 0, -1);
         }
 
-
         //$params = $this->limpiar($params);
         $arrayParams = explode("_", $params);
 
@@ -45,12 +44,20 @@ Class Lo extends CI_Controller {
         $params = implode("_", $arrayParams);
         $andParams = "('" . preg_replace('/_/', ' & ', $params) . "')";
         $orParams = "('" . preg_replace('/_/', ' | ', $params) . "')";
+        $content = array(
+            "result" => $this->lo_model->get_oas_b($orParams,$andParams),
+            "palabras" => $palabras,
+            "sess" => $sess,
+            "user" => $user
+        ); 
+        $this->load->view("base/result_view",$content);
+    }
        // print_r($andParams);
        // print_r($orParams);
-        $oasencontrados = $this->lo_model->get_oas_b($orParams,$andParams);
+     //   $oasencontrados = $this->lo_model->get_oas_b($orParams,$andParams);
 
 
-        if ($this->session->userdata ( 'logged_in' )) {
+       /* if ($this->session->userdata ( 'logged_in' )) {
             $d = 0;
             //print_r($oasencontrados);
             //echo ($oasencontrados[0][0]);
@@ -81,9 +88,8 @@ Class Lo extends CI_Controller {
         }
         //print_r($oasencontrados);
 
-        $this->load->view("base/result_view",$content);
-    }
-
+        $this->load->view("base/result_view",$content);*/
+    
 
     public function limpiar($cadena) {
         $no_permitidas = array("á", "é", "í", "ó", "ú", "Á", "É", "Í", "Ó", "Ú", "ñ", "À", "Ã", "Ì", "Ò", "Ù", "Ã™", "Ã ", "Ã¨", "Ã¬", "Ã²", "Ã¹", "ç", "Ç", "Ã¢", "ê", "Ã®", "Ã´", "Ã»", "Ã‚", "ÃŠ", "ÃŽ", "Ã”", "Ã›", "ü", "Ã¶", "Ã–", "Ã¯", "Ã¤", "«", "Ò", "Ã", "Ã„", "Ã‹");

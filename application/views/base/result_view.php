@@ -19,7 +19,7 @@ if ($sess == 1) {
         </header>
         <div class="panel-body">
             <?php
-            #echo var_dump($result);
+            #echo var_dump($result[0]);
             if (!empty($result[0])) {
                 foreach ($result[0] as $key) {
                     $url = base64_encode($key['lo_location']);
@@ -100,7 +100,7 @@ if ($sess == 1) {
     </section>
     <!-- page end-->
 </div>
-<div class="col-lg-3" id="recomendacion">
+<!--<div class="col-lg-3" id="recomendacion">
     <script>
         //Script para mostrar recomendación
         $(document).ready(function(){
@@ -114,7 +114,7 @@ if ($sess == 1) {
 
     </script>
 
-</div>
+</div>-->
 
 <!-- Modal Metadata -->
 <div class="modal fade" id="dialog_medatada"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
