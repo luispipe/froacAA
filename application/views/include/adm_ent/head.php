@@ -14,7 +14,7 @@
         <script src="<?php echo base_url() ?>css/adm_ent/js/jquery-1.9.1.js" type="text/javascript"></script>
         <link rel="stylesheet" href="<?php echo base_url() ?>css/adm_ent/css/south-street/jquery-ui-1.10.3.custom.css" type="text/css" media="screen"/>
         <script src="<?php echo base_url() ?>css/adm_ent/js/jquery-ui-1.10.3.custom.js" type="text/javascript"></script>
-        <link href="<?php echo base_url() ?>/css/froac/images/frog.png" rel="icon" />
+         <link href="<?php echo base_url() ?>/img/frog1.png" rel="icon" />
         <script src="<?php echo base_url() ?>css/adm_ent/js/hideshow.js" type="text/javascript"></script>
         <script src="<?php echo base_url() ?>css/adm_ent/js/jquery.tablesorter.min.js" type="text/javascript"></script>
 
@@ -77,7 +77,7 @@
                 $('.column').equalHeight();
             });
         </script>
-
+ <link href="<?php echo base_url() ?>/asset/img/frog1.png" rel="icon" />
     </head>
 
 

@@ -6,7 +6,9 @@
         <meta name="description" content="">
         <meta name="author" content="Mosaddek">
         <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-        <link rel="shortcut icon" href="img/favicon.png">
+        <link href="<?php echo base_url() ?>/img/frog1.png" rel="shortcut icon" />
+        <!--<link rel="shortcut icon" href="img/favicon.png">
+-->
 
         <title>FROAC</title>
 
@@ -27,6 +29,7 @@
           <script src="<?php echo base_url() ?>asset/js/html5shiv.js"></script>
           <script src="<?php echo base_url() ?>asset/js/respond.min.js"></script>
         <![endif]-->
+         <link href="<?php echo base_url() ?>/asset/img/frog1.png" rel="icon" />     
     </head>
 
     <body>

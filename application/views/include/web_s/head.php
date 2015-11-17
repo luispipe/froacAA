@@ -99,7 +99,7 @@
 
             });
         </script> 
-        <link href="<?php echo base_url() ?>/css/froac/images/frog.png" rel="icon" />
+         <link href="<?php echo base_url() ?>/asset/img/frog1.png" rel="icon" />
 
     </head>
     <body>
