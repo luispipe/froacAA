@@ -6,6 +6,7 @@ class Usuario_model extends CI_Model {
         parent::__construct();
     }
 
+
     function get_usr_data($username) {
 
         $this->db->select('use_username, use_nombre, use_rol_id');
@@ -22,11 +23,14 @@ class Usuario_model extends CI_Model {
 
     function get_all_usr_data($username) {
        $query = $this->db->query("select users.use_username, users.use_nombre, users.use_email, users.use_fecha_registro,users.use_apellido, use_rol.use_rol_nombre, use_rol.use_rol_id, 
-use_student.use_stu_datebirth, use_level.use_level 
-from users  inner join use_student on use_student.use_username=users.use_username
+use_student.use_stu_datebirth, use_level.use_level, use_ls.use_ls_learningstyle, use_ls.use_ls_description
+from users  
+inner join use_student on use_student.use_username=users.use_username
 inner join use_level on cast(use_level.use_id_level as text)=use_student.use_stu_level
+left join use_ls on use_ls.use_ls_id=use_student.use_ls_id
 inner join use_rol on use_rol.use_rol_id=users.use_rol_id
 where users.use_username='".$username."'");
+
 
         return $query->result_array();
     }
@@ -68,18 +72,18 @@ where users.use_username='".$username."'");
     }
     
     function get_rol($username) {
-    	$this->db->select('use_rol_id');
-    	$this->db->from('users');
-    	$this->db->where('use_username', $username);
-    	$this->db->limit(1);
+        $this->db->select('use_rol_id');
+        $this->db->from('users');
+        $this->db->where('use_username', $username);
+        $this->db->limit(1);
 
-    	$query = $this->db->get();
+        $query = $this->db->get();
 
-    	if ($query->num_rows() == 1) {
-    		return $query->result_array();
-    	} else {
-    		return false;
-    	}
+        if ($query->num_rows() == 1) {
+            return $query->result_array();
+        } else {
+            return false;
+        }
     }
 
 
@@ -175,7 +179,7 @@ if ($this->input->post('cantidad6')!='') {
         $data = array(
             'use_username' => $this->input->post('username'),
             'use_stu_datebirth' => $this->input->post('fecha_nac'),
-            'use_ls_id' => $result_text,
+            'use_ls_id' => $result_test,
             'use_stu_level' => $this->input->post('nevel_ed'),
             'use_ls_cant_V' => $cantidad1,
             'use_ls_cant_A' => $cantidad2,
@@ -183,6 +187,8 @@ if ($this->input->post('cantidad6')!='') {
             'use_ls_cant_K' => $cantidad4,
             'use_ls_cant_G' => $cantidad5,
             'use_ls_cant_S' => $cantidad6,
+            'use_etnica' => $this->input->post('etnica'),
+            'use_institution'=> $this->input->post('institution_username'),
         );
         $data2 = array(
             'use_username' => $this->input->post('username'),
@@ -204,11 +210,21 @@ if ($this->input->post('cantidad6')!='') {
   
         $data = array(
             'use_pre_id' => $pref,
-            'use_username' => $id
+            'use_username' => $id,
         );
         $this->db->insert('use_pre_stu', $data);
     }
 
+    //Guarda cada una de las discapacidades del estudiante en la tabla "use_dissability_stu"
+
+    public function insert_dissability($dissability, $id) {
+  
+        $data = array(
+            'use_dissability_id' => $dissability,
+            'use_username' => $id,
+        );
+        $this->db->insert('use_dissability_stu', $data);
+    }
     //Si el usuario tiene una NEED se actualiza
 
     public function has_need($username){
@@ -246,6 +262,15 @@ if ($this->input->post('cantidad6')!='') {
         return $query->result();
     }
 
+     // Se obtienen los registros de las discapacidades que hay en la tabla "use_dissabilities"
+
+    public function get_dissabilities() {
+
+        $query = $this->db->get('use_dissabilities');
+
+        return $query->result();
+    }
+
 
     // Se obtienen los registros de las preferencias que hay en la tabla "use_level"
 
@@ -269,6 +294,14 @@ if ($this->input->post('cantidad6')!='') {
         return $query->result();
     }
 
+     public function get_discapacidad_est($user) {
+        $this->db->select('*');
+        $this->db->from('use_dissability_stu');
+        $this->db->where('use_username', $user);
+        $this->db->join('use_dissabilities', 'use_dissability_stu.use_dissability_id = use_dissabilities.use_dissability_id');
+        $query = $this->db->get();
+        return $query->result();
+    }
 
     public function update_user($username){
         $data1 = array(
@@ -340,6 +373,26 @@ if ($this->input->post('cantidad6')!='') {
         return $query->result_array();
     }
 
+    /*
+    function update_test($estilo,$cant_V,$cant_A,$cant_R,$cant_K,$cant_G,$cant_S, $id) {
+
+        $data = array(
+            'use_ls_id' => $estilo
+            'use_ls_cant_V' => $cant_V
+            'use_ls_cant_R' => $cant_R
+            'use_ls_cant_A' => $cant_A
+            'use_ls_cant_K' => $cant_K
+            'use_ls_cant_G' => $cant_G
+            'use_ls_cant_S' => $cant_S
+        );
+
+        $this->db->where('use_username', $id);
+        $this->db->update('use_student', $data);
+    }
+
+
+
+*/
 
 
 

@@ -36,8 +36,7 @@
                                                 {?>
                                                     <li><a href="<?php echo base_url()?>repositorio/modificar_repo/<?php echo $key['rep_id'] ?>"> <i class="icon-file-text-alt"></i>Modificar </span></a></li>
                                                     <!-- el action  se le cambio la direccion para que actualizara-->
-                                                    <form autocomplete="off" action="<?php echo base_url() ?>index.php/repositorio/lista/" method="post" enctype="multipart/form-data">
-                                                        <input type="hidden" id="idrepository" name="idrepository" value="<?php echo $key['rep_id']; ?>" />
+                                                    <form autocomplete="off" action="<?php echo base_url() ?>index.php/repositorio/actualizar_oas/" method="post" enctype="multipart/form-data">                                                        <input type="hidden" id="idrepository" name="idrepository" value="<?php echo $key['rep_id']; ?>" />
                                                         <input type="hidden" id="lastupdate" name="lastupdate" value="<?php echo $key['rep_lastupdate']; ?>" />
                                                         <input type="hidden" id="cadenaoai" name="cadenaoai" value="<?php echo $key['rep_host']; ?>" />
                                                         <input type="hidden" id="metadata" name="metadata" value="<?php echo $key['rep_metadata_inf']; ?>" />  
@@ -45,8 +44,8 @@
                                                         
                                                             <div  id="actualizaroa<?php echo $i; ?>">
                                                             <br>
-                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1"/>Todo<br/> <br/>
-                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2" checked="TRUE"/>Desde: <?php echo $key['rep_lastupdate'] ?> <br/><br/>
+                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="1" checked="TRUE"/>Todo<br/> <br/>
+                                                            <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="2"/>Desde: <?php echo $key['rep_lastupdate'] ?> <br/><br/>
                                                             <input type="radio" id="actualizar<?php echo $i; ?>" name="actualizar" value="3"/>Rango de Fechas:<br/><br/>
                                                             <!-- SE CAMBIO EL TIPO DE TECT A DATE -->
                                                             Inicio:<input class="form-control" id="fechainicio"type="date"  value="" name="fechainicio" /><br/><br/>

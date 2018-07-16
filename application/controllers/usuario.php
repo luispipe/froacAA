@@ -1,3 +1,6 @@
+
+
+
 <?php
 
 //Clase Usuario, encargada de todas las operaciones y 
@@ -18,34 +21,119 @@ class Usuario extends CI_Controller {
         $this->load->view('base/login_view');
     }
     
-//metodo que carga la vista acerca
+///metodo que carga la vista acerca
     public function acerca() {
-        $content = array(
-            "main_view" => "shared_views/acerca_view",
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $rol = $this->usuario_model->get_rol ( $session_data ['username'] );
+            if ($rol [0] ['use_rol_id'] == 2) {
+                $content = array(
+                "main_view" => "shared_views/acerca_view",
+
+
+
                 "encabezado" => "Acerca de",
                 "url" => "usuario/acerca/"
-        );
+                );
+ 
+        $this->load->view('base/est_template', $content);
+    }
+    else{
+        $content = array(
+                "main_view" => "shared_views/acerca_view",
+                "encabezado" => "Acerca de",
+                "url" => "usuario/acerca/"
+                );
+ 
         $this->load->view('base/base_template', $content);
+
+    }
+} else {
+            $content = array(
+                "main_view" => "shared_views/acerca_view",
+                "encabezado" => "Acerca de",
+                "url" => "usuario/acerca/"
+                );
+ 
+        $this->load->view('base/base_template', $content);
+        }
+    }
+
+//metodo que carga el test de estilos de aprendizaje
+
+    public function estilos() {
+        $content = array(
+            "main_view" => "shared_views/estilos_view",
+                "encabezado" => "Test Estilos de Aprendizaje",
+                "url" => "usuario/estilos/"
+        );
+        $this->load->view('base/est_template', $content);
     }
 
 //metodo que carga el equipo de trabajo de froac
     public function equipo() {
-         $content = array(
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $rol = $this->usuario_model->get_rol ( $session_data ['username'] );
+            if ($rol [0] ['use_rol_id'] == 2) {
+                $content = array(
+                "main_view" => "shared_views/equipo_view",
+                "encabezado" => "Equipo FROAC",
+                "url" => "usuario/equipo/"
+            );
+                $this->load->view('base/est_template', $content);
+    }
+    else{
+        $content = array(
                 "main_view" => "shared_views/equipo_view",
                 "encabezado" => "Equipo FROAC",
                 "url" => "usuario/equipo/"
             );
                 $this->load->view('base/base_template', $content);
-            }
+
+    }
+} else {
+            $content = array(
+                "main_view" => "shared_views/equipo_view",
+                "encabezado" => "Equipo FROAC",
+                "url" => "usuario/equipo/"
+            );
+                $this->load->view('base/base_template', $content);
+        }
+    }
+         
+            
 
     public function glosario() {
-            $content = array(
+        if ($this->session->userdata('logged_in')) {
+            $session_data = $this->session->userdata('logged_in');
+            $rol = $this->usuario_model->get_rol ( $session_data ['username'] );
+            if ($rol [0] ['use_rol_id'] == 2) {
+                $content = array(
                 "main_view" => "shared_views/glosario_view",
-                "encabezado" => "GLosario",
+                "encabezado" => "Glosario",
+                "url" => "usuario/glosario/"
+            );
+                $this->load->view('base/est_template', $content);
+    }
+    else{
+        $content = array(
+                "main_view" => "shared_views/glosario_view",
+                "encabezado" => "Glosario",
                 "url" => "usuario/glosario/"
             );
                 $this->load->view('base/base_template', $content);
-            }
+
+    }
+} else {
+             $content = array(
+                "main_view" => "shared_views/glosario_view",
+                "encabezado" => "Glosario",
+                "url" => "usuario/glosario/"
+            );
+                $this->load->view('base/base_template', $content);
+        }
+    }
 
     //Metodo que carga la pagina de inicio de sesión
     public function login() {
@@ -58,9 +146,23 @@ class Usuario extends CI_Controller {
             redirect(base_url(), 'refresh');//Definir que pasa si ya esta loggeado
         } else {
             $content = array(
+                "dissabilities" => $this->usuario_model->get_dissabilities(), 
                 "preferencias" => $this->usuario_model->get_preferencias(), 
                 "nivel_educativo" => $this->usuario_model->get_nivel_educativo(),
                 "main_view" => "register/registro_view"
+            );
+            $this->load->view('base/base_template', $content);
+        }
+    }
+
+    public function busqueda(){
+        if ($this->session->userdata('logged_in')) {
+            redirect(base_url(), 'refresh');//Definir que pasa si ya esta loggeado
+        } else {
+            $content = array(
+                "preferencias" => $this->usuario_model->get_preferencias(), 
+                "nivel_educativo" => $this->usuario_model->get_nivel_educativo(),
+                "main_view" => "shared_views/busqueda_avanzada_view"
             );
             $this->load->view('base/base_template', $content);
         }
@@ -169,7 +271,24 @@ class Usuario extends CI_Controller {
         $this->login();
 
     }
+/*
+    public function xml_service(){
 
+        $this->load->view('shared_views/xml_service');
+    }
+
+    
+    public function search_service($params){
+        $content = array(
+            "main_view" => "shared_views/service_view",
+                "encabezado" => "This XML file does not appear to have any style information associated with it. The document tree is shown below.",
+                "url" => "usuario/search_service/"
+                "metadatos"=> $this->usuario_model->get_metadatos($params);
+        );
+            $this->load->view('base/base_template', $content);
+    }
+
+*/
     public function editar_usr(){
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
@@ -288,11 +407,13 @@ class Usuario extends CI_Controller {
     // en la tabla usuario y estudiante
 
     public function guardar() {
-
         $this->usuario_model->guardar_estudiante();
         foreach ($_POST['pref'] as $key => $value) {
             $this->usuario_model->insert_pref($value, $this->input->post('username'));
-        }
+        };
+       foreach ($_POST['dissabilities'] as $key => $value) {
+            $this->usuario_model->insert_dissability($value, $this->input->post('username'));
+        };
         if($_POST["necesidadespecial"]!=""){
             $this->usuario_model->has_need($this->input->post('username'));
             $need_vision = null;
@@ -685,6 +806,77 @@ cadena y enviar al modelo estos valores
 
        }
    }
+
+
+   /*
+    public function up_test() {
+        $cant_V = 0;
+        $cant_A = 0;
+        $cant_R = 0;
+        $cant_K = 0;
+
+        $cant_G = 0;
+        $cant_S = 0;
+
+        for ($i = 1; $i <= 13; $i++) {
+            if ($this->input->post($i) == 'V')
+                $cant_V++;
+
+            if ($this->input->post($i) == 'A')
+                $cant_A++;
+
+            if ($this->input->post($i) == 'R')
+                $cant_R++;
+
+            if ($this->input->post($i) == 'K')
+                $cant_K++;
+        }
+        
+        //GLOBAL _ SECUENCIAL 
+
+        for ($j = 49; $j <= 70; $j++) {
+            if ($this->input->post($j) == 'G')
+                $cant_G++;
+            if ($this->input->post($j) == 'S')
+                $cant_S++;
+        }
+
+
+        $puntaje = 0;
+        if ($cant_V >= $cant_A && $cant_V >= $cant_R && $cant_V >= $cant_K) {
+            $mayor = 7; //Visual
+            $puntaje = $cant_V;
+        } else
+        if ($cant_A >= $cant_V && $cant_A >= $cant_R && $cant_A >= $cant_K) {
+            $mayor = 1; //Auditivo
+            $puntaje = $cant_A;
+        } else
+        if ($cant_R >= $cant_V && $cant_R >= $cant_A && $cant_R >= $cant_K) {
+            $mayor = 5; //Lector
+            $puntaje = $cant_R;
+        } else
+        if ($cant_K >= $cant_R && $cant_K >= $cant_V && $cant_K >= $cant_A) {
+            $mayor = 3; //kinestesico
+            $puntaje = $cant_K;
+        }
+
+        if ($cant_G >= $cant_S) {
+            $mayor = $mayor + 0; //Global
+            $puntaje = $puntaje . '-' . $cant_G;
+        } else {
+            $mayor = $mayor + 1; //Secuencial
+            $puntaje = $puntaje . ' - ' . $cant_S;
+        }
+
+       $this->usuario_model->update_test($mayor,$cant_V,$cant_A,$cant_R,$cant_K,$cant_G,$cant_S,  $session_data['username']);
+        else{
+                        //If no session, redirect to login page
+            redirect('init', 'refresh');
+            
+        }
+     
+    }*/
+
 
   
     

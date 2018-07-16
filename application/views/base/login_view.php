@@ -31,8 +31,23 @@
 
         <div class="container">
             <form class="form-signin" action="<?php echo base_url()?>index.php/sesion" method="POST">
+                <?php
+                   if(isset($_GET['usr']) && isset($_GET['pass'])){
+               ?>
+                       <div class="login-wrap">
+                           <input type="text" class="form-control" placeholder="E-mail" name="username" value="<?php echo base64_decode($_GET['usr']) ?>" autofocus>
+                           <input type="password" class="form-control" name="password" value="<?php echo base64_decode($_GET['pass']) ?>" placeholder="Password">
+                       </div>
+                       <script type="text/javascript">
+                           document.getElementById('reg_dir').submit();
+                       </script>
+               <?php
+                   }else{
+               ?>
                 <p class="form-signin-heading">Federación de Repositorios de Objetos de Aprendizaje Colombia <br><br>
-                    <img src="<?php echo base_url() ?>asset/img/logo2.png" alt="logo FROAC" width="50"></p>
+                    <img src="<?php echo base_url() ?>asset/img/logo2.png" alt="aca pondre el texto :D" width="50"></p>
+                <?php echo validation_errors(); ?>
+                <?php echo form_open('sesion'); ?>
                 <div class="login-wrap">
                     <input type="text" class="form-control" placeholder="E-mail" name="username" autofocus>
                     <input type="password" class="form-control" name="password" placeholder="Password">
@@ -58,7 +73,9 @@
                     </div>
 
                 </div>
-
+                <?php
+                   }
+               ?>
 
             </form>
 

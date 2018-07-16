@@ -29,9 +29,3 @@ $('#2').hide();
 
 <?php if($user){$sess = 1; $usr = $user;}else{ $sess = 0; $usr=0;} ?>
         
-
-
-    
-    </section>
-</section>
-<!--main content end-->

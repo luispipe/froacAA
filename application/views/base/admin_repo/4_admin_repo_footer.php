@@ -1,16 +1,21 @@
 
-      <!--footer start
-      <footer class="site-footer">
-          <div class="text-center">
-              2014 | FROAC.
-              <a href="#" class="go-top">
-                  <i class="icon-angle-up"></i>
-              </a>
-          </div>
-      </footer>
+      <!--footer start-->
+      <footer class="container">             
+        <center>
+        <div>
+            <a rel="nofollow" href="http://www.tawdis.net/system/modules/org.fundacionctic.taw4_wcag_informes_ocms/elements/wcag20/resumen.jsp" title="Análisis de la accesibilidad de la página con TAW"><img style="border: 0; width: 60px; height: 31px;margin-left: 185px" src="asset/img/taw.png" alt="TAW. Nivel doble A. WCAG 1.0 WAI"></a>
+            <a href="http://www.w3.org/WAI/WCAG1AA-Conformance"
+                title="Explicación del Nivel Doble-A de 
+                Conformidad">
+                <img height="32" style="margin-left:20px;" width="88" 
+                src="http://www.w3.org/WAI/wcag1AA-blue"
+                alt="Icono de conformidad con el Nivel Doble-A, 
+                de las Directrices de Accesibilidad para el 
+                Contenido Web 1.0 del W3C-WAI"></a>
+        </div>
+    </footer>
       <!--footer end-->
   </section>
-
     <!-- js placed at the end of the document so the pages load faster -->
     
     <script src="<?php echo base_url()?>asset/js/bootstrap.min.js"></script>

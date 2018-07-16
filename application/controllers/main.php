@@ -34,7 +34,21 @@ class Main extends CI_Controller {
 
 
 	public function index() {
-		if ($this->session->userdata ( 'logged_in' )) {
+        
+        if(isset($_GET['usr']) && isset($_GET['pass'])){
+           $this->load->view('base/login/login_view');
+       }
+       elseif (isset($_GET['raim'])) {
+           $this->load->view('shared_views/service_raim_view');
+       }
+       elseif (isset($_GET['raim_brazil'])) {
+           $this->load->view('shared_views/service_raim_brazil_view');
+       }
+
+       elseif (isset($_GET['val'])) {
+           $this->load->view('shared_views/service_view');
+       }
+		elseif ($this->session->userdata ( 'logged_in' )) {
 			$session_data = $this->session->userdata ( 'logged_in' );
             $route = $this->verify_usr( $session_data ['username']);
 			$content = array (

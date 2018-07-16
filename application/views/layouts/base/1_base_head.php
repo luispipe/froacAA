@@ -6,8 +6,8 @@
         <meta name="description" content="">
         <meta name="author" content="Mosaddek">
         <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-         <link href="<?php echo base_url() ?>/img/frog1.png" rel="shortcut icon" />
-        <!--<link rel="shortcut icon" href="img/favicon.png">-->
+        <link rel="shortcut icon" href="img/favicon.png">
+         <link href="<?php echo base_url() ?>/asset/img/frog1.png" rel="icon" />
         <title>FROAC</title>
 
         <!-- Bootstrap core CSS -->
@@ -22,13 +22,13 @@
         <link href="<?php echo base_url() ?>asset/css/style-responsive.css" rel="stylesheet" />
         <script src="<?php echo base_url() ?>asset/js/jquery.js"></script>
         <script src="<?php echo base_url() ?>asset/js/jquery-1.8.3.min.js"></script>
+        <script src="<?php echo base_url() ?>asset/js/modifyStyle.js"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
         <!--[if lt IE 9]>
           <script src="js/html5shiv.js"></script>
           <script src="js/respond.min.js"></script>
 
         <![endif]-->
-          <link href="<?php echo base_url() ?>/asset/img/frog1.png" rel="icon" />
     </head>
 
     <body>

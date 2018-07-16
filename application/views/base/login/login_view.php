@@ -36,7 +36,7 @@
                 <?php echo validation_errors(); ?>
                 <?php echo form_open('sesion'); ?>
                 <div class="login-wrap">
-                    <input type="text" class="form-control" placeholder="E-mail" name="username" autofocus>
+                    <input type="text" class="form-control" placeholder="Username" name="username" autofocus>
                     <input type="password" class="form-control" name="password" placeholder="Password">
                     <label class="checkbox">
                         <input type="checkbox" value="remember-me"> Recordarme

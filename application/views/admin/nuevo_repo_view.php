@@ -121,22 +121,12 @@
 
             if ($('#tiporepositorio').val() == 'ROAp') {
                 $('#formulario').show();
-                 $('#formulario2').hide();
+                $('#formulario2').hide();
                 $('#formulario3').show();
                 $('#lhost').text("Host");
-               /*
-                $('#lmetadata').hide();
-                $('#metadata').hide();
-                $('#lpuerto').show();
-                $('#puerto').show();
-                $('#lbasededatos').show();
-                $('#basededatos').show();
-                $('#lusuario').show();
-                $('#usuario').show();
-                $('#lcontrasena').show();
-                $('#contrasena').show();
-                $('#lperiodicidad').hide();
-                $('#periodicidad').hide();*/
+
+
+                
             }
             ;
 
@@ -145,19 +135,8 @@
                 $('#formulario2').show();
                 $('#formulario3').hide();
                 $('#lhost').text("Enlace OAI");
-                /*
-                $('#lmetadata').show();
-                $('#metadata').show();
-                $('#lperiodicidad').show();
-                $('#periodicidad').show();
-                $('#lpuerto').hide();
-                $('#puerto').hide();
-                $('#lbasededatos').hide();
-                $('#basededatos').hide();
-                $('#lusuario').hide();
-                $('#usuario').hide();
-                $('#lcontrasena').hide();
-                $('#contrasena').hide();*/
+                
+                
             }
             ;
         }));
@@ -178,11 +157,13 @@
             <header><h3>Registro Repositorio</h3></header>
             <div class="module_content">                
                 <div class="col-lg-6">
-                  <div class="row"><br><br>               
+                  <div class="row"> <br><br>              
                     <label>
                         Tipo de Repositorio
                     </label>
+
                     <select class="form-control" name="tiporepositorio"  id="tiporepositorio">
+
                         <option selected="selected" value="">Seleccione Tipo</option>
                         <option value="ROAp">ROAp</option>
                         <option value="OAI">OAI</option>
@@ -192,21 +173,26 @@
 
                 <div class="row">
                 <div class="col-lg-12" id="formulario" style="display: none;">
+
                     <label>Nombre</label><br>
                     <input type="text" class="form-control" name="nombrerepositorio" id="nombrerepositorio" /><br>
                     <label>Entidad</label><br>
                     <input type="text" class="form-control" name="entidad" id="entidad" /><br>
                     <label>Correo Electrónico</label><br>
                     <input type="email" autocomplete="@gmail.com" class="form-control" name="email" id="email"/><br>
-                    <label>URL</label><br<
+                    <label>URL</label><br>
                     <input type="text" class="form-control" name="url" id="url" /><br>
                     <!--SI  TIPO DE REPOSITORIO ES ROAp lhost = host, -->
                     <!--SI  TIPO DE REPOSITORIO ES OAi lhost = Enlace OAi, -->
                     <label id="lhost">Host</label><br>
                     <input type="text" class="form-control" name="host" id="host" /><br>
-                     <!--ESTA PARTE DE FORMULARIO SOLO APARECERA  CON OAi -->
+
+                    <!--ESTA PARTE DE FORMULARIO SOLO APARECERA  CON OAi -->
                     <div class="row">
                     <div class="col-lg-12" id="formulario2" style="display: none;">
+
+                   
+                    
                     <!--SELECT ENCARGADO DE LOS TIPOS DE ESTANDARES DE METADATOS -->
                     <label id="lmetadata">Estandar de Metadatos</label><br>
                     <select class="form-control" name="metadata"  id="metadata">
@@ -217,6 +203,7 @@
                         <option value="cem">CEM</option>
                         <option value="dc">DUBLIN CORE</option>
                     </select><br>
+
                     <label id="lperiodicidad">Periodicidad Actualizaciones (días)</label>
                     <input type="text" class="form-control" id="periodicidad" name="periodicidad"><br>
                     </div></div>
@@ -240,8 +227,6 @@
                     <!--PARA ROAp Y  OAi-->
 
                         <option selected="selected" value="0">--Seleccione un usuario--</option>
-                        <!--<option value="Administrador">Administrador</option>
-                        <option value="Profesor">Evaluador</option>-->
                         
                         <!--SE ENCARGA DE  MOSTRAR EN EL SELECT EL USERNAME DE LOS ADMINISTRADORES  Y AGEGARLO COMO OPCION -->
                         <?php
@@ -250,6 +235,7 @@
                             <?php
                         }
                         ?>
+                        
                     </select><br>
 
                 </div>

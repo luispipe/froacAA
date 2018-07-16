@@ -79,7 +79,7 @@
                       </a>
                   </li>
                   <li>
-                      <a href="http://froac.manizales.unal.edu.co/GAIA/" >
+                      <a href="http://portal.manizales.unal.edu.co/gta/gaia/" >
                           <i class="icon-info"></i>
                           <span>GAIA</span>
                       </a>
